@@ -51,36 +51,14 @@ function useCustomText(
 export { HTMLTag, CustomTextType, useCustomText };
 type CustomTextProps = Text.TextLocalProps;
 enum CustomTextType {
-  //default "#111111"
-  //white "#ffffff"
-  //primary "#067df7"
-  //light "8c8c8c"
-  //lightB "696969"
-  //lightC "666666"
-  Link_primary14,
-  Link_light14,
-  Link_light16,
-  Link_white16,
-
-  Title_default14,
-  Title_default32,
-  Title_lightB16,
-  Title_default100,
-  Title_default48,
-
-  Content_light12,
-  Content_default14,
-  Content_default16,
-  Content_default14_bold,
-  Content_default18_bold,
-  Content_lightC20,
-  Content_lightC16,
-
-  Badge,
-
-  //twitter
   //default #0f1419
+  //light #536471
+  //primary #1d9bf0
   Navigation_default20,
+  Title_default20,
+  Content_default15,
+  Content_light15,
+  Content_primary14,
 }
 type CustomTextFactory = {
   [key in CustomTextType]: CustomTextProps;
@@ -88,104 +66,30 @@ type CustomTextFactory = {
 
 const CUSTOM_FACTORY: CustomTextFactory = {
   //Title
-  [CustomTextType.Title_default100]: {
-    fontSize: 100,
-    fontWeight: 800,
-    letterSpacing: -0.05,
-    color: "#111111", //rgb(17, 17, 17)
-  },
-  [CustomTextType.Title_default48]: {
-    fontSize: 48,
-    fontWeight: 800,
-    letterSpacing: -0.06,
-    color: "#111111", //rgb(17, 17, 17)
-  },
-  [CustomTextType.Title_default14]: {
-    fontSize: 14,
-    fontWeight: 500,
-    color: "#111111",
-  },
-  [CustomTextType.Title_default32]: {
-    fontSize: 32,
-    fontWeight: 700,
-    color: "#111111",
-  },
-  [CustomTextType.Title_lightB16]: {
-    fontSize: 16,
-    fontWeight: 400,
-    color: "#696969",
-  },
-
-  //Content
-  [CustomTextType.Content_default14]: {
-    fontSize: 14,
-    fontWeight: 400,
-    color: "#111111",
-  },
-  [CustomTextType.Content_default16]: {
-    fontSize: 16,
-    fontWeight: 400,
-    color: "#111111",
-  },
-  [CustomTextType.Content_default14_bold]: {
-    fontSize: 14,
-    fontWeight: 600,
-    color: "#111111",
-  },
-  [CustomTextType.Content_default18_bold]: {
-    fontSize: 18,
-    fontWeight: 600,
-    color: "#111111",
-  },
-  [CustomTextType.Content_light12]: {
-    fontSize: 12.6,
-    fontWeight: 400,
-    color: "#8c8c8c",
-  },
-  [CustomTextType.Content_lightC16]: {
-    fontSize: 16,
-    fontWeight: 400,
-    color: "#666666",
-  },
-  [CustomTextType.Content_lightC20]: {
+  [CustomTextType.Title_default20]: {
     fontSize: 20,
-    fontWeight: 400,
-    color: "#666666",
+    fontWeight: 700,
+    color: "#0f1419",
+    letterSpacing: "normal",
   },
-
-  //Link
-  [CustomTextType.Link_white16]: {
-    fontSize: 16,
-    fontWeight: 400,
-    color: "#ffffff",
-  },
-  [CustomTextType.Link_primary14]: {
+  //Content
+  [CustomTextType.Content_primary14]: {
     fontSize: 14,
+    color: "#1d9bf0",
+    letterSpacing: "normal",
+  },
+  [CustomTextType.Content_default15]: {
+    fontSize: 15,
     fontWeight: 400,
-    color: "#067df7",
-    hoverColor: "rgb(104, 181, 251)",
-    hoverUnderlined: true,
+    color: "#0f1419",
+    letterSpacing: "normal",
   },
-  [CustomTextType.Link_light14]: {
-    fontSize: 14,
+  [CustomTextType.Content_light15]: {
+    fontSize: 15,
     fontWeight: 400,
-    color: "#8c8c8c",
-    hoverColor: "#111111",
+    color: "#536471",
+    letterSpacing: "normal",
   },
-  [CustomTextType.Link_light16]: {
-    fontSize: 16,
-    fontWeight: 400,
-    lineHeight: 26,
-    color: "#696969", //rgb(105, 105, 105)
-  },
-  //other
-  [CustomTextType.Badge]: {
-    fontSize: 12.6,
-    fontWeight: 600,
-    color: "#fff",
-  },
-
-  //twitter
   //Navigation
   [CustomTextType.Navigation_default20]: {
     fontSize: 20,

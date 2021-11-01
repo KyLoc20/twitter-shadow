@@ -92,6 +92,7 @@ enum CustomButtonType {
   // Content_h45_default,
   Navigation_default50,
   Navigation_primary50,
+  Navigation_primary24,
 }
 type CustomButtonFactory = {
   [key in CustomButtonType]: CustomButtonProps;
@@ -122,5 +123,15 @@ const FACTORY: CustomButtonFactory = {
       fontWeight: 700,
       lineHeight: 20,
     },
+  },
+  [CustomButtonType.Navigation_primary24]: {
+    variant: "plain",
+    height: 24,
+    padding: "0 10px",
+    borderRadius: 12,
+    backgroundColor: "rgba(29, 155, 240, 0)",
+    hoverBackgroundColor: "rgba(29, 155, 240, 0.1)",
+    contentColor: "rgba(29, 155, 240, 1)",
+    rippleDisabled: true,
   },
 };

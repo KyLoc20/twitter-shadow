@@ -22,6 +22,9 @@ export default function UserInfoCard(props: UserInfoCardProps) {
       overflow: "hidden",
       m: "12px 0",
       p: "12px",
+      AI: "center",
+      borderRadius: 32,
+      bg: "rgba(15, 20, 25, 0.1)",
     }
   );
   const [Avatar] = useCustomBox(
@@ -51,10 +54,35 @@ export default function UserInfoCard(props: UserInfoCardProps) {
       flex: "1",
     }
   );
+  const [NicknameText] = useCustomText(
+    HTMLTag.span,
+    CustomTextType.Content_default15,
+    {
+      lineHeight: 20,
+      fontWeight: 700,
+      textOverflow: "ellipsis",
+      overflow: "hidden",
+    }
+  );
+  const [UsernameText] = useCustomText(
+    HTMLTag.span,
+    CustomTextType.Content_light15,
+    {
+      lineHeight: 20,
+      textOverflow: "ellipsis",
+      overflow: "hidden",
+    }
+  );
+
   return (
     <Component>
       <Avatar />
-      <About>11111111111111111111111</About>
+      <About>
+        <NicknameText>
+          CraSSusCraSSusCraSSusCraSSusCraSSusCraSSusCraSSus
+        </NicknameText>
+        <UsernameText>@CRa_SSus</UsernameText>
+      </About>
       <SVG {...IconMore} />
     </Component>
   );

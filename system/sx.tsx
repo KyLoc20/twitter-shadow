@@ -88,6 +88,8 @@ type TextProps = {
   fontSize?: LengthValue; //font-size
   fontWeight?: number | string; //font-weight
   letterSpacing?: LengthValue; //letter-spacing
+  textOverflow?: "ellipsis" | "clip"; //text-overflow
+  whiteSpace?: "nowrap" | "normal"; //white-space
 };
 type GridProps = {};
 //A LengthValue could be:
@@ -176,5 +178,7 @@ export function createStyleComponent<T extends sxProps>(
     font-size: ${(props: T) => parseLengthValue(props.fontSize)};
     font-weight: ${(props: T) => props.fontWeight};
     letter-spacing: ${(props: T) => parseLengthValue(props.letterSpacing)};
+    text-overflow: ${(props: T) => parseLengthValue(props.textOverflow)};
+    white-space: ${(props: T) => parseLengthValue(props.whiteSpace)};
   `;
 }
