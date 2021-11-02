@@ -8,6 +8,7 @@ import { isMobile } from "@/utils/media";
 import { useCustomBox, useCustomStack } from "@/hooks/Container";
 import TopBannerCard from "./TopBannerCard";
 import TweetEditorCard from "./TweetEditorCard";
+import TweetListCard from "./TweetListCard";
 type MainContentCard = {
   children?: React.ReactNode;
 };
@@ -28,6 +29,7 @@ export default function MainContentCard(props: MainContentCard) {
       <Content>
         <TopBannerCard></TopBannerCard>
         <TweetEditorCard></TweetEditorCard>
+        <TweetListCard></TweetListCard>
       </Content>
     </Component>
   );

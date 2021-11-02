@@ -17,7 +17,7 @@ export type TextProps = {
   children?: React.ReactNode;
   sx?: sxProps;
 } & TextLocalProps;
-//genStyle > genCSS
+
 // const genStyle = (props: TextProps): React.CSSProperties => {
 //   return {
 //     fontSize: parseNumberWithPx(props.fontSize),
@@ -27,8 +27,9 @@ export type TextProps = {
 //     textAlign: props.textAlign,
 //   };
 // };
+//genStyle > sx > genCSS
 const genCSS = (props: TextProps) => css`
-  color: ${props.color || "currentColor"};
+  color: ${props.sx?.color || props.color || "currentColor"};
   &:hover {
     color: ${props.hoverColor || null};
     text-decoration: ${props.hoverUnderlined ? "underline" : null};

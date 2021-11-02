@@ -58,6 +58,7 @@ enum CustomTextType {
   Title_default20,
   Content_default15,
   Content_light15,
+  Content_light13,
   Content_primary14,
 }
 type CustomTextFactory = {
@@ -86,6 +87,12 @@ const CUSTOM_FACTORY: CustomTextFactory = {
   },
   [CustomTextType.Content_light15]: {
     fontSize: 15,
+    fontWeight: 400,
+    color: "#536471",
+    letterSpacing: "normal",
+  },
+  [CustomTextType.Content_light13]: {
+    fontSize: 13,
     fontWeight: 400,
     color: "#536471",
     letterSpacing: "normal",

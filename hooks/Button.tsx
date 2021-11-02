@@ -28,7 +28,7 @@ type CustomButtonContentProps = {
   fontSize?: number;
   fontWeight?: number;
   lineHeight?: number;
-  letterSpacing?: number;
+  letterSpacing?: number | string;
   //the color is decided by contentColor&hoverContentColor from [CustomButtonProps]
 };
 const genPropsForCustomButton = (
@@ -92,6 +92,7 @@ enum CustomButtonType {
   // Content_h45_default,
   Navigation_default50,
   Navigation_primary50,
+  Navigation_primary36,
   Navigation_primary24,
 }
 type CustomButtonFactory = {
@@ -122,6 +123,21 @@ const FACTORY: CustomButtonFactory = {
       fontSize: 17,
       fontWeight: 700,
       lineHeight: 20,
+    },
+  },
+  [CustomButtonType.Navigation_primary36]: {
+    variant: "plain",
+    height: 36,
+    padding: "0 16px",
+    borderRadius: 9999,
+    backgroundColor: "#1d9bf0",
+    contentColor: "#fff",
+    rippleDisabled: true,
+    content: {
+      fontSize: 15,
+      fontWeight: 700,
+      lineHeight: 18,
+      letterSpacing: "normal",
     },
   },
   [CustomButtonType.Navigation_primary24]: {

@@ -42,7 +42,7 @@ function Group(props: GroupProps) {
   return (
     <g
       transform={props.transform}
-      fill={props.fill}
+      fill={props.fill ? props.fill : "currentColor"}
       stroke={props.stroke ? props.stroke : "currentColor"}
       strokeWidth={props.strokeWidth}
     >

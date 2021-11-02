@@ -49,7 +49,7 @@ export default function TopBannerCard(props: TopBannerProps) {
     </Component>
   );
 }
-const Component = styled.div`
+const Component = styled.section`
   position: sticky;
   top: 0;
   height: 53px;
