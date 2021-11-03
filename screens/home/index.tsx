@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import Head from "next/head";
 import AppBarCard from "@/components/home/AppBarCard";
 import MainContnetCard from "@/components/home/MainContentCard";
+import AsideContentCard from "@/components/home/AsideContentCard";
 import React from "react";
 import { useCustomBox } from "@/hooks/Container";
 type HomePageProps = {
@@ -9,11 +10,10 @@ type HomePageProps = {
 };
 export default function HomePage(props: HomePageProps) {
   const [Content] = useCustomBox(
-    {
-      noFlex: true,
-    },
+    {},
     {
       m: "0 auto",
+      JC: "space-between",
       maxWidth: 1265, //275+990
     }
   );
@@ -26,6 +26,7 @@ export default function HomePage(props: HomePageProps) {
       <Content>
         <AppBarCard></AppBarCard>
         <MainContnetCard></MainContnetCard>
+        <AsideContentCard></AsideContentCard>
       </Content>
     </Container>
   );

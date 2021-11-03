@@ -1,6 +1,11 @@
 import * as React from "react";
 import { default as Box, BoxProps } from "@/components/generic/Box";
 import { default as Stack, StackProps } from "@/components/generic/Stack";
+import {
+  default as Paper,
+  PaperProps,
+  PaperLocalProps,
+} from "@/components/generic/Paper";
 import { sxProps, JustifyContentValue, AlignItemsValue } from "@/system/sx";
 
 //display flex will shrink el to content width
@@ -57,4 +62,26 @@ function useCustomStack(custom: CustomStackProps) {
   );
   return [renderStack];
 }
-export { useCustomBox, useCustomStack };
+type CustomPaperProps = PaperLocalProps;
+const genPropsForCustomPaper = (custom: CustomPaperProps): PaperProps => {
+  return {
+    bg: custom.bg,
+    hoverBg: custom.hoverBg,
+    border: custom.border,
+    borderTop: custom.borderTop,
+    borderRight: custom.borderRight,
+    borderBottom: custom.borderBottom,
+    borderLeft: custom.borderLeft,
+    borderRadius: custom.borderRadius,
+    boxShadow: custom.boxShadow,
+  };
+};
+function useCustomPaper(custom: CustomPaperProps, sx?: sxProps) {
+  const renderPaper = (props: PaperProps) => (
+    <Paper {...genPropsForCustomPaper(custom)} sx={sx}>
+      {props.children}
+    </Paper>
+  );
+  return [renderPaper];
+}
+export { useCustomBox, useCustomStack, useCustomPaper };

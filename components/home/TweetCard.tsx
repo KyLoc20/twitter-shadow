@@ -7,25 +7,10 @@ import { useWindowSize } from "@/hooks/Window";
 import { isMobile } from "@/utils/media";
 import { useCustomBox, useCustomStack } from "@/hooks/Container";
 import { default as SVG, SVGBasicProps } from "@/components/generic/SVG";
+import { Tweet } from "./types/common";
 type TweetCardProps = {
   children?: React.ReactNode;
 } & Tweet;
-export type Tweet = {
-  uid: number;
-  user: UserInfo;
-  content: string;
-  timestamp: string;
-  replies: number;
-  likes: number;
-  retweets: number;
-  //isPromoted:boolean;
-  //action:Object;
-};
-type UserInfo = {
-  username: string;
-  nickname: string;
-  avatarUrl: string;
-};
 export default function TweetCard(props: TweetCardProps) {
   const [Content] = useCustomBox({}, {});
   const [Avatar] = useCustomBox(
