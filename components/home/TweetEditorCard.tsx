@@ -42,7 +42,7 @@ export default function TweetEditorCard(props: TweetEditorProps) {
       mr: "12px",
     }
   );
-  const [Image] = useCustomBox(
+  const [AvatarImage] = useCustomBox(
     {},
     {
       w: 48,
@@ -55,7 +55,7 @@ export default function TweetEditorCard(props: TweetEditorProps) {
     <Component>
       <Content>
         <Avatar>
-          <Image />
+          <AvatarImage />
         </Avatar>
         <Editor />
       </Content>
