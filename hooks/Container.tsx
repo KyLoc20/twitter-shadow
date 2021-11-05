@@ -35,7 +35,13 @@ const genPropsForCustomBox = (
 };
 function useCustomBox(custom: CustomBoxProps, sx: sxProps = {}) {
   const renderBox = (props: BoxProps) => (
-    <Box {...genPropsForCustomBox(custom, sx)} style={props.style}>
+    <Box
+      {...genPropsForCustomBox(custom, sx)}
+      onMouseEnter={props.onMouseEnter}
+      onMouseLeave={props.onMouseLeave}
+      className={props.className}
+      style={props.style}
+    >
       {props.children}
     </Box>
   );

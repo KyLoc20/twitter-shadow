@@ -12,21 +12,21 @@ type UserInfoCardProps = {
   children?: React.ReactNode;
 };
 export default function UserInfoCard(props: UserInfoCardProps) {
-  const [Component] = useCustomBox(
+  const [Content] = useCustomBox(
     {
       borderbox: true,
     },
     {
       w: "100%",
-      h: 64,
-      overflow: "hidden",
-      m: "12px 0",
       p: "12px",
       AI: "center",
-      borderRadius: 32,
-      bg: "rgba(15, 20, 25, 0.1)",
+      borderRadius: 9999,
+      cursor: "pointer",
+      transition: "all 0.2s ease",
+      overflow: "hidden",
     }
   );
+
   const [Avatar] = useCustomBox(
     {
       noFlex: true,
@@ -73,20 +73,34 @@ export default function UserInfoCard(props: UserInfoCardProps) {
       overflow: "hidden",
     }
   );
-
   return (
     <Component>
-      <Avatar />
-      <About>
-        <NicknameText>
-          CraSSusCraSSusCraSSusCraSSusCraSSusCraSSusCraSSus
-        </NicknameText>
-        <UsernameText>@CRa_SSus</UsernameText>
-      </About>
-      <SVG {...IconMore} />
+      <GhostBox username="@CRa_SSus"></GhostBox>
+      <Content className="content">
+        <Avatar />
+        <About>
+          <NicknameText>
+            CraSSusCraSSusCraSSusCraSSusCraSSusCraSSusCraSSus
+          </NicknameText>
+          <UsernameText>@CRa_SSus</UsernameText>
+        </About>
+        <SVG {...IconMore} />
+      </Content>
     </Component>
   );
 }
+
+const Component = styled.div`
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 64px;
+  margin: 12px 0;
+
+  .content:hover {
+    background: rgba(15, 20, 25, 0.1);
+  }
+`;
 const IconMore = {
   width: 18.75,
   height: 18.75,
@@ -102,3 +116,74 @@ const IconMore = {
     },
   ],
 };
+type GhostBoxProps = {
+  children?: React.ReactNode;
+  active?: boolean;
+  username: string;
+};
+function GhostBox(props: GhostBoxProps) {
+  const [isActive, setIsActive] = React.useState(props.active);
+  const [Component] = useCustomBox(
+    {
+      noFlex: true,
+    },
+    {
+      position: "absolute",
+      bottom: 86,
+      left: "calc(50% - 150px)", // - ((300px - 100%) / 2)
+      w: 300,
+      borderRadius: 16,
+      boxShadow:
+        "rgb(101,119,134,0.2) 0px 0px 15px, rgb(101,119,134,0.15) 0px 0px 3px 1px",
+      cursor: "default",
+      bg: "#fff",
+    }
+  );
+  const [Content] = useCustomBox(
+    {
+      vertical: true,
+      borderbox: true,
+    },
+    {
+      w: "100%",
+      overflow: "hidden",
+      py: "12px",
+      transition: "all 0.2s ease",
+    }
+  );
+  const [Button] = useCustomBox(
+    {
+      borderbox: true,
+    },
+    {
+      w: "100%",
+      h: 52,
+      p: "16px",
+      bg: "#fff",
+      hoverBg: "rgb(247, 249, 249)",
+      cursor: "pointer",
+    }
+  );
+  const [ButtonText] = useCustomText(
+    HTMLTag.span,
+    CustomTextType.Content_default15,
+    {
+      w: "100%",
+      lineHeight: 20,
+      textOverflow: "ellipsis",
+      overflow: "hidden",
+    }
+  );
+  return (
+    <Component>
+      <Content>
+        <Button>
+          <ButtonText>Add an existing account</ButtonText>
+        </Button>
+        <Button>
+          <ButtonText>Log out {props.username}</ButtonText>
+        </Button>
+      </Content>
+    </Component>
+  );
+}

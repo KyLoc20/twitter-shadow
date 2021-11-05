@@ -23,7 +23,7 @@ export default function AppBarCard(props: AppBarProps) {
       w: "100%",
       h: "100%",
       minHeight: 512,
-      overflow: "auto",
+      // overflow: "auto",
       JC: "space-between",
       p: "0 12px",
     }

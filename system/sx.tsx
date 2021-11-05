@@ -74,6 +74,7 @@ type SpacingProps = {
 };
 type PaperProps = {
   bg?: string; //background
+  hoverBg?: string; //:hover background
   border?: string; //border
   borderTop?: string; //border-top
   borderRight?: string; //border-right
@@ -81,6 +82,8 @@ type PaperProps = {
   borderLeft?: string; //border-left
   borderRadius?: number | string; //border-radius
   boxShadow?: string; //box-shadow
+  cursor?: "default" | "pointer" | "text";
+  transition?: string;
 };
 type TextProps = {
   textAlign?: "left" | "right" | "center" | "start" | "end" | "justify"; //text-align
@@ -141,10 +144,10 @@ export function createStyleComponent<T extends sxProps>(
 
     position: ${(props: T) => props.position};
     z-index: ${(props: T) => props.zIndex};
-    top: ${(props: T) => props.top};
-    right: ${(props: T) => props.right};
-    bottom: ${(props: T) => props.bottom};
-    left: ${(props: T) => props.left};
+    top: ${(props: T) => parseLengthValue(props.top)};
+    right: ${(props: T) => parseLengthValue(props.right)};
+    bottom: ${(props: T) => parseLengthValue(props.bottom)};
+    left: ${(props: T) => parseLengthValue(props.left)};
 
     box-sizing: ${(props: T) => props.boxSizing};
     width: ${(props: T) => parseLengthValue(props.w)};
@@ -173,6 +176,8 @@ export function createStyleComponent<T extends sxProps>(
     border-left: ${(props: T) => props.borderLeft};
     border-radius: ${(props: T) => parseLengthValue(props.borderRadius)};
     box-shadow: ${(props: T) => props.boxShadow};
+    cursor: ${(props: T) => props.cursor};
+    transition: ${(props: T) => props.transition};
 
     text-align: ${(props: T) => props.textAlign};
     line-height: ${(props: T) => parseLengthValue(props.lineHeight)};
@@ -182,5 +187,9 @@ export function createStyleComponent<T extends sxProps>(
     text-overflow: ${(props: T) => parseLengthValue(props.textOverflow)};
     white-space: ${(props: T) => parseLengthValue(props.whiteSpace)};
     color: ${(props: T) => parseLengthValue(props.color)};
+
+    &:hover {
+      background: ${(props: T) => props.hoverBg};
+    }
   `;
 }
