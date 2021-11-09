@@ -39,6 +39,7 @@ function useCustomBox(custom: CustomBoxProps, sx: sxProps = {}) {
       {...genPropsForCustomBox(custom, sx)}
       onMouseEnter={props.onMouseEnter}
       onMouseLeave={props.onMouseLeave}
+      onMouseDown={props.onMouseDown}
       className={props.className}
       style={props.style}
     >

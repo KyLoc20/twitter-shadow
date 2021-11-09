@@ -73,10 +73,23 @@ export default function UserInfoCard(props: UserInfoCardProps) {
       overflow: "hidden",
     }
   );
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const handleOpenMenu = () => {
+    console.log("handleOpenMenu", isMenuOpen);
+    setIsMenuOpen(true);
+  };
+  const handleCloseMenu = (e: Event) => {
+    console.log("handleCloseMenu", e);
+    setIsMenuOpen(false);
+  };
   return (
     <Component>
-      <GhostBox username="@CRa_SSus"></GhostBox>
-      <Content className="content">
+      <GhostBox
+        username="@CRa_SSus"
+        active={isMenuOpen}
+        onChange={handleCloseMenu}
+      ></GhostBox>
+      <Content className="content" onMouseDown={handleOpenMenu}>
         <Avatar />
         <About>
           <NicknameText>
@@ -120,9 +133,10 @@ type GhostBoxProps = {
   children?: React.ReactNode;
   active?: boolean;
   username: string;
+  onChange: React.EventHandler<any>;
 };
 function GhostBox(props: GhostBoxProps) {
-  const [isActive, setIsActive] = React.useState(props.active);
+  //const [isActive, setIsActive] = React.useState(props.active);
   const [Component] = useCustomBox(
     {
       noFlex: true,
@@ -137,6 +151,8 @@ function GhostBox(props: GhostBoxProps) {
         "rgb(101,119,134,0.2) 0px 0px 15px, rgb(101,119,134,0.15) 0px 0px 3px 1px",
       cursor: "default",
       bg: "#fff",
+      transition: "opacity 2s ease",
+      zIndex: 200,
     }
   );
   const [Content] = useCustomBox(
@@ -174,16 +190,39 @@ function GhostBox(props: GhostBoxProps) {
       overflow: "hidden",
     }
   );
+  const handleCloseGhost = (e: React.MouseEvent) => {
+    // setIsActive((prev) => {
+    //   props.onChange(!prev);
+    //   return !prev;
+    // });
+    props.onChange(e);
+  };
+  const computedDisplay = React.useMemo(() => {
+    return props.active ? "block" : "none";
+  }, [props.active]);
   return (
-    <Component>
-      <Content>
-        <Button>
-          <ButtonText>Add an existing account</ButtonText>
-        </Button>
-        <Button>
-          <ButtonText>Log out {props.username}</ButtonText>
-        </Button>
-      </Content>
-    </Component>
+    <React.Fragment>
+      {props.active && <Overlay onMouseDown={handleCloseGhost} />}
+      <Component style={{ display: computedDisplay }}>
+        <Content>
+          <Button>
+            <ButtonText>Add an existing account</ButtonText>
+          </Button>
+          <Button>
+            <ButtonText>Log out {props.username}</ButtonText>
+          </Button>
+        </Content>
+      </Component>
+    </React.Fragment>
   );
 }
+//todo absolute zindex
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(155, 0, 0, 0.2);
+  z-index: 100;
+`;

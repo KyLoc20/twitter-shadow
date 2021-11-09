@@ -41,5 +41,5 @@ const Component = styled.header`
   width: 275px;
   height: 100vh;
   position: fixed;
-  z-index: 10;
+  z-index: 20;
 `;
