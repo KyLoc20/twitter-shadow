@@ -8,6 +8,7 @@ import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
 import { useWindowSize } from "@/hooks/Window";
 import { isMobile } from "@/utils/media";
 import { default as SVG, SVGBasicProps } from "@/components/generic/SVG";
+import { useModal } from "@/hooks/Modal";
 type UserInfoCardProps = {
   children?: React.ReactNode;
 };
