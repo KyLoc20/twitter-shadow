@@ -7,6 +7,7 @@ import { useWindowSize } from "@/hooks/Window";
 import { isMobile } from "@/utils/media";
 import { useCustomBox, useCustomStack } from "@/hooks/Container";
 import { default as SVG, SVGBasicProps } from "@/components/generic/SVG";
+import Textarea from "@/components/generic/Textarea";
 type TweetEditorProps = {
   children?: React.ReactNode;
 };
@@ -77,7 +78,6 @@ function Editor() {
       w: "100%",
     }
   );
-  const [Textarea] = useCustomBox({}, {});
   const [WhoCanReplyWrapper] = useCustomBox(
     {
       borderbox: true,
@@ -126,13 +126,20 @@ function Editor() {
       <SVG {...item.icon} />
     </IconWrapper>
   ));
+  const TextareaSizingProps = {
+    width: "100%",
+    height: "52px",
+    padding: "12px 0",
+    inputHeight: "28px",
+    inputPadding: "2px 0",
+  };
   return (
     <Component>
-      <Textarea>
-        <TweetInput htmlFor="tweet-input">
-          <input type="text" id="tweet-input" placeholder="What's happening?" />
-        </TweetInput>
-      </Textarea>
+      <Textarea
+        id="tweet-input"
+        placeholder="What's happening?"
+        {...TextareaSizingProps}
+      />
       <WhoCanReplyWrapper>
         <WhoCanReply>
           <SVG {...IconEveryone} />
