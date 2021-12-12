@@ -7,7 +7,7 @@ import { useWindowSize } from "@/hooks/Window";
 import { isMobile } from "@/utils/media";
 import { useCustomBox, useCustomStack } from "@/hooks/Container";
 import { default as SVG, SVGBasicProps } from "@/components/generic/SVG";
-import Textarea from "@/components/generic/Textarea";
+import Textarea from "@/components/generic/SimpleTextarea";
 type TweetEditorProps = {
   children?: React.ReactNode;
 };
@@ -128,7 +128,7 @@ function Editor() {
   ));
   const TextareaSizingProps = {
     width: "100%",
-    height: "52px",
+    //height: "52px",
     padding: "12px 0",
     inputHeight: "28px",
     inputPadding: "2px 0",

@@ -75,3 +75,11 @@ input {
 input:focus {
     outline: none;
 }
+
+textarea,
+textarea:focus {
+    padding: 0;
+    border: none;
+    resize: none;
+    outline: none;
+}
