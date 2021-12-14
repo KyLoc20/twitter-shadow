@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { read } from "fs";
+import { createStyleComponent, sxProps, parseLengthValue } from "@/system/sx";
 type PropsWithChildren<P> = P & { children?: React.ReactNode | undefined };
 //pick with helper
 const pick = <O extends { [key: string]: any }>(
@@ -17,58 +17,49 @@ const _pick = <O extends { [key: string]: any }, K extends keyof O>(
     return acc;
   }, {} as Pick<O, K>);
 
-type TextareaBasicProps = {
+type TextareaProps = {
   id: string;
   placeholder?: string;
-} & BasicSizingProps;
-type BasicSizingProps = {
-  height?: string;
-  width?: string;
-  padding?: string;
-  margin?: string;
+  sx?: sxProps;
+} & TextareaStyledProps;
+type TextareaStyledProps = {
   inputHeight?: string;
   inputPadding?: string;
 };
-const BASIC_SIZING_PROPERTIES = [
-  "height",
-  "width",
-  "padding",
-  "margin",
-  "inputHeight",
-  "inputPadding",
-] as const;
-const handleChange = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-  const el = document.getElementById("test-textarea");
-  //initially overflow-y: hidden;
-  if (el) {
-    el.style.height = "auto";
-    el.style.height = el.scrollHeight + "px";
-    console.log("test-textarea", el.style.height);
-  }
-};
-export default function Textarea(props: PropsWithChildren<TextareaBasicProps>) {
+const LOCAL_STYLED_PROPERTIES = ["inputHeight", "inputPadding"] as const;
+
+export default function Textarea(props: PropsWithChildren<TextareaProps>) {
+  const handleChange = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    const el = document.getElementById("test-textarea");
+    //initially overflow-y: hidden;
+    if (el) {
+      el.style.height = "auto";
+      el.style.height = el.scrollHeight + "px";
+      console.log("test-textarea", el.style.height);
+    }
+  };
   let id = "test-textarea"; //props.id
   return (
-    <Wrapper {...pick(BASIC_SIZING_PROPERTIES, props)} htmlFor={props.id}>
+    <Component
+      {...{ ...pick(LOCAL_STYLED_PROPERTIES, props), ...props.sx }}
+      htmlFor={props.id}
+    >
       <textarea
         id={id}
         placeholder={props.placeholder}
         onKeyUp={handleChange}
       />
-    </Wrapper>
+    </Component>
   );
 }
 
-const Wrapper = styled.label`
+const BasicTextarea = styled.label`
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  width: ${(props: BasicSizingProps) => props.width};
-  height: ${(props: BasicSizingProps) => props.height};
-  padding: ${(props: BasicSizingProps) => props.padding};
   textarea {
-    height: ${(props: BasicSizingProps) => props.inputHeight};
-    padding: ${(props: BasicSizingProps) => props.inputPadding};
+    height: ${(props: TextareaStyledProps) => props.inputHeight};
+    padding: ${(props: TextareaStyledProps) => props.inputPadding};
     flex: 1;
     overflow-y: hidden;
   }
@@ -78,3 +69,5 @@ const Wrapper = styled.label`
     letter-spacing: normal;
   }
 `;
+const StyledTextarea = createStyleComponent<sxProps>(BasicTextarea);
+const Component = StyledTextarea.withComponent("label");

@@ -127,9 +127,9 @@ function Editor() {
     </IconWrapper>
   ));
   const TextareaSizingProps = {
-    width: "100%",
-    //height: "52px",
-    padding: "12px 0",
+    sx: {
+      p: "12px 0",
+    },
     inputHeight: "28px",
     inputPadding: "2px 0",
   };
