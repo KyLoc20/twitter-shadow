@@ -21,14 +21,28 @@ type TextareaProps = {
   id: string;
   placeholder?: string;
   sx?: sxProps;
-} & TextareaStyledProps;
-type TextareaStyledProps = {
+} & TextareaStyleProps;
+type TextareaStyleProps = {
   inputHeight?: string;
   inputPadding?: string;
+  inputFontSize?: string;
+  inputColor?: string;
+  inputLineHeight?: string;
+  placeholderFontsize?: string;
+  placeholderColor?: string;
 };
-const LOCAL_STYLED_PROPERTIES = ["inputHeight", "inputPadding"] as const;
-
+const LOCAL_STYLED_PROPERTIES = [
+  "inputHeight",
+  "inputPadding",
+  "inputFontSize",
+  "inputColor",
+  "inputLineHeight",
+  "placeholderFontsize",
+  "placeholderColor",
+] as const;
+const DEFAULT_ROWS = 1;
 export default function Textarea(props: PropsWithChildren<TextareaProps>) {
+  const { sx = {} } = props;
   const handleChange = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     const el = document.getElementById("test-textarea");
     //initially overflow-y: hidden;
@@ -39,12 +53,20 @@ export default function Textarea(props: PropsWithChildren<TextareaProps>) {
     }
   };
   let id = "test-textarea"; //props.id
+  React.useEffect(() => {
+    const el = document.getElementById("test-textarea");
+    //initially overflow-y: hidden;
+    if (el) {
+      console.log("useEffect test-textarea", el, el.scrollHeight);
+    }
+  }, []);
   return (
     <Component
-      {...{ ...pick(LOCAL_STYLED_PROPERTIES, props), ...props.sx }}
+      {...{ ...pick(LOCAL_STYLED_PROPERTIES, props), ...sx }}
       htmlFor={props.id}
     >
       <textarea
+        rows={DEFAULT_ROWS}
         id={id}
         placeholder={props.placeholder}
         onKeyUp={handleChange}
@@ -55,19 +77,21 @@ export default function Textarea(props: PropsWithChildren<TextareaProps>) {
 
 const BasicTextarea = styled.label`
   display: flex;
-  align-items: center;
   box-sizing: border-box;
   textarea {
-    height: ${(props: TextareaStyledProps) => props.inputHeight};
-    padding: ${(props: TextareaStyledProps) => props.inputPadding};
+    height: ${(props: TextareaStyleProps) => props.inputHeight};
+    padding: ${(props: TextareaStyleProps) => props.inputPadding};
+    font-size: ${(props: TextareaStyleProps) => props.inputFontSize};
+    color: ${(props: TextareaStyleProps) => props.inputColor};
+    line-height: ${(props: TextareaStyleProps) => props.inputLineHeight};
     flex: 1;
     overflow-y: hidden;
   }
   textarea::placeholder {
-    font-size: 20px;
-    color: #536471;
+    font-size: ${(props: TextareaStyleProps) => props.placeholderFontsize};
+    color: ${(props: TextareaStyleProps) => props.placeholderColor};
     letter-spacing: normal;
   }
 `;
-const StyledTextarea = createStyleComponent<sxProps>(BasicTextarea);
-const Component = StyledTextarea.withComponent("label");
+const UnstyledTextarea = createStyleComponent<sxProps>(BasicTextarea);
+const Component = UnstyledTextarea.withComponent("label");

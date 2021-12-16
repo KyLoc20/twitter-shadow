@@ -130,8 +130,11 @@ function Editor() {
     sx: {
       p: "12px 0",
     },
-    inputHeight: "28px",
-    inputPadding: "2px 0",
+    inputFontSize: "20px",
+    inputColor: "#0f1419",
+    inputLineHeight: "30px",
+    placeholderFontsize: "20px",
+    placeholderColor: "#536471",
   };
   return (
     <Component>
