@@ -92,7 +92,7 @@ type TextProps = {
   fontWeight?: number | string; //font-weight
   letterSpacing?: LengthValue; //letter-spacing
   textOverflow?: "ellipsis" | "clip"; //text-overflow
-  whiteSpace?: "nowrap" | "normal" | "pre"; //white-space
+  whiteSpace?: "nowrap" | "normal" | "pre" | "pre-wrap" | "pre-line"; //white-space
   color?: string;
 };
 type GridProps = {};

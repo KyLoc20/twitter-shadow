@@ -2,12 +2,9 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
 import { useCustomButton, CustomButtonType } from "@/hooks/Button";
-import { Link } from "../generic/Link";
-import { useWindowSize } from "@/hooks/Window";
-import { isMobile } from "@/utils/media";
 import { useCustomBox, useCustomStack } from "@/hooks/Container";
 import { default as SVG, SVGBasicProps } from "@/components/generic/SVG";
-import { Tweet } from "./types/common";
+import { Tweet } from "@/stores/tweet";
 type TweetCardProps = {
   children?: React.ReactNode;
 } & Tweet;
@@ -25,7 +22,7 @@ export default function TweetCard(props: TweetCardProps) {
       w: 48,
       h: 48,
       borderRadius: "50%",
-      bg: "red",
+      bg: props.user.avatarUrl,
     }
   );
   const [Main] = useCustomBox({ vertical: true }, { w: "100%" });
@@ -75,7 +72,7 @@ export default function TweetCard(props: TweetCardProps) {
     {
       lineHeight: 20,
       display: "inline-block",
-      whiteSpace: "pre",
+      whiteSpace: "pre-wrap",
     }
   );
   const [MoreButtonWrapper] = useCustomBox(

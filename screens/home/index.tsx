@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import Head from "next/head";
 import AppBarCard from "@/components/home/AppBarCard";
-import MainContnetCard from "@/components/home/MainContentCard";
+import MainContentCard from "@/components/home/MainContentCard";
 import AsideContentCard from "@/components/home/AsideContentCard";
 import React from "react";
 import { useCustomBox } from "@/hooks/Container";
@@ -25,7 +25,7 @@ export default function HomePage(props: HomePageProps) {
       </Head>
       <Content>
         <AppBarCard></AppBarCard>
-        <MainContnetCard></MainContnetCard>
+        <MainContentCard></MainContentCard>
         <AsideContentCard></AsideContentCard>
       </Content>
     </Container>

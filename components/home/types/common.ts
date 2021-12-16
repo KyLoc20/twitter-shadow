@@ -1,3 +1,4 @@
+//discarded
 export type Tweet = {
   uid: number;
   user: UserInfo;
