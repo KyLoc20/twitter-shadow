@@ -1,4 +1,4 @@
-import { User, Tweet, Statistics, State } from "./type";
+import { User, Tweet, Statistics, TweetState } from "./type";
 const User1: User = {
   id: 1,
   nickname: "Elon Musk",
@@ -61,7 +61,7 @@ const Tweet4: Tweet = {
   likes: 2,
   retweets: 3,
 };
-export const initialState: State = {
+export const initialState: TweetState = {
   tweets: [Tweet1, Tweet2, Tweet3, Tweet4],
   stats: { createNum: 0, deleteNum: 0, updateNum: 0 },
 };

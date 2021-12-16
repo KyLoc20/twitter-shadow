@@ -1,5 +1,5 @@
 import { ActionTypes, TweetActions } from "./action";
-import { Tweet, Statistics, State } from "./type";
+import { Tweet, Statistics, TweetState } from "./type";
 const tweetListReducer = (state: Tweet[], action: TweetActions): Tweet[] => {
   switch (action.type) {
     case ActionTypes.Create:
@@ -65,7 +65,7 @@ const statsReducer = (state: Statistics, action: TweetActions): Statistics => {
       return state;
   }
 };
-const mainReducer = ({ tweets, stats }: State, action: TweetActions) => ({
+const mainReducer = ({ tweets, stats }: TweetState, action: TweetActions) => ({
   tweets: tweetListReducer(tweets, action),
   stats: statsReducer(stats, action),
 });
