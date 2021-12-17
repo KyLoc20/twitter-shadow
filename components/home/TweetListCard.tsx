@@ -2,8 +2,6 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import { useCustomBox, useCustomStack } from "@/hooks/Container";
 import { default as TweetCard } from "./TweetCard";
-
-// import { Tweet } from "./types/common";
 import { TweetStore, Tweet } from "@/stores/tweet";
 type TweetListCardProps = {
   children?: React.ReactNode;

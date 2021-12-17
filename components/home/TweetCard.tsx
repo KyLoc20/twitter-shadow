@@ -4,7 +4,7 @@ import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
 import { useCustomButton, CustomButtonType } from "@/hooks/Button";
 import { useCustomBox, useCustomStack } from "@/hooks/Container";
 import { default as SVG, SVGBasicProps } from "@/components/generic/SVG";
-import { Tweet } from "@/stores/tweet";
+import { Tweet, User } from "@/stores/tweet";
 type TweetCardProps = {
   children?: React.ReactNode;
 } & Tweet;
@@ -26,47 +26,7 @@ export default function TweetCard(props: TweetCardProps) {
     }
   );
   const [Main] = useCustomBox({ vertical: true }, { w: "100%" });
-  const [UserInfo] = useCustomBox({}, {});
-  const [NicknameText] = useCustomText(
-    HTMLTag.span,
-    CustomTextType.Content_default15,
-    {
-      lineHeight: 20,
-      fontWeight: 700,
-      textOverflow: "ellipsis",
-      overflow: "hidden",
-    }
-  );
-  const [UsernameText] = useCustomText(
-    HTMLTag.span,
-    CustomTextType.Content_light15,
-    {
-      ml: "4px",
-      lineHeight: 20,
-      textOverflow: "ellipsis",
-      overflow: "hidden",
-    }
-  );
-  const [DividerText] = useCustomText(
-    HTMLTag.span,
-    CustomTextType.Content_light15,
-    {
-      p: "0 4px",
-      lineHeight: 20,
-      textOverflow: "ellipsis",
-      overflow: "hidden",
-    }
-  );
-  const [TimestampText] = useCustomText(
-    HTMLTag.span,
-    CustomTextType.Content_light15,
-    {
-      lineHeight: 20,
-      textOverflow: "ellipsis",
-      overflow: "hidden",
-    }
-  );
-  const [ContentText] = useCustomText(
+  const [TweetContent] = useCustomText(
     HTMLTag.span,
     CustomTextType.Content_default15,
     {
@@ -75,20 +35,11 @@ export default function TweetCard(props: TweetCardProps) {
       whiteSpace: "pre-wrap",
     }
   );
-  const [MoreButtonWrapper] = useCustomBox(
-    {},
-    {
-      minWidth: 38.75,
-      flexGrow: "1",
-      AI: "center",
-      JC: "flex-end",
-    }
-  );
+
   const [StatsWrapper] = useCustomBox(
     {},
     { pt: "12px", maxWidth: 425, JC: "space-between" }
   );
-  // const [Stats] = useCustomBox({}, {});
   const [StatsInnerText] = useCustomText(
     HTMLTag.span,
     CustomTextType.Content_light13,
@@ -107,18 +58,12 @@ export default function TweetCard(props: TweetCardProps) {
           <AvatarImage />
         </Avatar>
         <Main>
-          <UserInfo>
-            <NicknameText>{user.nickname}</NicknameText>
-            <UsernameText>{user.username}</UsernameText>
-            <DividerText>·</DividerText>
-            <TimestampText>{props.timestamp}</TimestampText>
-            <MoreButtonWrapper>
-              <IconMoreWrapper>
-                <SVG {...IconMore} />
-              </IconMoreWrapper>
-            </MoreButtonWrapper>
-          </UserInfo>
-          <ContentText>{props.content}</ContentText>
+          <UserInfo
+            nickname={user.nickname}
+            username={user.username}
+            timestamp={props.timestamp}
+          />
+          <TweetContent>{props.content}</TweetContent>
           <StatsWrapper>
             <Stats
               hoverColor="rgba(29, 155, 240, 1)"
@@ -166,6 +111,78 @@ const Component = styled.div`
   box-sizing: border-box;
   border-bottom: 1px solid rgb(239, 243, 244);
 `;
+function UserInfo({
+  nickname,
+  username,
+  timestamp,
+}: React.PropsWithChildren<{
+  nickname: string;
+  username: string;
+  timestamp: string;
+}>) {
+  const [Wrapper] = useCustomBox({}, {});
+  const [Nickname] = useCustomText(
+    HTMLTag.span,
+    CustomTextType.Content_default15,
+    {
+      lineHeight: 20,
+      fontWeight: 700,
+      textOverflow: "ellipsis",
+      overflow: "hidden",
+    }
+  );
+  const [Username] = useCustomText(
+    HTMLTag.span,
+    CustomTextType.Content_light15,
+    {
+      ml: "4px",
+      lineHeight: 20,
+      textOverflow: "ellipsis",
+      overflow: "hidden",
+    }
+  );
+  const [Divider] = useCustomText(
+    HTMLTag.span,
+    CustomTextType.Content_light15,
+    {
+      p: "0 4px",
+      lineHeight: 20,
+      textOverflow: "ellipsis",
+      overflow: "hidden",
+    }
+  );
+  const [Timestamp] = useCustomText(
+    HTMLTag.span,
+    CustomTextType.Content_light15,
+    {
+      lineHeight: 20,
+      textOverflow: "ellipsis",
+      overflow: "hidden",
+    }
+  );
+  const [MoreButtonWrapper] = useCustomBox(
+    {},
+    {
+      minWidth: 38.75,
+      flexGrow: "1",
+      AI: "center",
+      JC: "flex-end",
+    }
+  );
+  return (
+    <Wrapper>
+      <Nickname>{nickname}</Nickname>
+      <Username>{username}</Username>
+      <Divider>·</Divider>
+      <Timestamp>{timestamp}</Timestamp>
+      <MoreButtonWrapper>
+        <IconMoreWrapper>
+          <SVG {...IconMore} />
+        </IconMoreWrapper>
+      </MoreButtonWrapper>
+    </Wrapper>
+  );
+}
 const IconMore = {
   width: 18.75,
   height: 18.75,

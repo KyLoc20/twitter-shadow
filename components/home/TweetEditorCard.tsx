@@ -2,9 +2,6 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
 import { useCustomButton, CustomButtonType } from "@/hooks/Button";
-import { Link } from "../generic/Link";
-import { useWindowSize } from "@/hooks/Window";
-import { isMobile } from "@/utils/media";
 import { useCustomBox, useCustomStack } from "@/hooks/Container";
 import { default as SVG, SVGBasicProps } from "@/components/generic/SVG";
 import Textarea from "@/components/generic/SimpleTextarea";
@@ -19,24 +16,6 @@ export default function TweetEditorCard(props: TweetEditorProps) {
     }
   );
   //todo w: "100%" or  flex: "1", make it cover the rest container space
-  const [HeaderText] = useCustomText(
-    HTMLTag.span,
-    CustomTextType.Title_default20,
-    {
-      w: "100%",
-      lineHeight: 24,
-      textOverflow: "ellipsis",
-      overflow: "hidden",
-    }
-  );
-  const [ButtonWrapper] = useCustomBox(
-    {},
-    {
-      minWidth: 56,
-      AI: "center",
-      JC: "flex-end",
-    }
-  );
   const [Avatar] = useCustomBox(
     {},
     {
@@ -100,7 +79,7 @@ function Editor() {
       fontWeight: 700,
     }
   );
-  const [Control] = useCustomBox(
+  const [ControlPanel] = useCustomBox(
     {},
     {
       JC: "space-between",
@@ -149,35 +128,15 @@ function Editor() {
           <WhoCanReplyText>Everyone can Reply</WhoCanReplyText>
         </WhoCanReply>
       </WhoCanReplyWrapper>
-      <Control>
+      <ControlPanel>
         <Tools>{itemsTool}</Tools>
         <TweetButtonWrapper>
           <TweetButton>Tweet</TweetButton>
         </TweetButtonWrapper>
-      </Control>
+      </ControlPanel>
     </Component>
   );
 }
-//todo vertical align placeholder
-const TweetInput = styled.label`
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-  width: 100%;
-  height: 52px;
-  padding: 12px 0;
-
-  input {
-    height: 28px;
-    flex: 1;
-    padding: 2px 0;
-  }
-  input::placeholder {
-    font-size: 20px;
-    color: #536471;
-    letter-spacing: normal;
-  }
-`;
 const IconWrapper = styled.span`
   display: flex;
   justify-content: center;
