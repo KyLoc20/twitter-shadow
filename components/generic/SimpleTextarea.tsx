@@ -1,23 +1,9 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 import { createStyleComponent, sxProps, parseLengthValue } from "@/system/sx";
-type PropsWithChildren<P> = P & { children?: React.ReactNode | undefined };
-//pick with helper
-const pick = <O extends { [key: string]: any }>(
-  keys: readonly string[],
-  obj: O
-) => _pick(keys as unknown as Extract<typeof keys[number], keyof O>[], obj);
-//with type restriction keys can only be a literal like _pick(obj,["a","b","c"]) couldn't be a variable like let KEYS=["a","b","c"] _pick(obj,KEYS)
-const _pick = <O extends { [key: string]: any }, K extends keyof O>(
-  keys: K[],
-  obj: O
-): Pick<O, K> =>
-  keys.reduce((acc, key) => {
-    acc[key] = obj[key];
-    return acc;
-  }, {} as Pick<O, K>);
+import { pick } from "@/utils/helpers";
 
-type TextareaProps = {
+export type TextareaProps = {
   id: string;
   placeholder?: string;
   sx?: sxProps;
@@ -31,7 +17,7 @@ type TextareaStyleProps = {
   placeholderFontsize?: string;
   placeholderColor?: string;
 };
-const LOCAL_STYLED_PROPERTIES = [
+const LOCAL_STYLE_PROPERTIES = [
   "inputHeight",
   "inputPadding",
   "inputFontSize",
@@ -41,7 +27,9 @@ const LOCAL_STYLED_PROPERTIES = [
   "placeholderColor",
 ] as const;
 const DEFAULT_ROWS = 1;
-export default function Textarea(props: PropsWithChildren<TextareaProps>) {
+export default function Textarea(
+  props: React.PropsWithChildren<TextareaProps>
+) {
   const { sx = {} } = props;
   const handleChange = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     const el = document.getElementById("test-textarea");
@@ -62,7 +50,7 @@ export default function Textarea(props: PropsWithChildren<TextareaProps>) {
   }, []);
   return (
     <Component
-      {...{ ...pick(LOCAL_STYLED_PROPERTIES, props), ...sx }}
+      {...{ ...pick(LOCAL_STYLE_PROPERTIES, props), ...sx }}
       htmlFor={props.id}
     >
       <textarea

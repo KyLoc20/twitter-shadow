@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
 import { useCustomButton, CustomButtonType } from "@/hooks/Button";
 import { useCustomBox, useCustomStack } from "@/hooks/Container";
-import { default as SVG, SVGBasicProps } from "@/components/generic/SVG";
+import { default as SVG, SVGProps } from "@/components/generic/SVG";
 import { Tweet, User } from "@/stores/tweet";
 type TweetCardProps = {
   children?: React.ReactNode;

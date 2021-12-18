@@ -1,16 +1,13 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 const BasicSVG = styled.svg``;
-type SVGProps = {
-  children?: React.ReactNode;
-} & SVGBasicProps;
-export type SVGBasicProps = {
+export type SVGProps = {
   width: number;
   height: number;
   viewBox: string;
   group: GroupProps[];
 };
-export default function SVG(props: SVGProps) {
+export default function SVG(props: React.PropsWithChildren<SVGProps>) {
   return (
     <BasicSVG
       width={`${props.width}px`}

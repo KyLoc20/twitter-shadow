@@ -7,7 +7,7 @@ import { Icon } from "@/ui/Icon";
 import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
 import { useWindowSize } from "@/hooks/Window";
 import { isMobile } from "@/utils/media";
-import { default as SVG, SVGBasicProps } from "@/components/generic/SVG";
+import { default as SVG, SVGProps } from "@/components/generic/SVG";
 type NavigationMenuCardProps = {
   children?: React.ReactNode;
 };
@@ -93,7 +93,7 @@ const LogoTwitter = {
 type NavigationItem = {
   name: string;
   url: string;
-  icon: SVGBasicProps;
+  icon: SVGProps;
 };
 
 const IconHome = {

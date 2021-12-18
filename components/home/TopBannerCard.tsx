@@ -6,7 +6,7 @@ import { Link } from "../generic/Link";
 import { useWindowSize } from "@/hooks/Window";
 import { isMobile } from "@/utils/media";
 import { useCustomBox, useCustomStack } from "@/hooks/Container";
-import { default as SVG, SVGBasicProps } from "@/components/generic/SVG";
+import { default as SVG } from "@/components/generic/SVG";
 type TopBannerProps = {
   children?: React.ReactNode;
 };
