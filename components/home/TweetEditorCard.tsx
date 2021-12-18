@@ -8,7 +8,7 @@ import {
   default as Textarea,
   TextareaProps,
 } from "@/components/generic/SimpleTextarea";
-import { createStyleComponent, sxProps, parseLengthValue } from "@/system/sx";
+import { sxProps } from "@/system/sx";
 type TweetEditorProps = {
   children?: React.ReactNode;
 };
@@ -106,7 +106,7 @@ function Editor() {
   const [TweetButton] = useCustomButton(CustomButtonType.Navigation_primary36);
   const itemsTool = ["media", "gif", "poll", "emoji", "schedule"].map(
     (iconName, index) => (
-      <Icon key={index} round name={iconName} sx={CustomIconStyle} />
+      <Icon key={index} round name={iconName} sx={CUSTOM_ICON_STYLE} />
     )
   );
 
@@ -115,7 +115,7 @@ function Editor() {
       <Textarea
         id="tweet-input"
         placeholder="What's happening?"
-        {...CustomTextareaStyle}
+        {...CUSTOM_TEXTAREA_STYLE}
       />
       <WhoCanReplyWrapper>
         <WhoCanReply>
@@ -132,7 +132,7 @@ function Editor() {
     </Component>
   );
 }
-const CustomIconStyle: sxProps = {
+const CUSTOM_ICON_STYLE: sxProps = {
   w: 36,
   h: 36,
   transition: "all 0.2s ease",
@@ -140,7 +140,7 @@ const CustomIconStyle: sxProps = {
   cursor: "pointer",
   hoverBg: "rgba(29, 155, 240, 0.1)",
 };
-const CustomTextareaStyle: Omit<TextareaProps, "id"> = {
+const CUSTOM_TEXTAREA_STYLE: Omit<TextareaProps, "id"> = {
   sx: {
     p: "12px 0",
   },

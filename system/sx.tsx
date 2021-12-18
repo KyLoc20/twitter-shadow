@@ -94,6 +94,7 @@ type TextProps = {
   textOverflow?: "ellipsis" | "clip"; //text-overflow
   whiteSpace?: "nowrap" | "normal" | "pre" | "pre-wrap" | "pre-line"; //white-space
   color?: string;
+  hoverColor?: string; //:hover color
 };
 type GridProps = {};
 //A LengthValue could be:
@@ -186,9 +187,10 @@ export function createStyleComponent<T extends sxProps>(
     letter-spacing: ${(props: T) => parseLengthValue(props.letterSpacing)};
     text-overflow: ${(props: T) => parseLengthValue(props.textOverflow)};
     white-space: ${(props: T) => parseLengthValue(props.whiteSpace)};
-    color: ${(props: T) => parseLengthValue(props.color)};
+    color: ${(props: T) => props.color};
 
     &:hover {
+      color: ${(props: T) => props.hoverColor};
       background: ${(props: T) => props.hoverBg};
     }
   `;
