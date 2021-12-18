@@ -2,39 +2,31 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
 import { useCustomButton, CustomButtonType } from "@/hooks/Button";
-import { useCustomBox, useCustomStack } from "@/hooks/Container";
+import { defineCustomBox, useCustomBox, useBox } from "@/hooks/Container";
 import Icon from "@/components/generic/Icon";
 import {
   default as Textarea,
   TextareaProps,
 } from "@/components/generic/SimpleTextarea";
 import { sxProps } from "@/system/sx";
+const useFlexBox = defineCustomBox();
 type TweetEditorProps = {
   children?: React.ReactNode;
 };
 export default function TweetEditorCard(props: TweetEditorProps) {
-  const [Content] = useCustomBox(
-    {},
-    {
-      p: "8px 0",
-    }
-  );
+  const [Content] = useFlexBox({
+    p: "8px 0",
+  });
   //todo w: "100%" or  flex: "1", make it cover the rest container space
-  const [Avatar] = useCustomBox(
-    {},
-    {
-      mr: "12px",
-    }
-  );
-  const [AvatarImage] = useCustomBox(
-    {},
-    {
-      w: 48,
-      h: 48,
-      borderRadius: "50%",
-      bg: "red",
-    }
-  );
+  const [Avatar] = useFlexBox({
+    mr: "12px",
+  });
+  const [AvatarImage] = useFlexBox({
+    w: 48,
+    h: 48,
+    borderRadius: "50%",
+    bg: "red",
+  });
   return (
     <Component>
       <Content>
@@ -83,26 +75,17 @@ function Editor() {
       fontWeight: 700,
     }
   );
-  const [ControlPanel] = useCustomBox(
-    {},
-    {
-      JC: "space-between",
-    }
-  );
-  const [Tools] = useCustomBox(
-    {},
-    {
-      mt: "12px",
-    }
-  );
-  const [TweetButtonWrapper] = useCustomBox(
-    {},
-    {
-      w: 76,
-      mt: "12px",
-      ml: "12px",
-    }
-  );
+  const [ControlPanel] = useFlexBox({
+    JC: "space-between",
+  });
+  const [Tools] = useFlexBox({
+    mt: "12px",
+  });
+  const [TweetButtonWrapper] = useFlexBox({
+    w: 76,
+    mt: "12px",
+    ml: "12px",
+  });
   const [TweetButton] = useCustomButton(CustomButtonType.Navigation_primary36);
   const itemsTool = ["media", "gif", "poll", "emoji", "schedule"].map(
     (iconName, index) => (

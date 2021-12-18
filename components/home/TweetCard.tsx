@@ -2,32 +2,26 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
 import { useCustomButton, CustomButtonType } from "@/hooks/Button";
-import { useCustomBox, useCustomStack } from "@/hooks/Container";
-import { default as SVG, SVGProps } from "@/components/generic/SVG";
+import { defineCustomBox, useCustomBox, useBox } from "@/hooks/Container";
 import { Tweet, User } from "@/stores/tweet";
 import Icon from "@/components/generic/Icon";
 import { sxProps } from "@/system/sx";
+const useFlexBox = defineCustomBox();
 type TweetCardProps = {
   children?: React.ReactNode;
   share?: number;
 } & Tweet;
 export default function TweetCard(props: TweetCardProps) {
-  const [Content] = useCustomBox({}, {});
-  const [Avatar] = useCustomBox(
-    {},
-    {
-      mr: "12px",
-    }
-  );
-  const [AvatarImage] = useCustomBox(
-    {},
-    {
-      w: 48,
-      h: 48,
-      borderRadius: "50%",
-      bg: props.user.avatarUrl,
-    }
-  );
+  const [Content] = useFlexBox();
+  const [Avatar] = useFlexBox({ mr: "12px" });
+  //WHY: different highlight color
+  //const [Content] = useCustomBox({},{});
+  const [AvatarImage] = useFlexBox({
+    w: 48,
+    h: 48,
+    borderRadius: "50%",
+    bg: props.user.avatarUrl,
+  });
   const [Main] = useCustomBox({ vertical: true }, { w: "100%" });
   const [TweetContent] = useCustomText(
     HTMLTag.span,
@@ -39,10 +33,11 @@ export default function TweetCard(props: TweetCardProps) {
     }
   );
 
-  const [InteractionWrapper] = useCustomBox(
-    {},
-    { pt: "12px", maxWidth: 425, JC: "space-between" }
-  );
+  const [InteractionWrapper] = useFlexBox({
+    pt: "12px",
+    maxWidth: 425,
+    JC: "space-between",
+  });
   const [InteractionInnerText] = useCustomText(
     HTMLTag.span,
     CustomTextType.Content_light13,
@@ -100,7 +95,7 @@ function UserInfo({
   username: string;
   timestamp: string;
 }>) {
-  const [Wrapper] = useCustomBox({}, {});
+  const [Wrapper] = useFlexBox();
   const [Nickname] = useCustomText(
     HTMLTag.span,
     CustomTextType.Content_default15,
@@ -140,15 +135,12 @@ function UserInfo({
       overflow: "hidden",
     }
   );
-  const [MoreButtonWrapper] = useCustomBox(
-    {},
-    {
-      minWidth: 38.75,
-      flexGrow: "1",
-      AI: "center",
-      JC: "flex-end",
-    }
-  );
+  const [MoreButtonWrapper] = useFlexBox({
+    minWidth: 38.75,
+    flexGrow: "1",
+    AI: "center",
+    JC: "flex-end",
+  });
   return (
     <Wrapper>
       <Nickname>{nickname}</Nickname>

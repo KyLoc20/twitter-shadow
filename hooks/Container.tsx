@@ -7,8 +7,15 @@ import {
   PaperLocalProps,
 } from "@/components/generic/Paper";
 import { sxProps, JustifyContentValue, AlignItemsValue } from "@/system/sx";
-
-//display flex will shrink el to content width
+//custom props for quick uses and some default settings
+//REMINDER: display flex will shrink el to content width
+/*
+by default a custom Box is:
+1.display: flex 
+2.flex-direction: row
+3.flex-wrap: no-wrap
+4.box-sizing: content-box
+*/
 type CustomBoxProps = {
   vertical?: boolean; //shortcut for flex-direction by default "row"
   noFlex?: boolean;
@@ -17,13 +24,11 @@ type CustomBoxProps = {
   JC?: JustifyContentValue; //shortcut for justify-content
   AI?: AlignItemsValue; //shortcut for align-items
 };
-//to provide some shortcuts and default settings as for a custom
 const genPropsForCustomBox = (
   custom: CustomBoxProps,
   sx: sxProps
 ): BoxProps => {
   return {
-    //for now it is FlexBox by default
     display: custom.noFlex ? undefined : "flex",
     flexDirection: custom.vertical ? "column" : undefined,
     flexWrap: custom.wrap ? "wrap" : undefined,
@@ -33,7 +38,28 @@ const genPropsForCustomBox = (
     ...sx,
   };
 };
-function useCustomBox(custom: CustomBoxProps, sx: sxProps = {}) {
+type UnstyledBoxHook = (sx?: sxProps) => React.FC<BoxProps>[];
+//to provide a "half-customed" UnstyledBox with customs as to REUSE
+const defineCustomBox = (custom: CustomBoxProps = {}): UnstyledBoxHook => {
+  const useUnstyled = (sx?: sxProps) => {
+    const render = (props: BoxProps) => (
+      <Box
+        {...genPropsForCustomBox(custom, sx ?? {})}
+        onMouseEnter={props.onMouseEnter}
+        onMouseLeave={props.onMouseLeave}
+        onMouseDown={props.onMouseDown}
+        className={props.className}
+        style={props.style}
+      >
+        {props.children}
+      </Box>
+    );
+    return [render];
+  };
+  return useUnstyled;
+};
+//to provide a "fully-styled" Box with customs and sx setting at the same time
+function useCustomBox(custom: CustomBoxProps = {}, sx: sxProps = {}) {
   const renderBox = (props: BoxProps) => (
     <Box
       {...genPropsForCustomBox(custom, sx)}
@@ -48,7 +74,22 @@ function useCustomBox(custom: CustomBoxProps, sx: sxProps = {}) {
   );
   return [renderBox];
 }
-
+//to provide a "raw" Box with only sx
+function useBox(sx: sxProps = {}) {
+  const renderBox = (props: BoxProps) => (
+    <Box
+      {...sx}
+      onMouseEnter={props.onMouseEnter}
+      onMouseLeave={props.onMouseLeave}
+      onMouseDown={props.onMouseDown}
+      className={props.className}
+      style={props.style}
+    >
+      {props.children}
+    </Box>
+  );
+  return [renderBox];
+}
 type CustomStackProps = {
   p?: string; //padding
   ep?: string; //eachPadding
@@ -91,4 +132,10 @@ function useCustomPaper(custom: CustomPaperProps, sx?: sxProps) {
   );
   return [renderPaper];
 }
-export { useCustomBox, useCustomStack, useCustomPaper };
+export {
+  defineCustomBox,
+  useCustomBox,
+  useBox,
+  useCustomStack,
+  useCustomPaper,
+};

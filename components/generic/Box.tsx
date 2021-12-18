@@ -3,8 +3,8 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { sxProps, createStyleComponent } from "@/system/sx";
 //full sx supported
-export type BoxProps = {
-  children?: React.ReactNode;
+export type BoxProps = React.PropsWithChildren<BasicBoxProps>;
+type BasicBoxProps = {
   style?: React.CSSProperties;
   className?: string;
   onMouseEnter?: React.MouseEventHandler;
@@ -19,6 +19,6 @@ export default function Box(props: BoxProps) {
   );
 }
 const BasicBox = styled.div``;
-const StyledBox = createStyleComponent<sxProps>(BasicBox);
+const UnstyledBox = createStyleComponent<sxProps>(BasicBox);
 //todo tricky to get a StyledComponent
-const Component = StyledBox.withComponent("div");
+const Component = UnstyledBox.withComponent("div");
