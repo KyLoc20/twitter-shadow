@@ -1,7 +1,11 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
-import { useCustomButton, CustomButtonType } from "@/hooks/Button";
+import {
+  useCustomButton,
+  CustomButtonType,
+  defineCustomButton,
+} from "@/hooks/Button";
 import { defineCustomBox, useCustomBox, useBox } from "@/hooks/Container";
 import Icon from "@/components/generic/Icon";
 import {
@@ -53,40 +57,15 @@ function Editor() {
       w: "100%",
     }
   );
-  const [WhoCanReplyWrapper] = useCustomBox(
-    {
-      borderbox: true,
-    },
-    {
-      h: 37,
-      AI: "center",
-      borderBottom: "1px solid rgb(239, 243, 244)",
-    }
-  );
-
-  const [WhoCanReply] = useCustomButton(CustomButtonType.Navigation_primary24);
-  const [WhoCanReplyText] = useCustomText(
-    HTMLTag.span,
-    CustomTextType.Content_primary14,
-    {
-      ml: "4px",
-      pt: "2px",
-      lineHeight: 16,
-      fontWeight: 700,
-    }
-  );
   const [ControlPanel] = useFlexBox({
     JC: "space-between",
   });
   const [Tools] = useFlexBox({
     mt: "12px",
   });
-  const [TweetButtonWrapper] = useFlexBox({
-    w: 76,
-    mt: "12px",
-    ml: "12px",
+  const [TweetButton] = useButton36({
+    wrapper: { w: 76, mt: "12px", ml: "12px" },
   });
-  const [TweetButton] = useCustomButton(CustomButtonType.Navigation_primary36);
   const itemsTool = ["media", "gif", "poll", "emoji", "schedule"].map(
     (iconName, index) => (
       <Icon key={index} round name={iconName} sx={CUSTOM_ICON_STYLE} />
@@ -100,19 +79,41 @@ function Editor() {
         placeholder="What's happening?"
         {...CUSTOM_TEXTAREA_STYLE}
       />
-      <WhoCanReplyWrapper>
-        <WhoCanReply>
-          <Icon name="everyone" />
-          <WhoCanReplyText>Everyone can Reply</WhoCanReplyText>
-        </WhoCanReply>
-      </WhoCanReplyWrapper>
+      <WhoCanReply />
       <ControlPanel>
         <Tools>{itemsTool}</Tools>
-        <TweetButtonWrapper>
-          <TweetButton>Tweet</TweetButton>
-        </TweetButtonWrapper>
+        <TweetButton>Tweet</TweetButton>
       </ControlPanel>
     </Component>
+  );
+}
+const useButton36 = defineCustomButton(CustomButtonType.Navigation_primary36);
+const useButton24 = defineCustomButton(CustomButtonType.Navigation_primary24);
+function WhoCanReply() {
+  const [Wrapper] = useCustomBox(
+    {
+      borderbox: true,
+    },
+    {
+      h: 37,
+      AI: "center",
+      borderBottom: "1px solid rgb(239, 243, 244)",
+    }
+  );
+  const [Button] = useButton24();
+  const [Text] = useCustomText(HTMLTag.span, CustomTextType.Content_primary14, {
+    ml: "4px",
+    pt: "2px",
+    lineHeight: 16,
+    fontWeight: 700,
+  });
+  return (
+    <Wrapper>
+      <Button>
+        <Icon name="everyone" />
+        <Text>Everyone can Reply</Text>
+      </Button>
+    </Wrapper>
   );
 }
 const CUSTOM_ICON_STYLE: sxProps = {

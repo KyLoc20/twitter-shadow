@@ -1,5 +1,5 @@
 import React from "react";
-import { TweetState, Tweet, User, Statistics } from "./type";
+import { TweetState, Tweet, User, Statistics } from "./model";
 import { TweetActions } from "./action";
 import { mainReducer } from "./reducer";
 import { initialState } from "./data.test";

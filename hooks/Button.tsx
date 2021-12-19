@@ -1,15 +1,17 @@
 import * as React from "react";
 import { Button, ButtonProps } from "@/ui/Button";
 import * as Text from "@/components/generic/Text";
+import styled from "@emotion/styled";
+import { createStyleComponent, sxProps, parseLengthValue } from "@/system/sx";
+import { useBox } from "./Container";
 type ButtonVariant = "plain" | "text" | "outlined";
 type ButtonColor = string;
-type ButtonPadding = string;
 type CustomButtonProps = {
-  variant: ButtonVariant;
+  variant?: ButtonVariant;
   width?: number;
   height?: number;
   borderRadius?: number | string;
-  padding?: ButtonPadding;
+  padding?: string;
   backgroundColor?: ButtonColor;
   hoverBackgroundColor?: ButtonColor;
   borderColor?: ButtonColor;
@@ -23,6 +25,8 @@ type CustomButtonProps = {
   disabled?: boolean;
   tile?: boolean;
   content?: CustomButtonContentProps;
+  inner?: sxProps;
+  wrapper?: sxProps;
 };
 type CustomButtonContentProps = {
   fontSize?: number;
@@ -54,8 +58,61 @@ const genPropsForCustomButton = (
     tile: props.tile,
   };
 };
-function useCustomButton(which: CustomButtonType) {
-  const customProps = FACTORY[which];
+/**
+ * This is to provide a "half-customed" UnstyledButton with presets as to REUSE
+ * @param whichPreset
+ * @returns useCustomButton with which you can customize an unique Button even with a Wrapper and an InnerContent
+ */
+function defineCustomButton(
+  whichPreset: CustomButtonType
+): (custom?: CustomButtonProps) => React.FC<ButtonProps>[] {
+  const presetProps = FACTORY[whichPreset];
+  const useCustom = (custom?: CustomButtonProps) => {
+    const ultimateCustomProps: CustomButtonProps = {
+      ...presetProps,
+      ...custom,
+    };
+    const wrapperSx = ultimateCustomProps.wrapper;
+    const innerSx = ultimateCustomProps.inner;
+    if (wrapperSx != null) {
+      const renderWithWrapper = (props: ButtonProps) => (
+        <OuterWrapper {...wrapperSx} className="button-wrapper">
+          <Button {...genPropsForCustomButton(ultimateCustomProps)}>
+            {innerSx != null ? (
+              <InnerContent {...innerSx} className="inner-content">
+                {props.children}
+              </InnerContent>
+            ) : (
+              props.children
+            )}
+          </Button>
+        </OuterWrapper>
+      );
+      return [renderWithWrapper];
+    } else {
+      const renderWithoutWrapper = (props: ButtonProps) => (
+        <Button {...genPropsForCustomButton(ultimateCustomProps)}>
+          {innerSx != null ? (
+            <InnerContent {...innerSx} className="inner-content">
+              {props.children}
+            </InnerContent>
+          ) : (
+            props.children
+          )}
+        </Button>
+      );
+      return [renderWithoutWrapper];
+    }
+  };
+  return useCustom;
+}
+/**
+ * @deprecated
+ * @param
+ * @returns
+ */
+function useCustomButton(whichPreset: CustomButtonType) {
+  const customProps = FACTORY[whichPreset];
   if (customProps.content != null) {
     const customContentProps = customProps.content;
     const RenderContentText = (props: Text.TextProps) => (
@@ -83,7 +140,11 @@ function useCustomButton(which: CustomButtonType) {
     return [renderButton];
   }
 }
-export { useCustomButton, CustomButtonType };
+const BasicContent = styled.div``;
+const UnstyledContent = createStyleComponent<sxProps>(BasicContent);
+const InnerContent = UnstyledContent.withComponent("span");
+const OuterWrapper = UnstyledContent.withComponent("div");
+export { useCustomButton, CustomButtonType, defineCustomButton };
 enum CustomButtonType {
   // Navigation_h36,
   // Content_h45_primary,
@@ -124,6 +185,7 @@ const FACTORY: CustomButtonFactory = {
       fontWeight: 700,
       lineHeight: 20,
     },
+    inner: { fontSize: 17, fontWeight: 700, lineHeight: 20 },
   },
   [CustomButtonType.Navigation_primary36]: {
     variant: "plain",
@@ -131,9 +193,16 @@ const FACTORY: CustomButtonFactory = {
     padding: "0 16px",
     borderRadius: 9999,
     backgroundColor: "#1d9bf0",
+    hoverBackgroundColor: "rgba(26, 140, 216, 1)",
     contentColor: "#fff",
     rippleDisabled: true,
     content: {
+      fontSize: 15,
+      fontWeight: 700,
+      lineHeight: 18,
+      letterSpacing: "normal",
+    },
+    inner: {
       fontSize: 15,
       fontWeight: 700,
       lineHeight: 18,

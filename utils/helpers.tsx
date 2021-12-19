@@ -13,3 +13,9 @@ const _pick = <O extends { [key: string]: any }, K extends keyof O>(
     return acc;
   }, {} as Pick<O, K>);
 export { pick };
+type X<T extends number> = {
+  type: T;
+  value: string;
+};
+type X1 = X<1>;
+const x1: X1 = { type: 1, value: "x1" };

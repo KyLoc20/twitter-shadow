@@ -1,4 +1,4 @@
-import { User, Tweet, Statistics, TweetState } from "./type";
+import { User, Tweet, Statistics, TweetState } from "./model";
 const User1: User = {
   id: 1,
   nickname: "Elon Musk",

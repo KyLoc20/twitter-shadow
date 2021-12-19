@@ -39,7 +39,11 @@ const genPropsForCustomBox = (
   };
 };
 type UnstyledBoxHook = (sx?: sxProps) => React.FC<BoxProps>[];
-//to provide a "half-customed" UnstyledBox with customs as to REUSE
+/**
+ * This to provide a "half-customed" UnstyledBox with customs as to REUSE
+ * @param custom
+ * @returns
+ */
 const defineCustomBox = (custom: CustomBoxProps = {}): UnstyledBoxHook => {
   const useUnstyled = (sx?: sxProps) => {
     const render = (props: BoxProps) => (

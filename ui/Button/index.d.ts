@@ -1,6 +1,6 @@
 import * as React from "react";
 export declare function Button(props: ButtonProps): JSX.Element;
-export declare type ButtonProps = {
+type BasicButtonProps = {
   children?: React.ReactNode;
   variant?: "plain" | "text" | "outlined";
   size?: "auto" | "xsm" | "sm" | "md" | "lg" | "xlg";
@@ -27,6 +27,7 @@ export declare type ButtonProps = {
   hoverBoxShadow?: string;
   borderRadius?: number | string;
 };
+export declare type ButtonProps = React.PropsWithChildren<BasicButtonProps>;
 export declare function IconButton(props: IconButtonProps): JSX.Element;
 export declare type IconButtonProps = {
   children?: React.ReactNode;
