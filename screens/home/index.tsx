@@ -20,7 +20,7 @@ export default function HomePage(props: HomePageProps) {
   return (
     <Container>
       <Head>
-        <title>Next.js by Kyloc</title>
+        <title>Home / Twitter Shadow</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Content>
