@@ -1,90 +1,45 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
-import { useCustomButton, CustomButtonType } from "@/hooks/Button";
 import { defineCustomBox, useCustomBox, useBox } from "@/hooks/Container";
 import { Tweet, User } from "@/stores/tweet";
 import Icon from "@/components/generic/Icon";
 import { sxProps } from "@/system/sx";
+export type { TweetCardProps };
+export {
+  Component,
+  Avatar,
+  Interaction,
+  INTERACTIONS,
+  UserInfo,
+  CUSTOM_ICON_STYLE,
+};
 const useFlexBox = defineCustomBox();
 type TweetCardProps = {
-  children?: React.ReactNode;
   share?: number;
 } & Tweet;
-export default function TweetCard(props: TweetCardProps) {
-  const [Content] = useFlexBox();
-  const [Avatar] = useFlexBox({ mr: "12px" });
-  //WHY: different highlight color
-  //const [Content] = useCustomBox({},{});
-  const [AvatarImage] = useFlexBox({
-    w: 48,
-    h: 48,
-    borderRadius: "50%",
-    bg: props.user.avatarUrl,
-  });
-  const [Main] = useCustomBox({ vertical: true }, { w: "100%" });
-  const [TweetContent] = useCustomText(
-    HTMLTag.span,
-    CustomTextType.Content_default15,
-    {
-      lineHeight: 20,
-      display: "inline-block",
-      whiteSpace: "pre-wrap",
-    }
-  );
-
-  const [InteractionWrapper] = useFlexBox({
-    pt: "12px",
-    maxWidth: 425,
-    JC: "space-between",
-  });
-  const [InteractionInnerText] = useCustomText(
-    HTMLTag.span,
-    CustomTextType.Content_light13,
-    {
-      display: "inline-block",
-      color: "currentColor",
-      lineHeight: 16,
-      px: "16px",
-    }
-  );
-  const user = props.user;
-
-  const itemsInteraction = INTERACTIONS.map((item, index) => (
-    <Interaction
-      key={index}
-      name={item.name}
-      hoverColor={item.hoverColor}
-      hoverBg={item.hoverBg}
-    >
-      <Icon round name={item.name} sx={CUSTOM_ICON_STYLE} />
-      <InteractionInnerText>{props[item.name]}</InteractionInnerText>
-    </Interaction>
-  ));
-  return (
-    <Component>
-      <Content>
-        <Avatar>
-          <AvatarImage />
-        </Avatar>
-        <Main>
-          <UserInfo
-            nickname={user.nickname}
-            username={user.username}
-            timestamp={props.timestamp}
-          />
-          <TweetContent>{props.content}</TweetContent>
-          <InteractionWrapper>{itemsInteraction}</InteractionWrapper>
-        </Main>
-      </Content>
-    </Component>
-  );
-}
 const Component = styled.div`
   padding: 12px 16px 12px;
   box-sizing: border-box;
   border-bottom: 1px solid rgb(239, 243, 244);
 `;
+
+function Avatar(props: React.PropsWithChildren<{ url: string }>) {
+  const [Wrapper] = useFlexBox({ mr: "12px" });
+  //WHY: different highlight color
+  //const [Content] = useCustomBox({},{});
+  const [Image] = useFlexBox({
+    w: 48,
+    h: 48,
+    borderRadius: "50%",
+    bg: props.url,
+  });
+  return (
+    <Wrapper>
+      <Image />
+    </Wrapper>
+  );
+}
 
 function UserInfo({
   nickname,

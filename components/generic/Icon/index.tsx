@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { default as SVG, SVGProps } from "../SVG";
 import { getIconFromLocal } from "./icons";
 import * as React from "react";
-import { createStyleComponent, sxProps, parseLengthValue } from "@/system/sx";
+import { createUnstyleComponent, sxProps, parseLengthValue } from "@/system/sx";
 type IconProps = {
   name?: string;
   svg?: SVGProps;
@@ -11,6 +11,7 @@ type IconProps = {
 type IconStyleProps = {
   round?: boolean;
 };
+export type TIconSVG = SVGProps;
 export default function Icon(props: React.PropsWithChildren<IconProps>) {
   const svg = props.svg ?? getIconFromLocal(props.name ?? "unknown");
   const { sx = {} } = props;
@@ -28,5 +29,5 @@ const Wrapper = styled.span`
   border-radius: ${(props: IconStyleProps) =>
     props.round ? "50%" : undefined};
 `;
-const UnstyledIcon = createStyleComponent<sxProps>(Wrapper);
+const UnstyledIcon = createUnstyleComponent<sxProps>(Wrapper);
 const Component = UnstyledIcon.withComponent("span");

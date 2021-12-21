@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { createStyleComponent, sxProps, parseLengthValue } from "@/system/sx";
+import { createUnstyleComponent, sxProps, parseLengthValue } from "@/system/sx";
 import { pick } from "@/utils/helpers";
 
 export type TextareaProps = {
@@ -81,5 +81,5 @@ const BasicTextarea = styled.label`
     letter-spacing: normal;
   }
 `;
-const UnstyledTextarea = createStyleComponent<sxProps>(BasicTextarea);
+const UnstyledTextarea = createUnstyleComponent<sxProps>(BasicTextarea);
 const Component = UnstyledTextarea.withComponent("label");

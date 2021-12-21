@@ -1,80 +1,15 @@
-import * as React from "react";
-import styled from "@emotion/styled";
-import { useCustomButton, CustomButtonType } from "@/hooks/Button";
-import { useClickable } from "@/hooks/Clickable";
-import { useCustomBox } from "@/hooks/Container";
-import { Icon } from "@/ui/Icon";
-import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
-import { useWindowSize } from "@/hooks/Window";
-import { isMobile } from "@/utils/media";
-import { default as SVG, SVGProps } from "@/components/generic/SVG";
-type NavigationMenuCardProps = {
-  children?: React.ReactNode;
+export {
+  IconTwitter,
+  IconHome,
+  IconExplore,
+  IconNotifications,
+  IconMessages,
+  IconBookmarks,
+  IconLists,
+  IconProfile,
+  IconMore,
 };
-export default function NavigationMenuCard(props: NavigationMenuCardProps) {
-  const [Component] = useCustomBox(
-    {
-      vertical: true,
-    },
-    {
-      w: "100%",
-      overflow: "hidden",
-      flexShrink: "0",
-      AI: "flex-start",
-    }
-  );
-  const [Navigation] = useCustomButton(CustomButtonType.Navigation_default50);
-  const [NavigationText] = useCustomText(
-    HTMLTag.span,
-    CustomTextType.Navigation_default20,
-    {
-      lineHeight: 24,
-      ml: "20px",
-      mr: "16px",
-    }
-  );
-  const navigationMenuItems = NavigationItems.map((item) => (
-    <Navigation key={item.name}>
-      <SVG {...item.icon} />
-      <NavigationText>{item.name}</NavigationText>
-    </Navigation>
-  ));
-  const [ButtonWrapper] = useCustomBox(
-    {
-      noFlex: true,
-    },
-    {
-      my: "12px",
-    }
-  );
-  const [TweetButton] = useCustomButton(CustomButtonType.Navigation_primary50);
-
-  return (
-    <Component>
-      <Logo></Logo>
-      {navigationMenuItems}
-      <ButtonWrapper>
-        <TweetButton>Tweet</TweetButton>
-      </ButtonWrapper>
-    </Component>
-  );
-}
-function Logo() {
-  const [LogoWrapper] = useCustomBox(
-    {},
-    {
-      w: "100%",
-      h: 50,
-      AI: "center",
-    }
-  );
-  return (
-    <LogoWrapper>
-      <SVG {...LogoTwitter} />
-    </LogoWrapper>
-  );
-}
-const LogoTwitter = {
+const IconTwitter = {
   width: 50,
   height: 30,
   viewBox: "0 0 24 24",
@@ -89,11 +24,6 @@ const LogoTwitter = {
       ],
     },
   ],
-};
-type NavigationItem = {
-  name: string;
-  url: string;
-  icon: SVGProps;
 };
 
 const IconHome = {
@@ -227,45 +157,3 @@ const IconMore = {
     },
   ],
 };
-const NavigationItems: NavigationItem[] = [
-  {
-    name: "Home",
-    url: "",
-    icon: IconHome,
-  },
-  {
-    name: "Explore",
-    url: "",
-    icon: IconExplore,
-  },
-  {
-    name: "Notifications",
-    url: "",
-    icon: IconNotifications,
-  },
-  {
-    name: "Messages",
-    url: "",
-    icon: IconMessages,
-  },
-  {
-    name: "Bookmarks",
-    url: "",
-    icon: IconBookmarks,
-  },
-  {
-    name: "Lists",
-    url: "",
-    icon: IconLists,
-  },
-  {
-    name: "Profile",
-    url: "",
-    icon: IconProfile,
-  },
-  {
-    name: "More",
-    url: "",
-    icon: IconMore,
-  },
-];

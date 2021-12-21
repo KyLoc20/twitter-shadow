@@ -1,15 +1,10 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import {
-  useCustomBox,
-  useCustomStack,
-  useCustomPaper,
-} from "@/hooks/Container";
-import Paper from "@/components/generic/Paper";
-type AsideContentProps = {
-  children?: React.ReactNode;
-};
-export default function AsideContentCard(props: AsideContentProps) {
+import { useCustomBox, useCustomPaper } from "@/hooks/Container";
+type AsideContentProps = {};
+export default function AsideContentCard(
+  props: React.PropsWithChildren<AsideContentProps>
+) {
   const [Content] = useCustomBox({ vertical: true }, {});
   const [SearchWrapper] = useCustomBox(
     {},

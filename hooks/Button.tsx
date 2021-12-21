@@ -2,7 +2,7 @@ import * as React from "react";
 import { Button, ButtonProps } from "@/ui/Button";
 import * as Text from "@/components/generic/Text";
 import styled from "@emotion/styled";
-import { createStyleComponent, sxProps, parseLengthValue } from "@/system/sx";
+import { createUnstyleComponent, sxProps, parseLengthValue } from "@/system/sx";
 import { useBox } from "./Container";
 type ButtonVariant = "plain" | "text" | "outlined";
 type ButtonColor = string;
@@ -141,7 +141,7 @@ function useCustomButton(whichPreset: CustomButtonType) {
   }
 }
 const BasicContent = styled.div``;
-const UnstyledContent = createStyleComponent<sxProps>(BasicContent);
+const UnstyledContent = createUnstyleComponent<sxProps>(BasicContent);
 const InnerContent = UnstyledContent.withComponent("span");
 const OuterWrapper = UnstyledContent.withComponent("div");
 export { useCustomButton, CustomButtonType, defineCustomButton };

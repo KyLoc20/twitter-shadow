@@ -1,54 +1,9 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
-import { useCustomButton, CustomButtonType } from "@/hooks/Button";
-import { Link } from "../generic/Link";
-import { useWindowSize } from "@/hooks/Window";
-import { isMobile } from "@/utils/media";
-import { useCustomBox, useCustomStack } from "@/hooks/Container";
-import { default as SVG } from "@/components/generic/SVG";
-type TopBannerProps = {
-  children?: React.ReactNode;
-};
-export default function TopBannerCard(props: TopBannerProps) {
-  const [Content] = useCustomBox(
-    {},
-    {
-      JC: "space-between",
-      AI: "center",
-      h: "100%",
-    }
-  );
-  //todo w: "100%" or  flex: "1", make it cover the rest container space
-  const [HeaderText] = useCustomText(
-    HTMLTag.span,
-    CustomTextType.Title_default20,
-    {
-      w: "100%",
-      lineHeight: 24,
-      textOverflow: "ellipsis",
-      overflow: "hidden",
-    }
-  );
-  const [ButtonWrapper] = useCustomBox(
-    {},
-    {
-      minWidth: 56,
-      AI: "center",
-      JC: "flex-end",
-    }
-  );
-  return (
-    <Component>
-      <Content>
-        <HeaderText>Home</HeaderText>
-        <ButtonWrapper>
-          <SVG {...IconTopTweets} />
-        </ButtonWrapper>
-      </Content>
-    </Component>
-  );
-}
+import { defineCustomBox } from "@/hooks/Container";
+import Icon from "@/components/generic/Icon";
+import { sxProps } from "@/system/sx";
+export { Component, TopTweetsButton };
 const Component = styled.section`
   position: sticky;
   top: 0;
@@ -60,6 +15,29 @@ const Component = styled.section`
   border-top: 1px solid rgb(239, 243, 244);
   border-bottom: 1px solid rgb(239, 243, 244);
 `;
+const useFlexBox = defineCustomBox();
+function TopTweetsButton() {
+  const [Wrapper] = useFlexBox({
+    minWidth: 56,
+    AI: "center",
+    JC: "flex-end",
+  });
+
+  return (
+    <Wrapper>
+      <Icon svg={IconTopTweets} sx={ICON_STYLE} round></Icon>
+    </Wrapper>
+  );
+}
+const ICON_STYLE: sxProps = {
+  w: 36,
+  h: 36,
+  m: "-8px", //trick
+  transition: "all 0.2s ease",
+  cursor: "pointer",
+  color: "rgb(15, 20, 25)",
+  hoverBg: "rgba(15, 20, 25,0.1)",
+};
 const IconTopTweets = {
   width: 20,
   height: 20,

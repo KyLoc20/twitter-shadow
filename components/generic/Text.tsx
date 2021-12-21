@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import { createStyleComponent, sxProps, parseLengthValue } from "@/system/sx";
+import { createUnstyleComponent, sxProps, parseLengthValue } from "@/system/sx";
 type LengthValue = number | string | "inherit";
 export type TextLocalProps = {
   fontSize?: LengthValue; //font-size
@@ -107,7 +107,7 @@ const BasicText = styled.div`
   margin: 0;
   padding: 0;
 `;
-const UnstyledText = createStyleComponent<sxProps>(BasicText);
+const UnstyledText = createUnstyleComponent<sxProps>(BasicText);
 const DivComponent = UnstyledText.withComponent("div");
 const SpanComponent = UnstyledText.withComponent("span");
 const HeadingOneComponent = UnstyledText.withComponent("h1");

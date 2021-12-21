@@ -1,12 +1,6 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { useCustomButton, CustomButtonType } from "@/hooks/Button";
-import { useClickable } from "@/hooks/Clickable";
 import { useCustomBox } from "@/hooks/Container";
-import { Icon } from "@/ui/Icon";
-import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
-import { useWindowSize } from "@/hooks/Window";
-import { isMobile } from "@/utils/media";
 import UserInfoCard from "./UserInfoCard";
 import NavigationMenuCard from "./NavigationMenuCard";
 type AppBarProps = {

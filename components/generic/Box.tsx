@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import { sxProps, createStyleComponent } from "@/system/sx";
+import { sxProps, createUnstyleComponent } from "@/system/sx";
 //full sx supported
 export type BoxProps = React.PropsWithChildren<BasicBoxProps>;
 type BasicBoxProps = {
@@ -19,6 +19,6 @@ export default function Box(props: BoxProps) {
   );
 }
 const BasicBox = styled.div``;
-const UnstyledBox = createStyleComponent<sxProps>(BasicBox);
+const UnstyledBox = createUnstyleComponent<sxProps>(BasicBox);
 //todo tricky to get a StyledComponent
 const Component = UnstyledBox.withComponent("div");

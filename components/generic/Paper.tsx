@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import { createStyleComponent, sxProps, parseLengthValue } from "@/system/sx";
+import { createUnstyleComponent, sxProps, parseLengthValue } from "@/system/sx";
 type LengthValue = number | string | "inherit";
 export type PaperLocalProps = {
   bg?: string; //background
@@ -51,5 +51,5 @@ const genCSS = (props: PaperProps) => css`
   }
 `;
 const BasicPaper = styled.div``;
-const StyledPaper = createStyleComponent<sxProps>(BasicPaper);
+const StyledPaper = createUnstyleComponent<sxProps>(BasicPaper);
 const Component = StyledPaper.withComponent("div");

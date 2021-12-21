@@ -126,7 +126,7 @@ export function parseLengthValue(
       ? parseNumberWithPx(defaultValue)
       : defaultValue;
 }
-export function createStyleComponent<T extends sxProps>(
+export function createUnstyleComponent<T extends sxProps>(
   baseComponent: StyledComponent<{}>
 ) {
   return styled(baseComponent)`
