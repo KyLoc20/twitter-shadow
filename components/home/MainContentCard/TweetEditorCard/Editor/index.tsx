@@ -46,18 +46,34 @@ export default function Editor() {
   const handleNewTweet = (e: React.MouseEvent) => {
     //1. check tweet content
     const content = "test content";
+    const user = {
+      id: 0,
+      nickname: "Me",
+      username: "@crassus",
+      avatarUrl: "pink",
+    };
     //2. post to API and get unique tweet id
-    API.postNewTweet(content).then((tid) => {
+    API.postNewTweet({ content, user }).then((tid) => {
       console.log("finished postNewTweet", tid);
       //3.dispatch to store
-      const action: TweetActions = {
+      const doCreateTweet: TweetActions = {
         type: ActionTypes.Create,
         payload: {
           id: tid,
           content,
+          user: {
+            id: 0,
+            nickname: "Me",
+            username: "@crassus",
+            avatarUrl: "pink",
+          },
+          timestamp: "Just now",
+          replies: 1,
+          likes: 2,
+          retweets: 3,
         },
       };
-      dispatch(action);
+      dispatch(doCreateTweet);
       console.log(state);
     });
   };

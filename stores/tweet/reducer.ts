@@ -9,16 +9,11 @@ const tweetListReducer = (state: Tweet[], action: TweetActions): Tweet[] => {
         {
           id: action.payload.id,
           content: action.payload.content,
-          user: {
-            id: 0,
-            nickname: "Me",
-            username: "@crassus",
-            avatarUrl: "pink",
-          },
-          timestamp: "Just now",
-          replies: 1,
-          likes: 2,
-          retweets: 3,
+          user: action.payload.user,
+          timestamp: action.payload.timestamp,
+          replies: action.payload.replies,
+          likes: action.payload.likes,
+          retweets: action.payload.retweets,
         },
       ];
     case ActionTypes.Delete:
@@ -29,16 +24,11 @@ const tweetListReducer = (state: Tweet[], action: TweetActions): Tweet[] => {
         {
           id: action.payload.id,
           content: action.payload.content,
-          user: {
-            id: 0,
-            nickname: "Me",
-            username: "@crassus",
-            avatarUrl: "pink",
-          },
-          timestamp: "Just now",
-          replies: 1,
-          likes: 2,
-          retweets: 3,
+          user: action.payload.user,
+          timestamp: action.payload.timestamp,
+          replies: action.payload.replies,
+          likes: action.payload.likes,
+          retweets: action.payload.retweets,
         },
       ];
     case ActionTypes.Reset:

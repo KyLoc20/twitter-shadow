@@ -1,5 +1,5 @@
 import { ActionMap } from "../helper";
-import { Tweet, Statistics } from "./model";
+import { Tweet, User, Statistics } from "./model";
 export enum ActionTypes {
   Create = "CREATE_TWEET",
   Delete = "DELETE_TWEET",
@@ -10,6 +10,11 @@ type TweetPayload = {
   [ActionTypes.Create]: {
     id: number;
     content: string;
+    user: User;
+    timestamp: string;
+    replies: number;
+    likes: number;
+    retweets: number;
   };
   [ActionTypes.Delete]: {
     id: number;
@@ -17,6 +22,11 @@ type TweetPayload = {
   [ActionTypes.Update]: {
     id: number;
     content: string;
+    user: User;
+    timestamp: string;
+    replies: number;
+    likes: number;
+    retweets: number;
   };
   [ActionTypes.Reset]: {
     tweets: Tweet[];
