@@ -8,14 +8,19 @@ import {
 import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
 import { CustomButtonType, defineCustomButton } from "@/hooks/Button";
 import { defineCustomBox, useCustomBox, useBox } from "@/hooks/Container";
+import * as API from "@/api/index";
 import {
   WhoCanReply,
   CUSTOM_ICON_STYLE,
   CUSTOM_TEXTAREA_STYLE,
 } from "./widgets";
+import { TweetStore, Tweet, TweetActions } from "@/stores/tweet";
+import { ActionTypes } from "@/stores/tweet/action";
 const useFlexBox = defineCustomBox();
 const useButton36 = defineCustomButton(CustomButtonType.Navigation_primary36);
+type EditorProps = {};
 export default function Editor() {
+  const { state, dispatch } = React.useContext(TweetStore);
   const [Component] = useCustomBox(
     {
       vertical: true,
@@ -38,6 +43,24 @@ export default function Editor() {
       <Icon key={index} round name={iconName} sx={CUSTOM_ICON_STYLE} />
     )
   );
+  const handleNewTweet = (e: React.MouseEvent) => {
+    //1. check tweet content
+    const content = "test content";
+    //2. post to API and get unique tweet id
+    API.postNewTweet(content).then((tid) => {
+      console.log("finished postNewTweet", tid);
+      //3.dispatch to store
+      const action: TweetActions = {
+        type: ActionTypes.Create,
+        payload: {
+          id: tid,
+          content,
+        },
+      };
+      dispatch(action);
+      console.log(state);
+    });
+  };
   return (
     <Component>
       <Textarea
@@ -48,7 +71,7 @@ export default function Editor() {
       <WhoCanReply />
       <ControlPanel>
         <Tools>{itemsTool}</Tools>
-        <TweetButton>Tweet</TweetButton>
+        <TweetButton onClick={handleNewTweet}>Tweet</TweetButton>
       </ControlPanel>
     </Component>
   );

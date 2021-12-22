@@ -61,7 +61,12 @@ const Tweet4: Tweet = {
   likes: 2,
   retweets: 3,
 };
+export const SomeTweets = [Tweet1, Tweet2, Tweet3, Tweet4];
 export const initialState: TweetState = {
   tweets: [Tweet1, Tweet2, Tweet3, Tweet4],
   stats: { createNum: 0, deleteNum: 0, updateNum: 0 },
 };
+export const defaultState = (): TweetState => ({
+  tweets: [],
+  stats: { createNum: 0, deleteNum: 0, updateNum: 0 },
+});

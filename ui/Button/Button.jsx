@@ -171,9 +171,11 @@ function Button(props) {
     return props.loading ? 0 : 1;
   }, [props.loading]);
   const handleClick = (e) => {
-    if (props.disabled || props.loading || props.rippleDisabled) return;
-    createRippleByAddingLayer(e, false, computedRippleColor);
-    props.onClick?.(e);
+    if (!props.disabled && !props.loading) {
+      props.onClick?.(e);
+      if (!props.rippleDisabled)
+        createRippleByAddingLayer(e, false, computedRippleColor);
+    }
   };
   const handleHoverEnter = () => {
     if (props.disabled || props.loading) return;

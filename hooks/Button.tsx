@@ -77,7 +77,12 @@ function defineCustomButton(
     if (wrapperSx != null) {
       const renderWithWrapper = (props: ButtonProps) => (
         <OuterWrapper {...wrapperSx} className="button-wrapper">
-          <Button {...genPropsForCustomButton(ultimateCustomProps)}>
+          <Button
+            {...{
+              ...genPropsForCustomButton(ultimateCustomProps),
+            }}
+            onClick={props.onClick}
+          >
             {innerSx != null ? (
               <InnerContent {...innerSx} className="inner-content">
                 {props.children}

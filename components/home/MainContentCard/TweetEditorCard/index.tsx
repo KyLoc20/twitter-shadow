@@ -3,10 +3,10 @@ import styled from "@emotion/styled";
 import { defineCustomBox, useCustomBox, useBox } from "@/hooks/Container";
 import Editor from "./Editor";
 type TweetEditorProps = {};
+const useFlexBox = defineCustomBox();
 export default function TweetEditorCard(
   props: React.PropsWithChildren<TweetEditorProps>
 ) {
-  const useFlexBox = defineCustomBox();
   const [Content] = useFlexBox({
     p: "8px 0",
   });

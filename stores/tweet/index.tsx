@@ -1,24 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { TweetState, Tweet, User, Statistics } from "./model";
-import { TweetActions } from "./action";
+import { TweetActions, ActionTypes } from "./action";
 import { mainReducer } from "./reducer";
-import { initialState } from "./data.test";
+import { defaultState } from "./data.test";
+import { fetchTweetList } from "@/api/index";
+export { TweetStore, TweetStoreProvider };
+export type { Tweet, User, Statistics, TweetActions };
+
 const TweetStore = React.createContext<{
   state: TweetState;
   dispatch: React.Dispatch<TweetActions>;
 }>({
-  state: initialState,
+  state: defaultState(),
   dispatch: () => null,
 });
 
 const TweetStoreProvider: React.FC = ({ children }) => {
   //todo fetch initialState from API
-  const [state, dispatch] = React.useReducer(mainReducer, initialState);
+  const [state, dispatch] = React.useReducer(mainReducer, defaultState());
+  useEffect(() => {
+    fetchTweetList().then((res) => {
+      const doReset: TweetActions = {
+        type: ActionTypes.Reset,
+        payload: {
+          tweets: res,
+          stats: state.stats,
+        },
+      };
+      dispatch(doReset);
+    });
+  }, []);
   return (
     <TweetStore.Provider value={{ state, dispatch }}>
       {children}
     </TweetStore.Provider>
   );
 };
-export { TweetStore, TweetStoreProvider };
-export type { Tweet, User, Statistics };

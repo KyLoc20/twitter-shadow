@@ -1,8 +1,10 @@
 import { ActionMap } from "../helper";
+import { Tweet, Statistics } from "./model";
 export enum ActionTypes {
   Create = "CREATE_TWEET",
   Delete = "DELETE_TWEET",
   Update = "UPDATE_TWEET",
+  Reset = "RESET_TWEET",
 }
 type TweetPayload = {
   [ActionTypes.Create]: {
@@ -15,6 +17,10 @@ type TweetPayload = {
   [ActionTypes.Update]: {
     id: number;
     content: string;
+  };
+  [ActionTypes.Reset]: {
+    tweets: Tweet[];
+    stats: Statistics;
   };
 };
 // keyof X  -> 1 | 2 | ...

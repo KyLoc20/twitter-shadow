@@ -12,7 +12,7 @@ type BasicButtonProps = {
   tile?: boolean; //no border-radius if true
   rounded?: boolean; //round edges if true
   rippleDisabled?: boolean;
-  onClick?: React.FormEventHandler<HTMLInputElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   //custom
   width?: number;
   height?: number;

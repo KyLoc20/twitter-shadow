@@ -23,8 +23,8 @@ export default function MainContentCard(props: MainContentCard) {
     <Component>
       <Content>
         <TopBannerCard></TopBannerCard>
-        <TweetEditorCard></TweetEditorCard>
         <TweetStoreProvider>
+          <TweetEditorCard></TweetEditorCard>
           <TweetListCard></TweetListCard>
         </TweetStoreProvider>
       </Content>

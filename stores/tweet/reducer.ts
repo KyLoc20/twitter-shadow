@@ -1,6 +1,7 @@
 import { ActionTypes, TweetActions } from "./action";
 import { Tweet, Statistics, TweetState } from "./model";
 const tweetListReducer = (state: Tweet[], action: TweetActions): Tweet[] => {
+  console.log("tweetListReducer", state, action);
   switch (action.type) {
     case ActionTypes.Create:
       return [
@@ -40,6 +41,8 @@ const tweetListReducer = (state: Tweet[], action: TweetActions): Tweet[] => {
           retweets: 3,
         },
       ];
+    case ActionTypes.Reset:
+      return [...action.payload.tweets];
     default:
       return state;
   }
@@ -61,6 +64,8 @@ const statsReducer = (state: Statistics, action: TweetActions): Statistics => {
         ...state,
         createNum: state.updateNum + 1,
       };
+    case ActionTypes.Reset:
+      return { ...action.payload.stats };
     default:
       return state;
   }
