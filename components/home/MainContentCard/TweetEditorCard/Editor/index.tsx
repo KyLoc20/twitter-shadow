@@ -19,7 +19,8 @@ import { ActionTypes } from "@/stores/tweet/action";
 const useFlexBox = defineCustomBox();
 const useButton36 = defineCustomButton(CustomButtonType.Navigation_primary36);
 type EditorProps = {};
-export default function Editor() {
+const Editor = React.memo(() => {
+  console.log("RENDER Editor");
   const { state, dispatch } = React.useContext(TweetStore);
   const [Component] = useCustomBox(
     {
@@ -43,9 +44,11 @@ export default function Editor() {
       <Icon key={index} round name={iconName} sx={CUSTOM_ICON_STYLE} />
     )
   );
+  const contentRef = React.useRef<string>("");
   const handleNewTweet = (e: React.MouseEvent) => {
     //1. check tweet content
-    const content = "test content";
+    const content = contentRef.current;
+    if (content === "") return;
     const user = {
       id: 0,
       nickname: "Me",
@@ -81,6 +84,7 @@ export default function Editor() {
     <Component>
       <Textarea
         id="tweet-input"
+        ref={contentRef}
         placeholder="What's happening?"
         {...CUSTOM_TEXTAREA_STYLE}
       />
@@ -91,4 +95,5 @@ export default function Editor() {
       </ControlPanel>
     </Component>
   );
-}
+});
+export default Editor;

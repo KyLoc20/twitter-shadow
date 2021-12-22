@@ -10,6 +10,7 @@ type MainContentCard = {
 };
 
 export default function MainContentCard(props: MainContentCard) {
+  console.log("RENDER MainContentCard");
   const [Content] = useCustomBox(
     {
       vertical: true,
