@@ -3,8 +3,9 @@ import styled from "@emotion/styled";
 import Icon from "@/components/generic/Icon";
 import { defineCustomBox, useCustomBox, useBox } from "@/hooks/Container";
 import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
+import Ghost from "@/components/generic/Ghost";
 import {
-  TweetCardProps,
+  TTweetCard,
   Component,
   Avatar,
   Interaction,
@@ -12,10 +13,11 @@ import {
   UserInfo,
   CUSTOM_ICON_STYLE,
 } from "./widgets";
+import * as API from "@/api/index";
+import { TweetStore, TweetActions, ActionTypes } from "@/stores/tweet";
 const useFlexBox = defineCustomBox();
-export default function TweetCard(
-  props: React.PropsWithChildren<TweetCardProps>
-) {
+export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
+  const { state, dispatch } = React.useContext(TweetStore);
   const [Content] = useFlexBox();
   const [MainWrapper] = useCustomBox({ vertical: true }, { w: "100%" });
   const [TweetContent] = useCustomText(
@@ -55,6 +57,20 @@ export default function TweetCard(
       <InteractionInnerText>{props[item.name]}</InteractionInnerText>
     </Interaction>
   ));
+  const handleDeleteTweet = (e: React.MouseEvent, tid: number) => {
+    API.deleteTweet(tid).then((tid) => {
+      console.log("finished postDeleteTweet", tid);
+      const doDeleteTweet: TweetActions = {
+        type: ActionTypes.Delete,
+        payload: {
+          id: tid,
+        },
+      };
+      dispatch(doDeleteTweet);
+    });
+  };
+  const [isMoreMenuOpen, setMoreMenuOpen] = React.useState(false);
+  console.log("RENDER TweetCard", props.id, isMoreMenuOpen);
   return (
     <Component>
       <Content>
@@ -64,7 +80,25 @@ export default function TweetCard(
             nickname={user.nickname}
             username={user.username}
             timestamp={props.timestamp}
-          />
+            onClick={(e: React.MouseEvent) => {
+              console.log("onClick");
+              setMoreMenuOpen(true);
+              //handleDeleteTweet(e, props.id);
+            }}
+          >
+            <Ghost
+              active={isMoreMenuOpen}
+              onReadyClose={() => {
+                setMoreMenuOpen(false);
+              }}
+              width="300px"
+              right="0"
+              top="0"
+            >
+              123
+            </Ghost>
+          </UserInfo>
+
           <TweetContent>{props.content}</TweetContent>
           <InteractionWrapper>{itemsInteraction}</InteractionWrapper>
         </MainWrapper>

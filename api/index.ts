@@ -47,6 +47,20 @@ class LocalStorageManager {
   addNewTweet(tweet: TTweet) {
     this.tweets.push(tweet);
   }
+
+  deleteTweet(id: number) {
+    let index = this._searchTweet(id);
+    if (index >= 0) {
+      this.tweets.splice(index, 1);
+      return true;
+    } else return false;
+  }
+  updateTweet(tweet: TTweet) {
+    let index = this._searchTweet(tweet.id);
+    if (index >= 0) this.tweets.splice(index, 1, tweet);
+    else this.tweets.push(tweet);
+    return true;
+  }
   save() {
     this._synchronize();
     //saving tweets
@@ -64,30 +78,71 @@ class LocalStorageManager {
   _synchronize() {
     if (!this.isTweetsLoaded) this._loadTweets();
   }
+  _searchTweet(id: number) {
+    let cur: number = -1;
+    for (let i = 0; i < this.tweets.length; i++) {
+      let tweet = this.tweets[i];
+      if (tweet.id === id) {
+        cur = i;
+        break;
+      }
+    }
+    return cur;
+  }
 }
-function postNewTweet(tweet: TNewTweet) {
+function postCreateTweet(tweet: TNewTweet) {
   return new Promise<number>((resolve, reject) => {
     //mock network delay
     setTimeout(() => {
       const lsm = new LocalStorageManager();
       let id = lsm.availableTid;
       let { content, user } = tweet;
-      let timestamp = "Just now";
-      let replies = 0;
-      let likes = 0;
-      let retweets = 0;
-      lsm.addNewTweet({
+      let newTweet: TTweet = {
         id,
         content,
         user,
-        timestamp,
-        replies,
-        likes,
-        retweets,
-      });
+        timestamp: "Just now",
+        replies: 0,
+        likes: 0,
+        retweets: 0,
+      };
+      lsm.addNewTweet(newTweet);
       lsm.save();
       resolve(id);
     }, 500);
   });
 }
-export { fetchTweetList, postNewTweet };
+function deleteTweet(tid: number) {
+  return new Promise<number>((resolve, reject) => {
+    //mock network delay
+    setTimeout(() => {
+      const lsm = new LocalStorageManager();
+      lsm.deleteTweet(tid);
+      lsm.save();
+      resolve(tid);
+    }, 500);
+  });
+}
+function postUpdateTweet(tweet: TNewTweet) {
+  return new Promise<number>((resolve, reject) => {
+    //mock network delay
+    setTimeout(() => {
+      const lsm = new LocalStorageManager();
+      let id = lsm.availableTid;
+      let { content, user } = tweet;
+      let newTweet: Tweet = {
+        id,
+        content,
+        user,
+        timestamp: "Just now",
+        replies: 0,
+        likes: 0,
+        retweets: 0,
+      };
+      lsm.updateTweet(newTweet);
+      lsm.save();
+      resolve(id);
+    }, 500);
+  });
+}
+export { fetchTweetList, postCreateTweet, deleteTweet, postUpdateTweet };

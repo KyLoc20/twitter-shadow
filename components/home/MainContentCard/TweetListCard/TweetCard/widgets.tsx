@@ -5,7 +5,8 @@ import { defineCustomBox, useCustomBox, useBox } from "@/hooks/Container";
 import { Tweet, User } from "@/stores/tweet";
 import Icon from "@/components/generic/Icon";
 import { sxProps } from "@/system/sx";
-export type { TweetCardProps };
+import { prependOnceListener } from "process";
+export type { TTweetCard };
 export {
   Component,
   Avatar,
@@ -15,10 +16,11 @@ export {
   CUSTOM_ICON_STYLE,
 };
 const useFlexBox = defineCustomBox();
-type TweetCardProps = {
+type TTweetCard = {
   share?: number;
 } & Tweet;
 const Component = styled.div`
+  position: relative;
   padding: 12px 16px 12px;
   box-sizing: border-box;
   border-bottom: 1px solid rgb(239, 243, 244);
@@ -45,10 +47,13 @@ function UserInfo({
   nickname,
   username,
   timestamp,
+  onClick,
+  children,
 }: React.PropsWithChildren<{
   nickname: string;
   username: string;
   timestamp: string;
+  onClick?: React.MouseEventHandler;
 }>) {
   const [Wrapper] = useFlexBox();
   const [Nickname] = useCustomText(
@@ -91,6 +96,7 @@ function UserInfo({
     }
   );
   const [MoreButtonWrapper] = useFlexBox({
+    position: "relative",
     minWidth: 38.75,
     flexGrow: "1",
     AI: "center",
@@ -112,7 +118,9 @@ function UserInfo({
             hoverBg: COLOR_BLUE_LIGHT,
             hoverColor: COLOR_BLUE,
           }}
+          onClick={onClick}
         />
+        {children}
       </MoreButtonWrapper>
     </Wrapper>
   );
@@ -133,7 +141,7 @@ const COLOR_GREEN = "rgba(0, 186, 124, 1)";
 const COLOR_GREEN_LIGHT = "rgba(0, 186, 124, 0.1)";
 const COLOR_DEFAULT = "rgba(83, 100, 113,1)";
 type InteractionProps = {
-  name: keyof TweetCardProps;
+  name: keyof TTweetCard;
   hoverColor: string;
   hoverBg: string;
 };

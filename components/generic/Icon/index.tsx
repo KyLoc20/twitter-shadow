@@ -7,16 +7,24 @@ type IconProps = {
   name?: string;
   svg?: SVGProps;
   sx?: sxProps;
-} & IconStyleProps;
+} & IconStyleProps &
+  EventHandlerProps;
 type IconStyleProps = {
   round?: boolean;
+};
+type EventHandlerProps = {
+  onClick?: React.MouseEventHandler<HTMLElement>;
 };
 export type TIconSVG = SVGProps;
 export default function Icon(props: React.PropsWithChildren<IconProps>) {
   const svg = props.svg ?? getIconFromLocal(props.name ?? "unknown");
   const { sx = {} } = props;
   return (
-    <Component className="icon" {...{ round: props.round, ...sx }}>
+    <Component
+      className="icon"
+      {...{ round: props.round, ...sx }}
+      onClick={props.onClick}
+    >
       <SVG {...svg} />
     </Component>
   );

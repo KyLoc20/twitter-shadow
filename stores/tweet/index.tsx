@@ -4,7 +4,7 @@ import { TweetActions, ActionTypes } from "./action";
 import { mainReducer } from "./reducer";
 import { defaultState } from "./data.test";
 import { fetchTweetList } from "@/api/index";
-export { TweetStore, TweetStoreProvider };
+export { TweetStore, TweetStoreProvider, ActionTypes };
 export type { Tweet, User, Statistics, TweetActions };
 
 const TweetStore = React.createContext<{

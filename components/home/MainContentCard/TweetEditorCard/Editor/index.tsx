@@ -14,8 +14,7 @@ import {
   CUSTOM_ICON_STYLE,
   CUSTOM_TEXTAREA_STYLE,
 } from "./widgets";
-import { TweetStore, Tweet, TweetActions } from "@/stores/tweet";
-import { ActionTypes } from "@/stores/tweet/action";
+import { TweetStore, Tweet, TweetActions, ActionTypes } from "@/stores/tweet";
 const useFlexBox = defineCustomBox();
 const useButton36 = defineCustomButton(CustomButtonType.Navigation_primary36);
 type EditorProps = {};
@@ -56,8 +55,8 @@ const Editor = React.memo(() => {
       avatarUrl: "pink",
     };
     //2. post to API and get unique tweet id
-    API.postNewTweet({ content, user }).then((tid) => {
-      console.log("finished postNewTweet", tid);
+    API.postCreateTweet({ content, user }).then((tid) => {
+      console.log("finished postCreateTweet", tid);
       //3.dispatch to store
       const doCreateTweet: TweetActions = {
         type: ActionTypes.Create,
