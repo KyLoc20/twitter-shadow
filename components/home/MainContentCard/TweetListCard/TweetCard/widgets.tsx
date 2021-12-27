@@ -20,7 +20,6 @@ type TTweetCard = {
 function Avatar(props: React.PropsWithChildren<{ url: string }>) {
   const Wrapper = genFlexBox({ mr: "12px" });
   //WHY: different highlight color
-  //const [Content] = useCustomBox({},{});
   const Image = genFlexBox({
     w: 48,
     h: 48,

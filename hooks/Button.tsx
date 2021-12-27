@@ -3,7 +3,6 @@ import { Button, ButtonProps } from "@/ui/Button";
 import * as Text from "@/components/generic/Text";
 import styled from "@emotion/styled";
 import { createUnstyleComponent, sxProps, parseLengthValue } from "@/system/sx";
-import { useBox } from "./Container";
 type ButtonVariant = "plain" | "text" | "outlined";
 type ButtonColor = string;
 type CustomButtonProps = {

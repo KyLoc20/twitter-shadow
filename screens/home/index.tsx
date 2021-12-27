@@ -4,19 +4,11 @@ import AppBarCard from "@/components/home/AppBarCard";
 import MainContentCard from "@/components/home/MainContentCard";
 import AsideContentCard from "@/components/home/AsideContentCard";
 import React from "react";
-import { useCustomBox } from "@/hooks/Container";
+import { genCustomBox } from "@/components/generic/containers/Box";
 type HomePageProps = {
   children?: React.ReactNode;
 };
 export default function HomePage(props: HomePageProps) {
-  const [Content] = useCustomBox(
-    {},
-    {
-      m: "0 auto",
-      JC: "space-between",
-      maxWidth: 1265, //275+990
-    }
-  );
   return (
     <Container>
       <Head>
@@ -36,3 +28,11 @@ const Container = styled("section")`
   background: #fff;
   min-height: 100vh;
 `;
+const Content = genCustomBox(
+  {},
+  {
+    m: "0 auto",
+    JC: "space-between",
+    maxWidth: 1265, //275+990
+  }
+);

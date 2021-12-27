@@ -1,6 +1,10 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { useCustomBox, useBox } from "@/hooks/Container";
+import {
+  genBox,
+  genCustomBox,
+  defineCustomBox,
+} from "@/components/generic/containers/Box";
 type GhostProps = {
   active: boolean;
   onReadyClose: React.MouseEventHandler<HTMLDivElement>;
@@ -18,18 +22,6 @@ type TContainer = {
 //     left: "calc(50% - 150px)", // - ((300px - 100%) / 2)
 //     w: 300,
 export default function Ghost(props: React.PropsWithChildren<GhostProps>) {
-  const [Container] = useBox({
-    position: "absolute",
-    transition: "opacity 2s ease",
-    zIndex: 200,
-    w: props.width,
-    h: props.height,
-    right: props.right,
-    bottom: props.bottom,
-    left: props.left,
-    top: props.top,
-    //paper
-  });
   const computedDisplay = React.useMemo(() => {
     return props.active ? "block" : "none";
   }, [props.active]);
@@ -46,6 +38,14 @@ export default function Ghost(props: React.PropsWithChildren<GhostProps>) {
       )}
       <Container
         className="ghost-container"
+        {...{
+          width: props.width,
+          height: props.height,
+          right: props.right,
+          bottom: props.bottom,
+          left: props.left,
+          top: props.top,
+        }}
         style={{ display: computedDisplay }}
       >
         {props.children}
@@ -53,6 +53,7 @@ export default function Ghost(props: React.PropsWithChildren<GhostProps>) {
     </React.Fragment>
   );
 }
+
 //todo absolute z-index
 const DEFAULT_OVERLAY_COLOR = undefined;
 type TOverlay = {
@@ -66,4 +67,16 @@ const Overlay = styled.div`
   right: 0;
   background: ${(props: TOverlay) => props.color ?? DEFAULT_OVERLAY_COLOR};
   z-index: 100;
+`;
+
+const Container = styled.div`
+  position: absolute;
+  z-index: 200;
+  transition: opacity 2s ease;
+  width: ${(props: TContainer) => props.width};
+  height: ${(props: TContainer) => props.height};
+  right: ${(props: TContainer) => props.right};
+  bottom: ${(props: TContainer) => props.bottom};
+  left: ${(props: TContainer) => props.left};
+  top: ${(props: TContainer) => props.top};
 `;
