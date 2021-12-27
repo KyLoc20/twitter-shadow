@@ -6,7 +6,6 @@ import { Tweet, User } from "@/stores/tweet";
 import { default as Icon, TIconSVG } from "@/components/generic/Icon";
 import { IconDelete, IconPin } from "./icons";
 import { sxProps } from "@/system/sx";
-import { prependOnceListener } from "process";
 export type { TTweetCard };
 export {
   Component,
