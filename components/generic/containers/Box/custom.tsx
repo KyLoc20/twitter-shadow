@@ -1,9 +1,7 @@
 import * as React from "react";
-// import { default as Box, BoxProps } from "@/components/generic/Box";
 import { Box, TBox, TBasic } from "./base";
 import { sxProps, JustifyContentValue, AlignItemsValue } from "@/system/sx";
 
-//custom props for quick uses and some default settings
 //REMINDER: display flex will shrink el to content width
 /*
 by default a custom Box is:
@@ -30,7 +28,7 @@ const genPropsForCustomBox = (custom: TCustomBox, sx: sxProps): TBox => ({
   ...sx,
 });
 
-const genBasicPropsForCustomBox = (props: TBasic): TBox => ({
+const genBasicPropsForBox = (props: TBasic): TBox => ({
   className: props.className,
   style: props.style,
   onMouseEnter: props.onMouseEnter,
@@ -38,6 +36,7 @@ const genBasicPropsForCustomBox = (props: TBasic): TBox => ({
   onMouseDown: props.onMouseDown,
   onClick: props.onClick,
 });
+
 /**
  * This to provide a "half-customed" UnstyledBox with customs as to REUSE
  * @param custom quick settings like display: flex,
@@ -52,13 +51,14 @@ const defineCustomBox =
     const renderBox = (
       <Box
         {...genPropsForCustomBox(custom ?? {}, sx ?? {})}
-        {...genBasicPropsForCustomBox(props)}
+        {...genBasicPropsForBox(props)}
       >
         {props.children}
       </Box>
     );
     return renderBox;
   };
+
 /**
  * This to provide a "fully-customed" UnstyledBox with customs and sx setting at the same time
  * @param custom quick settings like display: flex,
@@ -67,12 +67,12 @@ const defineCustomBox =
  * @returns
  */
 const genCustomBox =
-  (custom: TCustomBox, sx: sxProps) =>
+  (custom?: TCustomBox, sx?: sxProps) =>
   (props: React.PropsWithChildren<TBox>) => {
     const renderBox = (
       <Box
         {...genPropsForCustomBox(custom ?? {}, sx ?? {})}
-        {...genBasicPropsForCustomBox(props)}
+        {...genBasicPropsForBox(props)}
       >
         {props.children}
       </Box>
@@ -85,14 +85,9 @@ const genCustomBox =
  * @param sx customize all of CSS properties
  * @returns
  */
-
-//to provide a "raw" Box with only sx
 const genBox = (sx?: sxProps) => (props: React.PropsWithChildren<TBox>) => {
   const renderBox = (
-    <Box
-      {...genPropsForCustomBox({}, sx ?? {})}
-      {...genBasicPropsForCustomBox(props)}
-    >
+    <Box {...(sx ?? {})} {...genBasicPropsForBox(props)}>
       {props.children}
     </Box>
   );

@@ -2,7 +2,11 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
 import { CustomButtonType, defineCustomButton } from "@/hooks/Button";
-import { defineCustomBox, useCustomBox, useBox } from "@/hooks/Container";
+import {
+  genBox,
+  genCustomBox,
+  defineCustomBox,
+} from "@/components/generic/containers/Box";
 import Icon from "@/components/generic/Icon";
 import { TextareaProps } from "@/components/generic/SimpleTextarea";
 import { sxProps } from "@/system/sx";
@@ -10,7 +14,7 @@ export { WhoCanReply, CUSTOM_ICON_STYLE, CUSTOM_TEXTAREA_STYLE };
 
 const useButton24 = defineCustomButton(CustomButtonType.Navigation_primary24);
 function WhoCanReply() {
-  const [Wrapper] = useCustomBox(
+  const Wrapper = genCustomBox(
     {
       borderbox: true,
     },

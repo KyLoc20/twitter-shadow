@@ -1,25 +1,16 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { defineCustomBox, useCustomBox, useBox } from "@/hooks/Container";
+import {
+  genBox,
+  genCustomBox,
+  defineCustomBox,
+} from "@/components/generic/containers/Box";
 import Editor from "./Editor";
 type TweetEditorProps = {};
-const useFlexBox = defineCustomBox();
+
 export default function TweetEditorCard(
   props: React.PropsWithChildren<TweetEditorProps>
 ) {
-  const [Content] = useFlexBox({
-    p: "8px 0",
-  });
-  const [Avatar] = useFlexBox({
-    mr: "12px",
-  });
-  const [AvatarImage] = useFlexBox({
-    w: 48,
-    h: 48,
-    borderRadius: "50%",
-    bg: "red",
-  });
-
   return (
     <Component>
       <Content>
@@ -37,3 +28,16 @@ const Component = styled.section`
   box-sizing: border-box;
   border-bottom: 1px solid rgb(239, 243, 244);
 `;
+const genFlexBox = defineCustomBox();
+const Content = genFlexBox({
+  p: "8px 0",
+});
+const Avatar = genFlexBox({
+  mr: "12px",
+});
+const AvatarImage = genFlexBox({
+  w: 48,
+  h: 48,
+  borderRadius: "50%",
+  bg: "red",
+});

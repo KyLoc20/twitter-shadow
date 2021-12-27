@@ -1,36 +1,27 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
-import { defineCustomBox, useCustomBox, useBox } from "@/hooks/Container";
+import {
+  genBox,
+  genCustomBox,
+  defineCustomBox,
+} from "@/components/generic/containers/Box";
 import { Tweet, User } from "@/stores/tweet";
 import { default as Icon, TIconSVG } from "@/components/generic/Icon";
 import { IconDelete, IconPin } from "./icons";
 import { sxProps } from "@/system/sx";
 export type { TTweetCard };
-export {
-  Component,
-  Avatar,
-  Interaction,
-  INTERACTIONS,
-  UserInfo,
-  CUSTOM_ICON_STYLE,
-};
-const useFlexBox = defineCustomBox();
+export { Avatar, Interaction, INTERACTIONS, UserInfo, CUSTOM_ICON_STYLE };
+const genFlexBox = defineCustomBox();
 type TTweetCard = {
   share?: number;
 } & Tweet;
-const Component = styled.div`
-  position: relative;
-  padding: 12px 16px 12px;
-  box-sizing: border-box;
-  border-bottom: 1px solid rgb(239, 243, 244);
-`;
 
 function Avatar(props: React.PropsWithChildren<{ url: string }>) {
-  const [Wrapper] = useFlexBox({ mr: "12px" });
+  const Wrapper = genFlexBox({ mr: "12px" });
   //WHY: different highlight color
   //const [Content] = useCustomBox({},{});
-  const [Image] = useFlexBox({
+  const Image = genFlexBox({
     w: 48,
     h: 48,
     borderRadius: "50%",
@@ -55,7 +46,7 @@ function UserInfo({
   timestamp: string;
   onClick?: React.MouseEventHandler;
 }>) {
-  const [Wrapper] = useFlexBox();
+  const Wrapper = genFlexBox();
   const [Nickname] = useCustomText(
     HTMLTag.span,
     CustomTextType.Content_default15,
@@ -95,7 +86,7 @@ function UserInfo({
       overflow: "hidden",
     }
   );
-  const [MoreButtonWrapper] = useFlexBox({
+  const MoreButtonWrapper = genFlexBox({
     position: "relative",
     minWidth: 38.75,
     flexGrow: "1",

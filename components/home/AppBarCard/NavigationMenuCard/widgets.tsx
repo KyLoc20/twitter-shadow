@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
 import { default as Icon, TIconSVG } from "@/components/generic/Icon";
-import { useCustomBox } from "@/hooks/Container";
+import {
+  genBox,
+  genCustomBox,
+  defineCustomBox,
+} from "@/components/generic/containers/Box";
 import {
   IconHome,
   IconExplore,
@@ -62,7 +66,7 @@ const NAVIGATION_ITEMS: NavigationItem[] = [
   },
 ];
 function Logo() {
-  const [LogoWrapper] = useCustomBox(
+  const LogoWrapper = genCustomBox(
     {},
     {
       w: "100%",

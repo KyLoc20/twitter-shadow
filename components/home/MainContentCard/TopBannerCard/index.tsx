@@ -1,18 +1,18 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { Component, TopTweetsButton } from "./widgets";
+import {
+  genBox,
+  genCustomBox,
+  defineCustomBox,
+} from "@/components/generic/containers/Box";
+import { TopTweetsButton } from "./widgets";
 import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
-import { useCustomBox, defineCustomBox } from "@/hooks/Container";
+
 type TopBannerProps = {};
-const useFlexBox = defineCustomBox();
+
 export default function TopBannerCard(
   props: React.PropsWithChildren<TopBannerProps>
 ) {
-  const [Content] = useFlexBox({
-    JC: "space-between",
-    AI: "center",
-    h: "100%",
-  });
   const [HeaderText] = useCustomText(
     HTMLTag.span,
     CustomTextType.Title_default20,
@@ -32,3 +32,20 @@ export default function TopBannerCard(
     </Component>
   );
 }
+const Component = styled.section`
+  position: sticky;
+  top: 0;
+  height: 53px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  z-index: 10;
+  background: #fff;
+  border-top: 1px solid rgb(239, 243, 244);
+  border-bottom: 1px solid rgb(239, 243, 244);
+`;
+const genFlexBox = defineCustomBox();
+const Content = genFlexBox({
+  JC: "space-between",
+  AI: "center",
+  h: "100%",
+});

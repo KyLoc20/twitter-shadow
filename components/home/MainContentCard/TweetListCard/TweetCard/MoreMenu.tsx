@@ -1,7 +1,11 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
-import { defineCustomBox, useCustomBox, useBox } from "@/hooks/Container";
+import {
+  genBox,
+  genCustomBox,
+  defineCustomBox,
+} from "@/components/generic/containers/Box";
 import { default as Icon, TIconSVG } from "@/components/generic/Icon";
 import { IconDelete, IconPin } from "./icons";
 type TMenuItem = {
@@ -27,36 +31,7 @@ export default function MoreMenu(
   }>
 ) {
   //todo [Stack] first and last El's border-radius
-  const [Component] = useBox({
-    bg: "#fff",
-    borderRadius: 4,
-    boxShadow:
-      "rgb(101, 119, 134, 0.2) 0px 0px 15px,rgb(101, 119, 134, 0.15) 0px 0px 3px 1px",
-  });
-  const [Content] = useCustomBox(
-    {
-      vertical: true,
-      borderbox: true,
-    },
-    {
-      w: "100%",
-      overflow: "hidden",
-      transition: "all 0.2s ease",
-    }
-  );
-  const [MenuItem] = useCustomBox(
-    {
-      borderbox: true,
-    },
-    {
-      w: "100%",
-      h: 52,
-      p: "16px",
-      hoverBg: "rgb(247, 249, 249)",
-      cursor: "pointer",
-      color: "rgb(83, 100, 113)",
-    }
-  );
+
   const [MenuText] = useCustomText(
     HTMLTag.span,
     CustomTextType.Content_default15,
@@ -109,3 +84,33 @@ export default function MoreMenu(
     </Component>
   );
 }
+const Component = genBox({
+  bg: "#fff",
+  borderRadius: 4,
+  boxShadow:
+    "rgb(101, 119, 134, 0.2) 0px 0px 15px,rgb(101, 119, 134, 0.15) 0px 0px 3px 1px",
+});
+const Content = genCustomBox(
+  {
+    vertical: true,
+    borderbox: true,
+  },
+  {
+    w: "100%",
+    overflow: "hidden",
+    transition: "all 0.2s ease",
+  }
+);
+const MenuItem = genCustomBox(
+  {
+    borderbox: true,
+  },
+  {
+    w: "100%",
+    h: 52,
+    p: "16px",
+    hoverBg: "rgb(247, 249, 249)",
+    cursor: "pointer",
+    color: "rgb(83, 100, 113)",
+  }
+);

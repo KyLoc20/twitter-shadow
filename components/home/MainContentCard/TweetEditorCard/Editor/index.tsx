@@ -7,7 +7,11 @@ import {
 } from "@/components/generic/SimpleTextarea";
 import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
 import { CustomButtonType, defineCustomButton } from "@/hooks/Button";
-import { defineCustomBox, useCustomBox, useBox } from "@/hooks/Container";
+import {
+  genBox,
+  genCustomBox,
+  defineCustomBox,
+} from "@/components/generic/containers/Box";
 import * as API from "@/api/index";
 import {
   WhoCanReply,
@@ -15,26 +19,13 @@ import {
   CUSTOM_TEXTAREA_STYLE,
 } from "./widgets";
 import { TweetStore, Tweet, TweetActions, ActionTypes } from "@/stores/tweet";
-const useFlexBox = defineCustomBox();
+
 const useButton36 = defineCustomButton(CustomButtonType.Navigation_primary36);
 type EditorProps = {};
-const Editor = React.memo(() => {
+const Editor = React.memo((props: React.PropsWithChildren<EditorProps>) => {
   console.log("RENDER Editor");
   const { state, dispatch } = React.useContext(TweetStore);
-  const [Component] = useCustomBox(
-    {
-      vertical: true,
-    },
-    {
-      w: "100%",
-    }
-  );
-  const [ControlPanel] = useFlexBox({
-    JC: "space-between",
-  });
-  const [Tools] = useFlexBox({
-    mt: "12px",
-  });
+
   const [TweetButton] = useButton36({
     wrapper: { w: 76, mt: "12px", ml: "12px" },
   });
@@ -94,5 +85,20 @@ const Editor = React.memo(() => {
       </ControlPanel>
     </Component>
   );
+});
+const Component = genCustomBox(
+  {
+    vertical: true,
+  },
+  {
+    w: "100%",
+  }
+);
+const genFlexBox = defineCustomBox();
+const ControlPanel = genFlexBox({
+  JC: "space-between",
+});
+const Tools = genFlexBox({
+  mt: "12px",
 });
 export default Editor;

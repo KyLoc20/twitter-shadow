@@ -1,12 +1,15 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 import Icon from "@/components/generic/Icon";
-import { defineCustomBox, useCustomBox, useBox } from "@/hooks/Container";
+import {
+  genBox,
+  genCustomBox,
+  defineCustomBox,
+} from "@/components/generic/containers/Box";
 import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
 import Ghost from "@/components/generic/Ghost";
 import {
   TTweetCard,
-  Component,
   Avatar,
   Interaction,
   INTERACTIONS,
@@ -16,11 +19,10 @@ import {
 import MoreMenu from "./MoreMenu";
 import * as API from "@/api/index";
 import { TweetStore, TweetActions, ActionTypes } from "@/stores/tweet";
-const useFlexBox = defineCustomBox();
+
 export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
   const { state, dispatch } = React.useContext(TweetStore);
-  const [Content] = useFlexBox();
-  const [MainWrapper] = useCustomBox({ vertical: true }, { w: "100%" });
+
   const [TweetContent] = useCustomText(
     HTMLTag.span,
     CustomTextType.Content_default15,
@@ -31,11 +33,6 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
     }
   );
 
-  const [InteractionWrapper] = useFlexBox({
-    pt: "12px",
-    maxWidth: 425,
-    JC: "space-between",
-  });
   const [InteractionInnerText] = useCustomText(
     HTMLTag.span,
     CustomTextType.Content_light13,
@@ -118,3 +115,17 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
     </Component>
   );
 }
+const Component = styled.div`
+  position: relative;
+  padding: 12px 16px 12px;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgb(239, 243, 244);
+`;
+const genFlexBox = defineCustomBox();
+const Content = genFlexBox();
+const MainWrapper = genCustomBox({ vertical: true }, { w: "100%" });
+const InteractionWrapper = genFlexBox({
+  pt: "12px",
+  maxWidth: 425,
+  JC: "space-between",
+});

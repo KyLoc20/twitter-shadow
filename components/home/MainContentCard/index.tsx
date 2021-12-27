@@ -1,6 +1,10 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { useCustomBox } from "@/hooks/Container";
+import {
+  genBox,
+  genCustomBox,
+  defineCustomBox,
+} from "@/components/generic/containers/Box";
 import TopBannerCard from "./TopBannerCard";
 import TweetEditorCard from "./TweetEditorCard";
 import TweetListCard from "./TweetListCard";
@@ -11,15 +15,7 @@ type MainContentCard = {
 
 export default function MainContentCard(props: MainContentCard) {
   console.log("RENDER MainContentCard");
-  const [Content] = useCustomBox(
-    {
-      vertical: true,
-    },
-    {
-      minHeight: "200vh",
-      position: "relative",
-    }
-  );
+
   return (
     <Component>
       <Content>
@@ -41,3 +37,12 @@ const Component = styled.main`
   border-left: 1px solid rgb(239, 243, 244);
   border-right: 1px solid rgb(239, 243, 244);
 `;
+const Content = genCustomBox(
+  {
+    vertical: true,
+  },
+  {
+    minHeight: "200vh",
+    position: "relative",
+  }
+);

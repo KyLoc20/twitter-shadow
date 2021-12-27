@@ -1,27 +1,17 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { useCustomBox } from "@/hooks/Container";
+import {
+  genBox,
+  genCustomBox,
+  defineCustomBox,
+} from "@/components/generic/containers/Box";
 import UserInfoCard from "./UserInfoCard";
 import NavigationMenuCard from "./NavigationMenuCard";
+
 type AppBarProps = {
   children?: React.ReactNode;
 };
 export default function AppBarCard(props: AppBarProps) {
-  const [Content] = useCustomBox(
-    //todo flex overflow-y
-    {
-      vertical: true,
-      borderbox: true,
-    },
-    {
-      w: "100%",
-      h: "100%",
-      minHeight: 512,
-      // overflow: "auto",
-      JC: "space-between",
-      p: "0 12px",
-    }
-  );
   return (
     <Component className="app-bar">
       <Content>
@@ -37,3 +27,18 @@ const Component = styled.header`
   position: fixed;
   z-index: 20;
 `;
+const Content = genCustomBox(
+  //todo flex overflow-y
+  {
+    vertical: true,
+    borderbox: true,
+  },
+  {
+    w: "100%",
+    h: "100%",
+    minHeight: 512,
+    // overflow: "auto",
+    JC: "space-between",
+    p: "0 12px",
+  }
+);

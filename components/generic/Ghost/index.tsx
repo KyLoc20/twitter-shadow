@@ -18,7 +18,6 @@ type TContainer = {
 //     left: "calc(50% - 150px)", // - ((300px - 100%) / 2)
 //     w: 300,
 export default function Ghost(props: React.PropsWithChildren<GhostProps>) {
-  console.log("RENDER Ghost", props.active);
   const [Container] = useBox({
     position: "absolute",
     transition: "opacity 2s ease",

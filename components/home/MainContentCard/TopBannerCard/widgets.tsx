@@ -1,23 +1,17 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { defineCustomBox } from "@/hooks/Container";
+import {
+  genBox,
+  genCustomBox,
+  defineCustomBox,
+} from "@/components/generic/containers/Box";
 import Icon from "@/components/generic/Icon";
 import { sxProps } from "@/system/sx";
-export { Component, TopTweetsButton };
-const Component = styled.section`
-  position: sticky;
-  top: 0;
-  height: 53px;
-  padding: 0 16px;
-  box-sizing: border-box;
-  z-index: 10;
-  background: #fff;
-  border-top: 1px solid rgb(239, 243, 244);
-  border-bottom: 1px solid rgb(239, 243, 244);
-`;
-const useFlexBox = defineCustomBox();
+
+export { TopTweetsButton };
+
 function TopTweetsButton() {
-  const [Wrapper] = useFlexBox({
+  const Wrapper = genFlexBox({
     minWidth: 56,
     AI: "center",
     JC: "flex-end",
@@ -29,6 +23,7 @@ function TopTweetsButton() {
     </Wrapper>
   );
 }
+const genFlexBox = defineCustomBox();
 const ICON_STYLE: sxProps = {
   w: 36,
   h: 36,
