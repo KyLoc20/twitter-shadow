@@ -52,6 +52,7 @@ const defineCustomBox = (custom: CustomBoxProps = {}): UnstyledBoxHook => {
         onMouseEnter={props.onMouseEnter}
         onMouseLeave={props.onMouseLeave}
         onMouseDown={props.onMouseDown}
+        onClick={props.onClick}
         className={props.className}
         style={props.style}
       >
@@ -70,6 +71,7 @@ function useCustomBox(custom: CustomBoxProps = {}, sx: sxProps = {}) {
       onMouseEnter={props.onMouseEnter}
       onMouseLeave={props.onMouseLeave}
       onMouseDown={props.onMouseDown}
+      onClick={props.onClick}
       className={props.className}
       style={props.style}
     >
@@ -86,6 +88,7 @@ function useBox(sx: sxProps = {}) {
       onMouseEnter={props.onMouseEnter}
       onMouseLeave={props.onMouseLeave}
       onMouseDown={props.onMouseDown}
+      onClick={props.onClick}
       className={props.className}
       style={props.style}
     >

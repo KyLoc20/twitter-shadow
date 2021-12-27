@@ -13,6 +13,7 @@ import {
   UserInfo,
   CUSTOM_ICON_STYLE,
 } from "./widgets";
+import MoreMenu from "./MoreMenu";
 import * as API from "@/api/index";
 import { TweetStore, TweetActions, ActionTypes } from "@/stores/tweet";
 const useFlexBox = defineCustomBox();
@@ -57,8 +58,9 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
       <InteractionInnerText>{props[item.name]}</InteractionInnerText>
     </Interaction>
   ));
-  const handleDeleteTweet = (e: React.MouseEvent, tid: number) => {
+  const handleDeleteTweet = (tid: number) => {
     API.deleteTweet(tid).then((tid) => {
+      setMoreMenuOpen(false);
       console.log("finished postDeleteTweet", tid);
       const doDeleteTweet: TweetActions = {
         type: ActionTypes.Delete,
@@ -83,7 +85,6 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
             onClick={(e: React.MouseEvent) => {
               console.log("onClick");
               setMoreMenuOpen(true);
-              //handleDeleteTweet(e, props.id);
             }}
           >
             <Ghost
@@ -95,7 +96,18 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
               right="0"
               top="0"
             >
-              123
+              <MoreMenu
+                onSelect={(value: string) => {
+                  console.log("onSelect", value);
+                  switch (value) {
+                    case "delete":
+                      handleDeleteTweet(props.id);
+                      break;
+                    default:
+                      break;
+                  }
+                }}
+              />
             </Ghost>
           </UserInfo>
 

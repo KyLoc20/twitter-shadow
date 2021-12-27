@@ -83,6 +83,7 @@ type PaperProps = {
   borderRadius?: number | string; //border-radius
   boxShadow?: string; //box-shadow
   cursor?: "default" | "pointer" | "text";
+  userSelect?: "auto" | "none" | "text" | "all" | "contain";
   transition?: string;
 };
 type TextProps = {
@@ -178,6 +179,7 @@ export function createUnstyleComponent<T extends sxProps>(
     border-radius: ${(props: T) => parseLengthValue(props.borderRadius)};
     box-shadow: ${(props: T) => props.boxShadow};
     cursor: ${(props: T) => props.cursor};
+    user-select: ${(props: T) => props.userSelect};
     transition: ${(props: T) => props.transition};
 
     text-align: ${(props: T) => props.textAlign};

@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { useCustomBox, useBox } from "@/hooks/Container";
 type GhostProps = {
   active: boolean;
-  onReadyClose: React.MouseEventHandler<HTMLElement>;
+  onReadyClose: React.MouseEventHandler<HTMLDivElement>;
   overlayColor?: string;
 } & TContainer;
 type TContainer = {
@@ -30,11 +30,6 @@ export default function Ghost(props: React.PropsWithChildren<GhostProps>) {
     left: props.left,
     top: props.top,
     //paper
-    borderRadius: 16,
-    boxShadow:
-      "rgb(101,119,134,0.2) 0px 0px 15px, rgb(101,119,134,0.15) 0px 0px 3px 1px",
-    cursor: "default",
-    bg: "#fff",
   });
   const computedDisplay = React.useMemo(() => {
     return props.active ? "block" : "none";
@@ -45,7 +40,7 @@ export default function Ghost(props: React.PropsWithChildren<GhostProps>) {
         <Overlay
           className="ghost-overlay"
           color={props.overlayColor}
-          onMouseDown={(e: React.MouseEvent) => {
+          onMouseDown={(e: React.MouseEvent<HTMLDivElement>) => {
             props.onReadyClose(e);
           }}
         />
@@ -60,7 +55,7 @@ export default function Ghost(props: React.PropsWithChildren<GhostProps>) {
   );
 }
 //todo absolute z-index
-const DEFAULT_OVERLAY_COLOR = "rgba(155, 0, 0, 0.2)";
+const DEFAULT_OVERLAY_COLOR = undefined;
 type TOverlay = {
   color?: string;
 };

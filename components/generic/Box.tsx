@@ -10,6 +10,7 @@ type BasicBoxProps = {
   onMouseEnter?: React.MouseEventHandler;
   onMouseLeave?: React.MouseEventHandler;
   onMouseDown?: React.MouseEventHandler;
+  onClick?: React.MouseEventHandler;
 } & sxProps;
 export default function Box(props: BoxProps) {
   return (
