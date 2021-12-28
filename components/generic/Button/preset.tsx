@@ -4,6 +4,7 @@ export { PresetType, FACTORY };
 
 enum PresetType {
   Navigation_default50,
+  Navigation_default40,
   Navigation_primary50,
   Navigation_primary36,
   Navigation_primary24,
@@ -23,6 +24,18 @@ const FACTORY: CustomButtonFactory = {
     rippleDisabled: true,
     depressed: true,
   },
+  [PresetType.Navigation_default40]: {
+    variant: "outlined",
+    height: 40,
+    padding: "0 16px",
+    borderRadius: 9999,
+    backgroundColor: "rgba(0, 0, 0, 0)",
+    hoverBackgroundColor: "rgba(15, 20, 25, 0.1)",
+    contentColor: "#0f1419",
+    rippleDisabled: true,
+    depressed: true,
+  },
+
   [PresetType.Navigation_primary50]: {
     variant: "plain",
     width: 226,

@@ -87,7 +87,9 @@ function Button(props) {
   const computedSize = React.useMemo(() => {
     const sizeStyles = getSize(props.size);
     if (props.height) sizeStyles["height"] = `${props.height}px`;
-    if (props.width) sizeStyles["width"] = `${props.width}px`;
+    if (props.width)
+      sizeStyles["width"] =
+        typeof props.width === "number" ? `${props.width}px` : props.width;
     if (props.padding) sizeStyles["padding"] = `${props.padding}`;
     return sizeStyles;
   }, [props.size, props.height, props.width, props.padding]);
@@ -220,7 +222,7 @@ Button.propTypes = {
   rippleDisabled: PropTypes.bool,
   onClick: PropTypes.func,
   //custom
-  width: PropTypes.number,
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   height: PropTypes.number,
   padding: PropTypes.string,
   backgroundColor: PropTypes.string,

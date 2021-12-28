@@ -6,6 +6,7 @@ export { PresetType, PRESET_FACTORY };
 enum PresetType {
   Navigation_default20,
   Title_default20,
+  Content_default23,
   Content_default15,
   Content_light15,
   Content_light13,
@@ -27,6 +28,12 @@ const PRESET_FACTORY: CustomTextFactory = {
   [PresetType.Content_primary14]: {
     fontSize: 14,
     color: "#1d9bf0",
+    letterSpacing: "normal",
+  },
+  [PresetType.Content_default23]: {
+    fontSize: 23,
+    fontWeight: 400,
+    color: "#0f1419",
     letterSpacing: "normal",
   },
   [PresetType.Content_default15]: {

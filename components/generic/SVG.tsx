@@ -66,11 +66,12 @@ function Group(props: GroupProps) {
     </g>
   );
 }
+//todo support all props from SVGBase
 export type PathProps = {
   d: string;
 } & SVGBase;
 function Path(props: PathProps) {
-  return <path d={props.d} fill={props.fill} />;
+  return <path {...props} />;
 }
 export type EllipseProps = {
   cx: number;

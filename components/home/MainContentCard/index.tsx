@@ -5,7 +5,6 @@ import TopBannerCard from "./TopBannerCard";
 import TweetEditorCard from "./TweetEditorCard";
 import TweetListCard from "./TweetListCard";
 import { TweetStoreProvider } from "@/stores/tweet";
-
 export default function MainContentCard(
   props: React.PropsWithChildren<TMainContentCard>
 ) {

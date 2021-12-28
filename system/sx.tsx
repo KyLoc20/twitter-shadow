@@ -37,6 +37,7 @@ type FlexProps = {
     | "space-around";
   flexGrow?: string; //flex-grow
   flexShrink?: string; //flex-shrink
+  flexBasis?: string;
   flex?: string; //flex
 };
 type PositionProps = {
@@ -143,6 +144,7 @@ export function createUnstyleComponent<T extends sxProps>(
     align-content: ${(props: T) => props.alignContent};
     flex-grow: ${(props: T) => props.flexGrow};
     flex-shrink: ${(props: T) => props.flexShrink};
+    flex-basis: ${(props: T) => props.flexBasis};
     flex: ${(props: T) => props.flex};
 
     position: ${(props: T) => props.position};

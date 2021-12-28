@@ -20,6 +20,7 @@ export default function HomePage(props: HomePageProps) {
         <MainContentCard></MainContentCard>
         <AsideContentCard></AsideContentCard>
       </Content>
+      <SigninModal id="signin-modal-container"></SigninModal>
     </Container>
   );
 }
@@ -36,3 +37,5 @@ const Content = genCustomBox(
     maxWidth: 1265, //275+990
   }
 );
+const SigninModal = styled.div``;
+const RegisterModal = styled.div``;

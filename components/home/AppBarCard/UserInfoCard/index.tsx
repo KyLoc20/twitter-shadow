@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import Icon from "@/components/generic/Icon";
 import { useModal } from "@/hooks/Modal";
 import Ghost from "@/components/generic/Ghost";
+import SignInModalCard from "@/components/home/modals/SignInCard";
 import {
   defineCustomText,
   genCustomText,
@@ -16,6 +17,18 @@ export default function UserInfoCard(
   props: React.PropsWithChildren<UserInfoCardProps>
 ) {
   const [isMenuOpen, setMenuOpen] = React.useState(false);
+  const [showSignin, hideSignin, SigninModal] = useModal(
+    "signin-modal-container"
+  );
+  const handleOpenSigninModal = () => {
+    //todo mobile
+    let scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.overflow = "hidden";
+    //to fill the space of the missing scrollbar
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    showSignin();
+  };
   return (
     <Component>
       <Ghost
@@ -27,7 +40,19 @@ export default function UserInfoCard(
         bottom="86px"
         left="calc(50% - 150px)"
       >
-        <UserMenu username="@CRa_SSus" />
+        <UserMenu
+          username="@CRa_SSus"
+          onSelect={(value) => {
+            switch (value) {
+              case "signin":
+                handleOpenSigninModal();
+                break;
+              default:
+                break;
+            }
+            setMenuOpen(false);
+          }}
+        />
       </Ghost>
       <Content
         className="content"
@@ -42,6 +67,15 @@ export default function UserInfoCard(
         </About>
         <Icon name="more" />
       </Content>
+      <SigninModal>
+        <SignInModalCard
+          onClose={() => {
+            document.body.style.overflow = "auto";
+            document.body.style.paddingRight = "0";
+            hideSignin();
+          }}
+        />
+      </SigninModal>
     </Component>
   );
 }

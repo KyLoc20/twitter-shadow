@@ -6,7 +6,11 @@ import { genCustomText, HTMLTag, TextPreset } from "@/components/generic/Text";
 export default function UserMenu(props: React.PropsWithChildren<TUserMenu>) {
   return (
     <Component>
-      <MenuItem>
+      <MenuItem
+        onClick={() => {
+          props.onSelect("signin");
+        }}
+      >
         <MenuText>Add an existing account</MenuText>
       </MenuItem>
       <MenuItem>
@@ -17,6 +21,7 @@ export default function UserMenu(props: React.PropsWithChildren<TUserMenu>) {
 }
 type TUserMenu = {
   username: string;
+  onSelect: (value: string) => void;
 };
 const MenuText = genCustomText(HTMLTag.span, TextPreset.Content_default15, {
   w: "100%",

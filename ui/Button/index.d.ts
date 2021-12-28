@@ -18,7 +18,7 @@ type TButtonBasic = {
   variant?: ButtonVariant;
   size?: ButtonSize;
   color?: ButtonColorTheme; //color theme
-  width?: number; //todo
+  width?: number | string; //todo
   height?: number;
   padding?: string;
   backgroundColor?: string;
