@@ -21,6 +21,7 @@ const FACTORY: CustomButtonFactory = {
     hoverBackgroundColor: "rgba(15, 20, 25, 0.1)",
     contentColor: "rgb(15, 20, 25)",
     rippleDisabled: true,
+    depressed: true,
   },
   [PresetType.Navigation_primary50]: {
     variant: "plain",
@@ -32,6 +33,7 @@ const FACTORY: CustomButtonFactory = {
     hoverBackgroundColor: "rgba(26, 140, 216, 1)",
     contentColor: "#fff",
     rippleDisabled: true,
+    depressed: true,
     content: {
       fontSize: 17,
       fontWeight: 700,
@@ -48,6 +50,7 @@ const FACTORY: CustomButtonFactory = {
     hoverBackgroundColor: "rgba(26, 140, 216, 1)",
     contentColor: "#fff",
     rippleDisabled: true,
+    depressed: true,
     content: {
       fontSize: 15,
       fontWeight: 700,
@@ -70,5 +73,6 @@ const FACTORY: CustomButtonFactory = {
     hoverBackgroundColor: "rgba(29, 155, 240, 0.1)",
     contentColor: "rgba(29, 155, 240, 1)",
     rippleDisabled: true,
+    depressed: true,
   },
 };

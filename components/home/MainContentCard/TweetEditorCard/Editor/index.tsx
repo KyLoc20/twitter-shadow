@@ -6,7 +6,7 @@ import {
   TextareaProps,
 } from "@/components/generic/SimpleTextarea";
 import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
-import { CustomButtonType, defineCustomButton } from "@/hooks/Button";
+import { defineCustomButton, ButtonPreset } from "@/components/generic/Button";
 import {
   genBox,
   genCustomBox,
@@ -20,15 +20,12 @@ import {
 } from "./widgets";
 import { TweetStore, Tweet, TweetActions, ActionTypes } from "@/stores/tweet";
 
-const useButton36 = defineCustomButton(CustomButtonType.Navigation_primary36);
 type EditorProps = {};
-const Editor = React.memo((props: React.PropsWithChildren<EditorProps>) => {
+
+function Editor(props: React.PropsWithChildren<EditorProps>) {
   console.log("RENDER Editor");
   const { state, dispatch } = React.useContext(TweetStore);
 
-  const [TweetButton] = useButton36({
-    wrapper: { w: 76, mt: "12px", ml: "12px" },
-  });
   const itemsTool = ["media", "gif", "poll", "emoji", "schedule"].map(
     (iconName, index) => (
       <Icon key={index} round name={iconName} sx={CUSTOM_ICON_STYLE} />
@@ -85,7 +82,7 @@ const Editor = React.memo((props: React.PropsWithChildren<EditorProps>) => {
       </ControlPanel>
     </Component>
   );
-});
+}
 const Component = genCustomBox(
   {
     vertical: true,
@@ -101,4 +98,9 @@ const ControlPanel = genFlexBox({
 const Tools = genFlexBox({
   mt: "12px",
 });
-export default Editor;
+const genButton36 = defineCustomButton(ButtonPreset.Navigation_primary36);
+const TweetButton = genButton36({
+  wrapper: { w: 76, mt: "12px", ml: "12px" },
+});
+
+export default React.memo(Editor);

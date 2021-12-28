@@ -1,6 +1,6 @@
 # Twitter-Shadow
 
-This is an exercise for React&Typescript by building a very simple Twitter.
+This is an exercise for _React_ & _Typescript_ by building a very simple Twitter.
 
 There is no backend involved and all the data is stored locally.
 
@@ -36,7 +36,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Tweets in the timeline page
   - [ ]all tweets are readable but can be edited or deleted only by the posters
   - [ ]tweets are in a descending order
-  - [ ]each tweet owns a unique incremental integer ID
+  - [*]each tweet owns a unique incremental integer ID
   - [ ]users can post text tweets
   - [ ]transfer to the detail page with the path (/tweet/{tweet ID}) after clicking a tweet
 - Tweets in the detail page

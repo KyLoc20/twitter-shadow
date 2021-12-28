@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
-import { CustomButtonType, defineCustomButton } from "@/hooks/Button";
+import { defineCustomButton, ButtonPreset } from "@/components/generic/Button";
 import {
   genBox,
   genCustomBox,
@@ -12,7 +12,6 @@ import { TextareaProps } from "@/components/generic/SimpleTextarea";
 import { sxProps } from "@/system/sx";
 export { WhoCanReply, CUSTOM_ICON_STYLE, CUSTOM_TEXTAREA_STYLE };
 
-const useButton24 = defineCustomButton(CustomButtonType.Navigation_primary24);
 function WhoCanReply() {
   const Wrapper = genCustomBox(
     {
@@ -24,7 +23,7 @@ function WhoCanReply() {
       borderBottom: "1px solid rgb(239, 243, 244)",
     }
   );
-  const [Button] = useButton24();
+  const Button = genButton24();
   const [Text] = useCustomText(HTMLTag.span, CustomTextType.Content_primary14, {
     ml: "4px",
     pt: "2px",
@@ -40,6 +39,7 @@ function WhoCanReply() {
     </Wrapper>
   );
 }
+const genButton24 = defineCustomButton(ButtonPreset.Navigation_primary24);
 const CUSTOM_ICON_STYLE: sxProps = {
   w: 36,
   h: 36,
