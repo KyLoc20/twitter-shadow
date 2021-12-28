@@ -1,10 +1,6 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import {
-  genBox,
-  genCustomBox,
-  defineCustomBox,
-} from "@/components/generic/containers/Box";
+import { defineCustomBox } from "@/components/generic/containers/Box";
 import Icon from "@/components/generic/Icon";
 import { sxProps } from "@/system/sx";
 

@@ -1,14 +1,29 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import {
-  genBox,
-  genCustomBox,
-  defineCustomBox,
-} from "@/components/generic/containers/Box";
-import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
+import { genCustomBox } from "@/components/generic/containers/Box";
+import { genCustomText, HTMLTag, TextPreset } from "@/components/generic/Text";
+
+export default function UserMenu(props: React.PropsWithChildren<TUserMenu>) {
+  return (
+    <Component>
+      <MenuItem>
+        <MenuText>Add an existing account</MenuText>
+      </MenuItem>
+      <MenuItem>
+        <MenuText>Log out {props.username}</MenuText>
+      </MenuItem>
+    </Component>
+  );
+}
 type TUserMenu = {
   username: string;
 };
+const MenuText = genCustomText(HTMLTag.span, TextPreset.Content_default15, {
+  w: "100%",
+  lineHeight: 20,
+  textOverflow: "ellipsis",
+  overflow: "hidden",
+});
 const Component = genCustomBox(
   {
     vertical: true,
@@ -38,25 +53,3 @@ const MenuItem = genCustomBox(
     cursor: "pointer",
   }
 );
-export default function UserMenu(props: React.PropsWithChildren<TUserMenu>) {
-  const [MenuText] = useCustomText(
-    HTMLTag.span,
-    CustomTextType.Content_default15,
-    {
-      w: "100%",
-      lineHeight: 20,
-      textOverflow: "ellipsis",
-      overflow: "hidden",
-    }
-  );
-  return (
-    <Component>
-      <MenuItem>
-        <MenuText>Add an existing account</MenuText>
-      </MenuItem>
-      <MenuItem>
-        <MenuText>Log out {props.username}</MenuText>
-      </MenuItem>
-    </Component>
-  );
-}

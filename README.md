@@ -36,7 +36,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Tweets in the timeline page
   - [ ]all tweets are readable but can be edited or deleted only by the posters
   - [ ]tweets are in a descending order
-  - [*]each tweet owns a unique incremental integer ID
-  - [ ]users can post text tweets
+  - [x] each tweet owns a unique incremental integer ID
+  - [x] users can post text tweets
   - [ ]transfer to the detail page with the path (/tweet/{tweet ID}) after clicking a tweet
 - Tweets in the detail page

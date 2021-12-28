@@ -2,16 +2,16 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { sxProps, createUnstyleComponent } from "@/system/sx";
-export type { TBox, TBasic };
+export type { TBox, TComponentBasic };
 export { Box };
-type TBox = TBasic & sxProps;
-type TBasic = {
+type TBox = TComponentBasic & sxProps;
+type TComponentBasic = {
   style?: React.CSSProperties;
   className?: string;
-  onMouseEnter?: React.MouseEventHandler;
-  onMouseLeave?: React.MouseEventHandler;
-  onMouseDown?: React.MouseEventHandler;
-  onClick?: React.MouseEventHandler;
+  onMouseEnter?: React.MouseEventHandler<HTMLElement>;
+  onMouseLeave?: React.MouseEventHandler<HTMLElement>;
+  onMouseDown?: React.MouseEventHandler<HTMLElement>;
+  onClick?: React.MouseEventHandler<HTMLElement>;
 };
 function Box(props: React.PropsWithChildren<TBox>) {
   return (

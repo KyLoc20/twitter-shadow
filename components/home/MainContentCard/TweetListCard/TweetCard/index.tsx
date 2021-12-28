@@ -2,11 +2,10 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import Icon from "@/components/generic/Icon";
 import {
-  genBox,
   genCustomBox,
   defineCustomBox,
 } from "@/components/generic/containers/Box";
-import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
+import { genCustomText, HTMLTag, TextPreset } from "@/components/generic/Text";
 import Ghost from "@/components/generic/Ghost";
 import {
   TTweetCard,
@@ -22,27 +21,6 @@ import { TweetStore, TweetActions, ActionTypes } from "@/stores/tweet";
 
 export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
   const { state, dispatch } = React.useContext(TweetStore);
-
-  const [TweetContent] = useCustomText(
-    HTMLTag.span,
-    CustomTextType.Content_default15,
-    {
-      lineHeight: 20,
-      display: "inline-block",
-      whiteSpace: "pre-wrap",
-    }
-  );
-
-  const [InteractionInnerText] = useCustomText(
-    HTMLTag.span,
-    CustomTextType.Content_light13,
-    {
-      display: "inline-block",
-      color: "currentColor",
-      lineHeight: 16,
-      px: "16px",
-    }
-  );
   const user = props.user;
   const itemsInteraction = INTERACTIONS.map((item, index) => (
     <Interaction
@@ -129,3 +107,19 @@ const InteractionWrapper = genFlexBox({
   maxWidth: 425,
   JC: "space-between",
 });
+const TweetContent = genCustomText(HTMLTag.span, TextPreset.Content_default15, {
+  lineHeight: 20,
+  display: "inline-block",
+  whiteSpace: "pre-wrap",
+});
+
+const InteractionInnerText = genCustomText(
+  HTMLTag.span,
+  TextPreset.Content_light13,
+  {
+    display: "inline-block",
+    color: "currentColor",
+    lineHeight: 16,
+    px: "16px",
+  }
+);

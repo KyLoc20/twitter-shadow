@@ -2,12 +2,7 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import { TweetStore, Tweet } from "@/stores/tweet";
 import TweetCard from "./TweetCard";
-import {
-  genBox,
-  genCustomBox,
-  defineCustomBox,
-} from "@/components/generic/containers/Box";
-type TweetListCardProps = {};
+import { genCustomBox } from "@/components/generic/containers/Box";
 
 export default function TweetListCard(
   props: React.PropsWithChildren<TweetListCardProps>
@@ -23,6 +18,7 @@ export default function TweetListCard(
     </Component>
   );
 }
+type TweetListCardProps = {};
 const Component = styled.section`
   margin-top: 4px;
   box-sizing: border-box;

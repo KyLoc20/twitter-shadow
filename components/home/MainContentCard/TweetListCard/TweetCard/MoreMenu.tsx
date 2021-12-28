@@ -1,11 +1,7 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
-import {
-  genBox,
-  genCustomBox,
-  defineCustomBox,
-} from "@/components/generic/containers/Box";
+import { genCustomText, HTMLTag, TextPreset } from "@/components/generic/Text";
+import { genBox, genCustomBox } from "@/components/generic/containers/Box";
 import { default as Icon, TIconSVG } from "@/components/generic/Icon";
 import { IconDelete, IconPin } from "./icons";
 type TMenuItem = {
@@ -31,30 +27,6 @@ export default function MoreMenu(
   }>
 ) {
   //todo [Stack] first and last El's border-radius
-
-  const [MenuText] = useCustomText(
-    HTMLTag.span,
-    CustomTextType.Content_default15,
-    {
-      w: "100%",
-      lineHeight: 20,
-      textOverflow: "ellipsis",
-      overflow: "hidden",
-      userSelect: "none",
-    }
-  );
-  const [MenuWarningText] = useCustomText(
-    HTMLTag.span,
-    CustomTextType.Content_default15,
-    {
-      w: "100%",
-      lineHeight: 20,
-      textOverflow: "ellipsis",
-      overflow: "hidden",
-      color: "#f4212e",
-      userSelect: "none",
-    }
-  );
   const itemsMenu = MORE_MENU_ITEMS.map((item) => (
     <MenuItem
       key={item.name}
@@ -112,5 +84,24 @@ const MenuItem = genCustomBox(
     hoverBg: "rgb(247, 249, 249)",
     cursor: "pointer",
     color: "rgb(83, 100, 113)",
+  }
+);
+const MenuText = genCustomText(HTMLTag.span, TextPreset.Content_default15, {
+  w: "100%",
+  lineHeight: 20,
+  textOverflow: "ellipsis",
+  overflow: "hidden",
+  userSelect: "none",
+});
+const MenuWarningText = genCustomText(
+  HTMLTag.span,
+  TextPreset.Content_default15,
+  {
+    w: "100%",
+    lineHeight: 20,
+    textOverflow: "ellipsis",
+    overflow: "hidden",
+    color: "#f4212e",
+    userSelect: "none",
   }
 );

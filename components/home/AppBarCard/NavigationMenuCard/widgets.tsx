@@ -1,10 +1,6 @@
 import styled from "@emotion/styled";
 import { default as Icon, TIconSVG } from "@/components/generic/Icon";
-import {
-  genBox,
-  genCustomBox,
-  defineCustomBox,
-} from "@/components/generic/containers/Box";
+import { genCustomBox } from "@/components/generic/containers/Box";
 import {
   IconHome,
   IconExplore,

@@ -3,37 +3,18 @@ import styled from "@emotion/styled";
 import Icon from "@/components/generic/Icon";
 import { useModal } from "@/hooks/Modal";
 import Ghost from "@/components/generic/Ghost";
-import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
 import {
-  genBox,
-  genCustomBox,
-  defineCustomBox,
-} from "@/components/generic/containers/Box";
+  defineCustomText,
+  genCustomText,
+  HTMLTag,
+  TextPreset,
+} from "@/components/generic/Text";
+import { genCustomBox } from "@/components/generic/containers/Box";
 import UserMenu from "./UserMenu";
-type UserInfoCardProps = {};
 
 export default function UserInfoCard(
   props: React.PropsWithChildren<UserInfoCardProps>
 ) {
-  const [Nickname] = useCustomText(
-    HTMLTag.span,
-    CustomTextType.Content_default15,
-    {
-      lineHeight: 20,
-      fontWeight: 700,
-      textOverflow: "ellipsis",
-      overflow: "hidden",
-    }
-  );
-  const [Username] = useCustomText(
-    HTMLTag.span,
-    CustomTextType.Content_light15,
-    {
-      lineHeight: 20,
-      textOverflow: "ellipsis",
-      overflow: "hidden",
-    }
-  );
   const [isMenuOpen, setMenuOpen] = React.useState(false);
   return (
     <Component>
@@ -64,6 +45,7 @@ export default function UserInfoCard(
     </Component>
   );
 }
+type UserInfoCardProps = {};
 const Component = styled.div`
   display: flex;
   position: relative;
@@ -120,3 +102,14 @@ const About = genCustomBox(
     flex: "1",
   }
 );
+const Nickname = genCustomText(HTMLTag.span, TextPreset.Content_default15, {
+  lineHeight: 20,
+  fontWeight: 700,
+  textOverflow: "ellipsis",
+  overflow: "hidden",
+});
+const Username = genCustomText(HTMLTag.span, TextPreset.Content_light15, {
+  lineHeight: 20,
+  textOverflow: "ellipsis",
+  overflow: "hidden",
+});

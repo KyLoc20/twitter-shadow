@@ -93,6 +93,7 @@ type TextProps = {
   fontWeight?: number | string; //font-weight
   letterSpacing?: LengthValue; //letter-spacing
   textOverflow?: "ellipsis" | "clip"; //text-overflow
+  textDecoration?: string; //text-decoration
   whiteSpace?: "nowrap" | "normal" | "pre" | "pre-wrap" | "pre-line"; //white-space
   color?: string;
   hoverColor?: string; //:hover color
@@ -188,6 +189,7 @@ export function createUnstyleComponent<T extends sxProps>(
     font-weight: ${(props: T) => props.fontWeight};
     letter-spacing: ${(props: T) => parseLengthValue(props.letterSpacing)};
     text-overflow: ${(props: T) => parseLengthValue(props.textOverflow)};
+    text-decoration: ${(props: T) => props.textDecoration};
     white-space: ${(props: T) => parseLengthValue(props.whiteSpace)};
     color: ${(props: T) => props.color};
 

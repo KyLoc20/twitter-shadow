@@ -5,10 +5,8 @@ import {
   default as Textarea,
   TextareaProps,
 } from "@/components/generic/SimpleTextarea";
-import { useCustomText, HTMLTag, CustomTextType } from "@/hooks/Text";
 import { defineCustomButton, ButtonPreset } from "@/components/generic/Button";
 import {
-  genBox,
   genCustomBox,
   defineCustomBox,
 } from "@/components/generic/containers/Box";

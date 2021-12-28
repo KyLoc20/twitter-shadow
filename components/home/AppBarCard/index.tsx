@@ -1,17 +1,12 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import {
-  genBox,
-  genCustomBox,
-  defineCustomBox,
-} from "@/components/generic/containers/Box";
+import { genCustomBox } from "@/components/generic/containers/Box";
 import UserInfoCard from "./UserInfoCard";
 import NavigationMenuCard from "./NavigationMenuCard";
 
-type AppBarProps = {
-  children?: React.ReactNode;
-};
-export default function AppBarCard(props: AppBarProps) {
+export default function AppBarCard(
+  props: React.PropsWithChildren<AppBarProps>
+) {
   return (
     <Component className="app-bar">
       <Content>
@@ -21,6 +16,7 @@ export default function AppBarCard(props: AppBarProps) {
     </Component>
   );
 }
+type AppBarProps = {};
 const Component = styled.header`
   width: 275px;
   height: 100vh;

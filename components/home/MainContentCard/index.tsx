@@ -1,21 +1,14 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import {
-  genBox,
-  genCustomBox,
-  defineCustomBox,
-} from "@/components/generic/containers/Box";
+import { genCustomBox } from "@/components/generic/containers/Box";
 import TopBannerCard from "./TopBannerCard";
 import TweetEditorCard from "./TweetEditorCard";
 import TweetListCard from "./TweetListCard";
 import { TweetStoreProvider } from "@/stores/tweet";
-type MainContentCard = {
-  children?: React.ReactNode;
-};
 
-export default function MainContentCard(props: MainContentCard) {
-  console.log("RENDER MainContentCard");
-
+export default function MainContentCard(
+  props: React.PropsWithChildren<TMainContentCard>
+) {
   return (
     <Component>
       <Content>
@@ -28,6 +21,7 @@ export default function MainContentCard(props: MainContentCard) {
     </Component>
   );
 }
+type TMainContentCard = {};
 const Component = styled.main`
   width: 100%;
   margin-left: 275px;

@@ -1,11 +1,7 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import {
-  genBox,
-  genCustomBox,
-  defineCustomBox,
-} from "@/components/generic/containers/Box";
-type AsideContentProps = {};
+import { genBox, genCustomBox } from "@/components/generic/containers/Box";
+
 export default function AsideContentCard(
   props: React.PropsWithChildren<AsideContentProps>
 ) {
@@ -21,6 +17,7 @@ export default function AsideContentCard(
     </Component>
   );
 }
+type AsideContentProps = {};
 const Component = styled.aside`
   width: 350px;
   margin-right: 10px;

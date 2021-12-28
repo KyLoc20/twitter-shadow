@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, TBox, TBasic } from "./base";
+import { Box, TBox, TComponentBasic } from "./base";
 import { sxProps, JustifyContentValue, AlignItemsValue } from "@/system/sx";
 
 //REMINDER: display flex will shrink el to content width
@@ -28,7 +28,7 @@ const genPropsForCustomBox = (custom: TCustomBox, sx: sxProps): TBox => ({
   ...sx,
 });
 
-const genBasicPropsForBox = (props: TBasic): TBox => ({
+const genBasicPropsForBox = (props: TComponentBasic): TBox => ({
   className: props.className,
   style: props.style,
   onMouseEnter: props.onMouseEnter,

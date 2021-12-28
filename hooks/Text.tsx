@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as Text from "@/components/generic/Text";
+import * as Text from "@/components/generic/Text3";
 import { sxProps, parseLengthValue } from "@/system/sx";
 enum HTMLTag {
   div,

@@ -1,12 +1,7 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import {
-  genBox,
-  genCustomBox,
-  defineCustomBox,
-} from "@/components/generic/containers/Box";
+import { defineCustomBox } from "@/components/generic/containers/Box";
 import Editor from "./Editor";
-type TweetEditorProps = {};
 
 export default function TweetEditorCard(
   props: React.PropsWithChildren<TweetEditorProps>
@@ -22,6 +17,7 @@ export default function TweetEditorCard(
     </Component>
   );
 }
+type TweetEditorProps = {};
 const Component = styled.section`
   min-height: 145px;
   padding: 0 16px;
