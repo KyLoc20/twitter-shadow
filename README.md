@@ -1,6 +1,8 @@
 # Twitter-Shadow
 
-This is an exercise for React&Typescript by build a very simple Twitter. There is no backend involved and all the data is stored locally.
+This is an exercise for React&Typescript by building a very simple Twitter.
+
+There is no backend involved and all the data is stored locally.
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

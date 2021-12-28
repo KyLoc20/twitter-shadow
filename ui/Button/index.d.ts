@@ -1,20 +1,24 @@
 import * as React from "react";
-export declare function Button(props: ButtonProps): JSX.Element;
-type BasicButtonProps = {
-  children?: React.ReactNode;
-  variant?: "plain" | "text" | "outlined";
-  size?: "auto" | "xsm" | "sm" | "md" | "lg" | "xlg";
-  elevation?: number;
-  color?: "default" | "primary" | "error"; //color theme
-  disabled?: boolean;
-  loading?: boolean; //render LoadingEffect not content if true
+type ButtonVariant = "plain" | "text" | "outlined";
+type ButtonSize = "auto" | "xsm" | "sm" | "md" | "lg" | "xlg";
+type ButtonColor = string;
+type ButtonColorTheme = "default" | "primary" | "error";
+type TSweet = {
   depressed?: boolean; //no box-shadow if true
   tile?: boolean; //no border-radius if true
   rounded?: boolean; //round edges if true
+  elevation?: number; //todo
+};
+type TControl = {
+  disabled?: boolean;
+  loading?: boolean; //render LoadingEffect not content if true
   rippleDisabled?: boolean;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  //custom
-  width?: number;
+};
+type TButtonBasic = {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  color?: ButtonColorTheme; //color theme
+  width?: number; //todo
   height?: number;
   padding?: string;
   backgroundColor?: string;
@@ -27,7 +31,22 @@ type BasicButtonProps = {
   hoverBoxShadow?: string;
   borderRadius?: number | string;
 };
-export declare type ButtonProps = React.PropsWithChildren<BasicButtonProps>;
+type TComponentBasic = {
+  style?: React.CSSProperties;
+  className?: string;
+  onMouseEnter?: React.MouseEventHandler<HTMLButtonElement>;
+  onMouseLeave?: React.MouseEventHandler<HTMLButtonElement>;
+  onMouseDown?: React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+};
+export declare type TButton = TButtonBasic &
+  TComponentBasic &
+  TControl &
+  TSweet;
+export declare function Button(
+  props: React.PropsWithChildren<TButton>
+): JSX.Element;
+
 export declare function IconButton(props: IconButtonProps): JSX.Element;
 export declare type IconButtonProps = {
   children?: React.ReactNode;
