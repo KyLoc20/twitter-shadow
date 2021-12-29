@@ -4,6 +4,7 @@ import { genCustomBox } from "@/components/generic/containers/Box";
 import { genCustomText, HTMLTag, TextPreset } from "@/components/generic/Text";
 import { defineCustomButton, ButtonPreset } from "@/components/generic/Button";
 import Icon from "@/components/generic/Icon";
+import Textfield from "@/components/generic/Textfield";
 export default function SignInModalCard(
   props: React.PropsWithChildren<TSignInModal>
 ) {
@@ -154,7 +155,9 @@ function SignInForm() {
           <Icon svg={IconApple} sx={{ mr: "4px" }} /> Sign in with Apple
         </SignInWithAppleButton>
         <Divider />
-        <UsernameTextfield></UsernameTextfield>
+        <UsernameTextfield>
+          <Textfield id="username-input" prompt="Phone, email, or username" />
+        </UsernameTextfield>
         <SubmitButton>Next</SubmitButton>
         <ForgetPasswordButton>Forget password?</ForgetPasswordButton>
       </Content>
