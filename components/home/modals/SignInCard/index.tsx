@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { genCustomBox } from "@/components/generic/containers/Box";
 import { genCustomText, HTMLTag, TextPreset } from "@/components/generic/Text";
 import { defineCustomButton, ButtonPreset } from "@/components/generic/Button";
+import API from "@/api/index";
 import Icon from "@/components/generic/Icon";
 import Textfield from "@/components/generic/Textfield";
 export default function SignInModalCard(
@@ -142,7 +143,24 @@ function SignInForm() {
       AI: "center",
     },
   });
+  console.log("RENDER SignInForm");
   const UsernameTextfield = genCustomBox({}, { h: 84, py: "12px" });
+  const usernameRef = React.useRef<string>("");
+  const textfieldRef = React.useRef<HTMLInputElement>(null);
+  const handleInputUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
+    usernameRef.current = e.target.value;
+  };
+  const handleSubmitUsername = (e: React.MouseEvent<HTMLButtonElement>) => {
+    let username = usernameRef.current;
+    if (username !== "") {
+      API.User.getCheckUsernameForLogin(username).then((isAvailable) => {
+        if (isAvailable) alert("YES");
+        else alert("NO");
+        if (textfieldRef.current != null) textfieldRef.current.value = "";
+        usernameRef.current = "";
+      });
+    }
+  };
   return (
     <Component>
       <Content>
@@ -156,9 +174,14 @@ function SignInForm() {
         </SignInWithAppleButton>
         <Divider />
         <UsernameTextfield>
-          <Textfield id="username-input" prompt="Phone, email, or username" />
+          <Textfield
+            id="username-input"
+            ref={textfieldRef}
+            prompt="Phone, email, or username"
+            onChange={handleInputUsername}
+          />
         </UsernameTextfield>
-        <SubmitButton>Next</SubmitButton>
+        <SubmitButton onClick={handleSubmitUsername}>Next</SubmitButton>
         <ForgetPasswordButton>Forget password?</ForgetPasswordButton>
       </Content>
     </Component>

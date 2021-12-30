@@ -1,24 +1,37 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 import { sxProps, createUnstyleComponent, parseLengthValue } from "@/system/sx";
-export default function Textfield(props: TextfieldProps) {
+
+const Textfield: React.ForwardRefRenderFunction<
+  HTMLInputElement,
+  TextfieldProps
+> = (props, inputRef: React.Ref<HTMLInputElement>) => {
+  console.log("RENDER Textfield");
   return (
     <Component
       {...props.sx}
       {...genCustomPropsForTextfield(props)}
       className="textfield"
     >
-      <input type="text" placeholder=" " id={props.id} />
+      <input
+        ref={inputRef}
+        type="text"
+        placeholder=" "
+        id={props.id}
+        onChange={props.onChange}
+      />
       <label className="prompt" htmlFor={props.id}>
         {props.prompt}
       </label>
     </Component>
   );
-}
+};
+export default React.forwardRef(Textfield);
 type TextfieldProps = React.PropsWithChildren<TTextfield>;
 type TTextfield = {
   id: string;
   prompt: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
   sx?: sxProps;
 } & TCustomTextfield &
   TComponentBasic;

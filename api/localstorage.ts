@@ -2,19 +2,26 @@ import { Tweet } from "@/stores/tweet";
 import { User } from "@/stores/user";
 import { getSomeTweets } from "@/stores/tweet/data.test";
 import { getSomeUsers } from "@/stores/user/data.test";
+//server mocking
 export default class LocalStorageManager {
   ls: Storage;
   _tweets: TTweet[];
-  isTweetsLoaded: boolean;
+  _users: TUser[];
+  isTweetsLoaded: boolean = false;
+  isUsersLoaded: boolean = false;
   constructor() {
     this.ls = window.localStorage;
-    this.isTweetsLoaded = false;
     this._tweets = [];
+    this._users = [];
   }
 
   get tweets() {
     this._synchronize();
     return this._tweets;
+  }
+  get users() {
+    this._synchronize();
+    return this._users;
   }
   get availableTid() {
     let v: number;
@@ -41,22 +48,37 @@ export default class LocalStorageManager {
     else this.tweets.push(tweet);
     return true;
   }
+  checkUsernameExisting(username: string) {
+    return this.users.some((user) => user.username.trim() === username.trim());
+  }
   save() {
     this._synchronize();
     //saving tweets
     this.ls.setItem("tweets", JSON.stringify(this.tweets));
+    //saving users
+    this.ls.setItem("users", JSON.stringify(this.users));
   }
   _loadTweets() {
     const tweetsFromLocal = this.ls.getItem("tweets");
-    let tweets: Tweet[];
+    let tweets: TTweet[];
     if (tweetsFromLocal == null) tweets = getSomeTweets();
     //todo checker
     else tweets = JSON.parse(tweetsFromLocal);
     this._tweets = tweets;
     this.isTweetsLoaded = true;
   }
+  _loadUsers() {
+    const usersFromLocal = this.ls.getItem("users");
+    let users: TUser[];
+    if (usersFromLocal == null) users = getSomeUsers();
+    //todo checker
+    else users = JSON.parse(usersFromLocal);
+    this._users = users;
+    this.isUsersLoaded = true;
+  }
   _synchronize() {
     if (!this.isTweetsLoaded) this._loadTweets();
+    if (!this.isUsersLoaded) this._loadUsers();
   }
   _searchTweet(id: number) {
     let cur: number = -1;

@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 import { createUnstyleComponent, sxProps, parseLengthValue } from "@/system/sx";
-import { pick } from "@/utils/helpers";
+import { pick, updateRef } from "@/utils/helpers";
 const showHeight = (height: number | string) => {
   console.log("Height of Textarea: ", height);
 };
@@ -29,25 +29,7 @@ const LOCAL_STYLE_PROPERTIES = [
   "placeholderColor",
 ] as const;
 const DEFAULT_ROWS = 1;
-type Writable<T> = {
-  -readonly [P in keyof T]: T[P];
-};
 
-// basically Exclude<React.ClassAttributes<T>["ref"], string>
-type UserRef<T> =
-  | ((instance: T | null) => void)
-  | React.RefObject<T>
-  | null
-  | undefined;
-
-function updateRef<T>(ref: UserRef<T>, value: T | null) {
-  if (ref == null) return;
-  if (typeof ref === "function") {
-    ref(value);
-    return;
-  }
-  (ref as Writable<typeof ref>).current = value;
-}
 const AutosizeTextarea: React.ForwardRefRenderFunction<string, TextareaProps> =
   (props, userRef: React.Ref<string>) => {
     console.log("RENDER Textarea");
@@ -76,7 +58,8 @@ const AutosizeTextarea: React.ForwardRefRenderFunction<string, TextareaProps> =
     }, []);
     return (
       <Component
-        {...{ ...pick(LOCAL_STYLE_PROPERTIES, props), ...sx }}
+        {...pick(LOCAL_STYLE_PROPERTIES, props)}
+        {...sx}
         htmlFor={props.id}
       >
         <textarea

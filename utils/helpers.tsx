@@ -1,3 +1,5 @@
+export { pick, updateRef };
+export type { Writable };
 //pick with helper
 const pick = <O extends { [key: string]: any }>(
   keys: readonly string[],
@@ -12,7 +14,27 @@ const _pick = <O extends { [key: string]: any }, K extends keyof O>(
     acc[key] = obj[key];
     return acc;
   }, {} as Pick<O, K>);
-export { pick };
+
+type Writable<T> = {
+  -readonly [P in keyof T]: T[P];
+};
+
+// basically Exclude<React.ClassAttributes<T>["ref"], string>
+type UserRef<T> =
+  | ((instance: T | null) => void)
+  | React.RefObject<T>
+  | null
+  | undefined;
+
+function updateRef<T>(ref: UserRef<T>, value: T | null) {
+  if (ref == null) return;
+  if (typeof ref === "function") {
+    ref(value);
+    return;
+  }
+  (ref as Writable<typeof ref>).current = value;
+}
+
 type X<T extends number> = {
   type: T;
   value: string;
