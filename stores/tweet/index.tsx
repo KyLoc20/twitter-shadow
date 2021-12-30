@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { TweetState, Tweet, User, Statistics } from "./model";
 import { TweetActions, ActionTypes } from "./action";
 import { mainReducer } from "./reducer";
-import { defaultState } from "./data.test";
-import { fetchTweetList } from "@/api/index";
+import { getDefaultState } from "./data.test";
+import API from "@/api/index";
 export { TweetStore, TweetStoreProvider, ActionTypes };
 export type { Tweet, User, Statistics, TweetActions };
 
@@ -11,15 +11,15 @@ const TweetStore = React.createContext<{
   state: TweetState;
   dispatch: React.Dispatch<TweetActions>;
 }>({
-  state: defaultState(),
+  state: getDefaultState(),
   dispatch: () => null,
 });
 
 const TweetStoreProvider: React.FC = ({ children }) => {
   //todo fetch initialState from API
-  const [state, dispatch] = React.useReducer(mainReducer, defaultState());
+  const [state, dispatch] = React.useReducer(mainReducer, getDefaultState());
   useEffect(() => {
-    fetchTweetList().then((res) => {
+    API.Tweet.getTweetList().then((res) => {
       const doReset: TweetActions = {
         type: ActionTypes.Reset,
         payload: {

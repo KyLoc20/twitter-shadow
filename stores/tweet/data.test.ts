@@ -1,23 +1,24 @@
 import { User, Tweet, Statistics, TweetState } from "./model";
+export { getSomeTweets, getDefaultState };
 const User1: User = {
   nickname: "Elon Musk",
   username: "@elonmusk",
-  avatarUrl: "red",
+  avatarUrl: "/avatars/@elonmusk.jpg",
 };
 const User2: User = {
   nickname: "Jessie Frazelle",
   username: "@jessfraz",
-  avatarUrl: "green",
+  avatarUrl: "/avatars/@elonmusk.jpg",
 };
 const User3: User = {
   nickname: "Kent Beck",
   username: "@KentBeck",
-  avatarUrl: "blue",
+  avatarUrl: "/avatars/@elonmusk.jpg",
 };
 const User4: User = {
   nickname: "virushuo",
   username: "@virushuo",
-  avatarUrl: "yellow",
+  avatarUrl: "/avatars/@elonmusk.jpg",
 };
 
 const Tweet1: Tweet = {
@@ -57,12 +58,8 @@ const Tweet4: Tweet = {
   likes: 2,
   retweets: 3,
 };
-export const SomeTweets = [Tweet1, Tweet2, Tweet3, Tweet4];
-export const initialState: TweetState = {
-  tweets: [Tweet1, Tweet2, Tweet3, Tweet4],
-  stats: { createNum: 0, deleteNum: 0, updateNum: 0 },
-};
-export const defaultState = (): TweetState => ({
+const getSomeTweets = () => [Tweet1, Tweet2, Tweet3, Tweet4];
+const getDefaultState = (): TweetState => ({
   tweets: [],
   stats: { createNum: 0, deleteNum: 0, updateNum: 0 },
 });

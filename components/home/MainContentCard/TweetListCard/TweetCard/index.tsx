@@ -16,7 +16,7 @@ import {
   CUSTOM_ICON_STYLE,
 } from "./widgets";
 import MoreMenu from "./MoreMenu";
-import * as API from "@/api/index";
+import API from "@/api/index";
 import { TweetStore, TweetActions, ActionTypes } from "@/stores/tweet";
 
 export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
@@ -34,9 +34,8 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
     </Interaction>
   ));
   const handleDeleteTweet = (tid: number) => {
-    API.deleteTweet(tid).then((tid) => {
+    API.Tweet.deleteTweet(tid).then((tid) => {
       setMoreMenuOpen(false);
-      console.log("finished postDeleteTweet", tid);
       const doDeleteTweet: TweetActions = {
         type: ActionTypes.Delete,
         payload: {
@@ -47,7 +46,7 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
     });
   };
   const [isMoreMenuOpen, setMoreMenuOpen] = React.useState(false);
-  console.log("RENDER TweetCard", props.id, isMoreMenuOpen);
+  console.log("RENDER TweetCard", props.id, isMoreMenuOpen, user);
   return (
     <Component>
       <Content>

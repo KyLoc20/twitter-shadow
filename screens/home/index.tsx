@@ -5,6 +5,7 @@ import MainContentCard from "@/components/home/MainContentCard";
 import AsideContentCard from "@/components/home/AsideContentCard";
 import React from "react";
 import { genCustomBox } from "@/components/generic/containers/Box";
+import { UserStoreProvider } from "@/stores/user";
 type HomePageProps = {
   children?: React.ReactNode;
 };
@@ -16,9 +17,11 @@ export default function HomePage(props: HomePageProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Content>
-        <AppBarCard></AppBarCard>
-        <MainContentCard></MainContentCard>
-        <AsideContentCard></AsideContentCard>
+        <UserStoreProvider>
+          <AppBarCard></AppBarCard>
+          <MainContentCard></MainContentCard>
+          <AsideContentCard></AsideContentCard>
+        </UserStoreProvider>
       </Content>
       <SigninModal id="signin-modal-container"></SigninModal>
     </Container>

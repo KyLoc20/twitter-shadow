@@ -29,6 +29,19 @@ export default function UserInfoCard(
     document.body.style.paddingRight = `${scrollbarWidth}px`;
     showSignin();
   };
+  const Avatar = genCustomBox(
+    {
+      noFlex: true,
+      wrap: false,
+    },
+    {
+      w: 40,
+      h: 40,
+      borderRadius: "50%",
+      bg: "pink",
+      bgSize: "contain",
+    }
+  );
   return (
     <Component>
       <Ghost
@@ -106,18 +119,6 @@ const Content = genCustomBox(
   }
 );
 
-const Avatar = genCustomBox(
-  {
-    noFlex: true,
-    wrap: false,
-  },
-  {
-    w: 40,
-    h: 40,
-    borderRadius: "50%",
-    bg: "red",
-  }
-);
 /**
  *  trick how to deal with text overflow
  *  flex:1

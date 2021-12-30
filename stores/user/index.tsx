@@ -3,7 +3,6 @@ import { User, UserState } from "./model";
 import { UserActions, ActionTypes } from "./action";
 import { mainReducer } from "./reducer";
 import { getDefaultState } from "./data.test";
-import { fetchTweetList } from "@/api/index";
 export { UserStore, UserStoreProvider, ActionTypes };
 export type { User, UserActions };
 

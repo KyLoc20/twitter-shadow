@@ -75,6 +75,7 @@ type SpacingProps = {
 };
 type PaperProps = {
   bg?: string; //background
+  bgSize?: string; //background-size
   hoverBg?: string; //:hover background
   border?: string; //border
   borderTop?: string; //border-top
@@ -174,6 +175,7 @@ export function createUnstyleComponent<T extends sxProps>(
     padding-left: ${(props: T) => props.px || props.pl};
 
     background: ${(props: T) => props.bg};
+    background-size: ${(props: T) => props.bgSize};
     border: ${(props: T) => props.border};
     border-top: ${(props: T) => props.borderTop};
     border-right: ${(props: T) => props.borderRight};

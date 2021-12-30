@@ -10,7 +10,7 @@ import {
   genCustomBox,
   defineCustomBox,
 } from "@/components/generic/containers/Box";
-import * as API from "@/api/index";
+import API from "@/api/index";
 import {
   WhoCanReply,
   CUSTOM_ICON_STYLE,
@@ -41,8 +41,7 @@ function Editor(props: React.PropsWithChildren<EditorProps>) {
       avatarUrl: "pink",
     };
     //2. post to API and get unique tweet id
-    API.postCreateTweet({ content, user }).then((tid) => {
-      console.log("finished postCreateTweet", tid);
+    API.Tweet.postCreateTweet({ content, user }).then((tid) => {
       //3.dispatch to store
       const doCreateTweet: TweetActions = {
         type: ActionTypes.Create,
