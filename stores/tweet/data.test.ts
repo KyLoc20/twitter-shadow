@@ -1,24 +1,20 @@
 import { User, Tweet, Statistics, TweetState } from "./model";
 const User1: User = {
-  id: 1,
   nickname: "Elon Musk",
   username: "@elonmusk",
   avatarUrl: "red",
 };
 const User2: User = {
-  id: 2,
   nickname: "Jessie Frazelle",
   username: "@jessfraz",
   avatarUrl: "green",
 };
 const User3: User = {
-  id: 3,
   nickname: "Kent Beck",
   username: "@KentBeck",
   avatarUrl: "blue",
 };
 const User4: User = {
-  id: 4,
   nickname: "virushuo",
   username: "@virushuo",
   avatarUrl: "yellow",

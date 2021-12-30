@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import { genCustomText, HTMLTag, TextPreset } from "@/components/generic/Text";
 import { defineCustomBox } from "@/components/generic/containers/Box";
-import { Tweet, User } from "@/stores/tweet";
+import { Tweet } from "@/stores/tweet";
 import { default as Icon, TIconSVG } from "@/components/generic/Icon";
 import { sxProps } from "@/system/sx";
 export type { TTweetCard };

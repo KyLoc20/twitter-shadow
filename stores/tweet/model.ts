@@ -1,5 +1,4 @@
 export type User = {
-  id: number;
   nickname: string;
   username: string;
   avatarUrl: string;

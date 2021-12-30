@@ -50,7 +50,6 @@ function Editor(props: React.PropsWithChildren<EditorProps>) {
           id: tid,
           content,
           user: {
-            id: 0,
             nickname: "Me",
             username: "@crassus",
             avatarUrl: "pink",
@@ -62,7 +61,6 @@ function Editor(props: React.PropsWithChildren<EditorProps>) {
         },
       };
       dispatch(doCreateTweet);
-      console.log(state);
     });
   };
   return (
