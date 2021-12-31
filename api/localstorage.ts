@@ -1,20 +1,31 @@
 import { Tweet } from "@/stores/tweet";
 import { User } from "@/stores/user";
 import { getSomeTweets } from "@/stores/tweet/data.test";
-import { getSomeUsers } from "@/stores/user/data.test";
+import { getSomeUsers, getSomeAuth } from "@/stores/user/data.test";
 //server mocking
+//todo [username: string]: string is not safe use Map instead
+type AuthMap = {
+  [username: string]: string | undefined;
+};
 export default class LocalStorageManager {
   ls: Storage;
   _tweets: TTweet[];
   _users: TUser[];
+  _auth: AuthMap;
   isTweetsLoaded: boolean = false;
   isUsersLoaded: boolean = false;
+  isAuthLoaded: boolean = false;
   constructor() {
     this.ls = window.localStorage;
     this._tweets = [];
     this._users = [];
+    this._auth = {};
+    this._synchronize();
   }
-
+  get auth() {
+    this._synchronize();
+    return this._auth;
+  }
   get tweets() {
     this._synchronize();
     return this._tweets;
@@ -49,7 +60,14 @@ export default class LocalStorageManager {
     return true;
   }
   checkUsernameExisting(username: string) {
+    console.log("checkUsernameExisting", username);
+    console.log(this.users);
     return this.users.some((user) => user.username.trim() === username.trim());
+  }
+  login(username: string, password: string) {
+    let authenticPassword = this.auth[username];
+    if (authenticPassword == null) return false;
+    else return authenticPassword === password;
   }
   save() {
     this._synchronize();
@@ -57,6 +75,8 @@ export default class LocalStorageManager {
     this.ls.setItem("tweets", JSON.stringify(this.tweets));
     //saving users
     this.ls.setItem("users", JSON.stringify(this.users));
+    //saving auth
+    this.ls.setItem("auth", JSON.stringify(this.auth));
   }
   _loadTweets() {
     const tweetsFromLocal = this.ls.getItem("tweets");
@@ -76,9 +96,19 @@ export default class LocalStorageManager {
     this._users = users;
     this.isUsersLoaded = true;
   }
+  _loadAuth() {
+    const authFromLocal = this.ls.getItem("auth");
+    let auth: AuthMap;
+    if (authFromLocal == null) auth = getSomeAuth();
+    //todo checker
+    else auth = JSON.parse(authFromLocal);
+    this._auth = auth;
+    this.isAuthLoaded = true;
+  }
   _synchronize() {
     if (!this.isTweetsLoaded) this._loadTweets();
     if (!this.isUsersLoaded) this._loadUsers();
+    if (!this.isAuthLoaded) this._loadAuth();
   }
   _searchTweet(id: number) {
     let cur: number = -1;

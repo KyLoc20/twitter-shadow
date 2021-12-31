@@ -7,17 +7,19 @@ import { genCustomText, HTMLTag, TextPreset } from "@/components/generic/Text";
 import { defineCustomButton, ButtonPreset } from "@/components/generic/Button";
 import { Divider, IconGoogle, IconApple } from "./widgets";
 import API from "@/api/index";
-export default function SignInForm() {
-  console.log("RENDER SignInForm");
+export default function UsernameForm(
+  props: React.PropsWithChildren<TUsernameForm>
+) {
+  console.log("RENDER UsernameForm");
   const UsernameTextfield = genCustomBox({}, { h: 84, py: "12px" });
   const usernameTextfieldRef = React.useRef<HTMLInputElement>(null);
   const handleSubmitUsername = (e: React.MouseEvent<HTMLButtonElement>) => {
     let elUT = usernameTextfieldRef.current;
     if (elUT != null && elUT.value !== "") {
-      let username = elUT.value;
+      let username = prefixWithAt(elUT.value);
       API.User.getCheckUsernameForLogin(username).then((isAvailable) => {
-        if (isAvailable) alert("YES");
-        else alert("NO");
+        if (isAvailable) props.onAfterSubmit(username);
+        else alert("Sorry, we could not find your account.");
         if (elUT != null) elUT.value = "";
       });
     }
@@ -48,6 +50,9 @@ export default function SignInForm() {
     </Component>
   );
 }
+type TUsernameForm = {
+  onAfterSubmit: (username: string) => void;
+};
 const Component = genCustomBox(
   {},
   { m: "36.5px 118px", p: "0 32px 48px", h: 428 }
@@ -115,3 +120,5 @@ const ForgetPasswordButton = genButton40({
     AI: "center",
   },
 });
+const prefixWithAt = (username: string) =>
+  username.startsWith("@") ? username : "@" + username;

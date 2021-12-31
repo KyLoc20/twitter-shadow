@@ -30,6 +30,7 @@ const genPropsForCustomButton = (props: TCustomButton): TButton => {
     disabled: props.disabled,
     tile: props.tile,
     width: props.width, //todo
+    cursor: props.cursor, //todo
   };
 };
 const genBasicPropsForButton = (props: TButton): TComponentBasic => ({

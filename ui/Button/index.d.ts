@@ -30,6 +30,7 @@ type TButtonBasic = {
   boxShadow?: string;
   hoverBoxShadow?: string;
   borderRadius?: number | string;
+  cursor?: "default" | "pointer" | "text";
 };
 type TComponentBasic = {
   style?: React.CSSProperties;

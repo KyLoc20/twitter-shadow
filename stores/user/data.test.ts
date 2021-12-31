@@ -1,5 +1,5 @@
 import { User, UserState } from "./model";
-export { getTouristUser, getSomeUsers, getDefaultState };
+export { getTouristUser, getSomeUsers, getDefaultState, getSomeAuth };
 const UserTourist: User = {
   nickname: "Please Log in",
   username: "@tourist",
@@ -14,8 +14,15 @@ const UserElonMusk: User = {
   auth: {},
   stats: {},
 };
+const AUTH: {
+  [username: string]: string;
+} = {
+  "@elonmusk": "123456",
+};
 const getTouristUser = () => UserTourist;
 const getSomeUsers = () => [UserElonMusk];
+const getSomeAuth = () => AUTH;
+
 const getDefaultState = (): UserState => ({
   ...getTouristUser(),
 });

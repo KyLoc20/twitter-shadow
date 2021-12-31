@@ -15,10 +15,12 @@ const Textfield: React.ForwardRefRenderFunction<
     >
       <input
         ref={inputRef}
-        type="text"
+        type={props.secretly ? "password" : "text"}
         placeholder=" "
         id={props.id}
         onChange={props.onChange}
+        defaultValue={props.defaultValue}
+        disabled={props.disabled}
       />
       <label className="prompt" htmlFor={props.id}>
         {props.prompt}
@@ -31,6 +33,9 @@ type TextfieldProps = React.PropsWithChildren<TTextfield>;
 type TTextfield = {
   id: string;
   prompt: string;
+  defaultValue?: string;
+  disabled?: boolean;
+  secretly?: boolean; //type="password" if true
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   sx?: sxProps;
 } & TCustomTextfield &
@@ -47,9 +52,11 @@ type TComponentBasic = {
 type TCustomTextfield = {
   borderColor?: string;
   focusBorderColor?: string;
+  disabledBorderColor?: string;
   inputColor?: string;
   promptColor?: string;
   focusPromptColor?: string;
+  disabledBg?: string;
   width?: string | number;
 };
 const genCustomPropsForTextfield = (custom: TCustomTextfield) => ({
@@ -60,11 +67,14 @@ const genCustomPropsForTextfield = (custom: TCustomTextfield) => ({
   focusPromptColor: custom.focusPromptColor,
   width: custom.width,
 });
+
 const DEFAULT_BORDER_COLOR = "rgb(207, 217, 222)";
 const DEFAULT_INPUT_COLOR = "rgb(15, 20, 25)";
 const DEFAULT_PROMPT_COLOR = "rgb(83, 100, 113)";
 const DEFAULT_FOCUS_BORDER_COLOR = "rgb(29, 155, 240)";
 const DEFAULT_FOCUS_PROMPT_COLOR = "rgb(29, 155, 240)";
+const DEFAULT_DISABLED_BORDER_COLOR = "rgb(239, 243, 244)";
+const DEFAULT_DISABLED_BG = "rgb(239, 243, 244)";
 const BasicComponent = styled.div`
   display: flex;
   position: relative;
@@ -86,13 +96,6 @@ const BasicComponent = styled.div`
     font-family: "Roboto", Helvetica, Arial, sans-serif;
     font-size: 18px;
   }
-  input:focus {
-    outline: none;
-    padding: 27px 7px 7px;
-    border: 2px solid
-      ${(props: TCustomTextfield) =>
-        props.focusBorderColor ?? DEFAULT_FOCUS_BORDER_COLOR};
-  }
   input + label {
     position: absolute;
     bottom: calc(50% - 10px);
@@ -106,11 +109,32 @@ const BasicComponent = styled.div`
     cursor: text;
     box-sizing: border-box;
     transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
   }
-  input:focus + label {
-    transform: translateY(-60%) translateX(-10%) scale(0.8);
-    color: ${(props: TCustomTextfield) =>
-      props.focusPromptColor ?? DEFAULT_FOCUS_PROMPT_COLOR};
+  input:disabled {
+    opacity: 0.5;
+    cursor: default;
+    border: 1px solid
+      ${(props: TCustomTextfield) =>
+        props.disabledBorderColor ?? DEFAULT_DISABLED_BORDER_COLOR};
+    background: ${(props: TCustomTextfield) =>
+      props.disabledBg ?? DEFAULT_DISABLED_BG};
+    & + label {
+      cursor: default;
+      opacity: 0.5;
+    }
+  }
+  input:focus {
+    outline: none;
+    padding: 27px 7px 7px;
+    border: 2px solid
+      ${(props: TCustomTextfield) =>
+        props.focusBorderColor ?? DEFAULT_FOCUS_BORDER_COLOR};
+    & + label {
+      transform: translateY(-60%) translateX(-10%) scale(0.8);
+      color: ${(props: TCustomTextfield) =>
+        props.focusPromptColor ?? DEFAULT_FOCUS_PROMPT_COLOR};
+    }
   }
   input:not(:placeholder-shown) + label {
     transform: translateY(-60%) translateX(-10%) scale(0.8);

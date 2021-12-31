@@ -5,7 +5,9 @@ import Icon from "@/components/generic/Icon";
 import { sxProps } from "@/system/sx";
 import { IconTwitter, IconCross } from "./widgets";
 import UsernameForm from "./UsernameForm";
+import PasswordForm from "./PasswordForm";
 export default function SignIn(props: React.PropsWithChildren<TSignIn>) {
+  const [givenUsername, setGivenUsername] = React.useState("");
   const handleKeepModalOpen = (e: React.MouseEvent<HTMLElement>) =>
     e.stopPropagation();
   const handleShutdown = () => props.onClose();
@@ -21,7 +23,20 @@ export default function SignIn(props: React.PropsWithChildren<TSignIn>) {
           <Icon svg={IconTwitter} />
           <Placeholder></Placeholder>
         </Header>
-        <UsernameForm />
+        {givenUsername === "" ? (
+          <UsernameForm
+            onAfterSubmit={(username) => {
+              setGivenUsername(username);
+            }}
+          />
+        ) : (
+          <PasswordForm
+            username={givenUsername}
+            onAfterSubmit={() => {
+              handleShutdown();
+            }}
+          />
+        )}
       </Content>
     </Component>
   );
@@ -40,7 +55,7 @@ const Component = genCustomBox(
   {},
   { w: 600, h: 650, bg: "#fff", borderRadius: 16 }
 );
-const Content = genCustomBox({ vertical: true }, { w: "100%", pb: "48px" });
+const Content = genCustomBox({ vertical: true }, { w: "100%" });
 const Header = genCustomBox({}, { h: 53, px: "16px" });
 const CloseButton = genCustomBox();
 //TRICK a center position two same size placeholder -> flex-basis: "50%"

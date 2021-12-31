@@ -197,6 +197,7 @@ function Button(props) {
         boxShadow: computedBoxShadow,
         border: computedBorder,
         borderRadius: computedBorderRadius,
+        cursor: props.cursor,
       }}
       onClick={handleClick}
       onMouseEnter={handleHoverEnter}
@@ -234,6 +235,7 @@ Button.propTypes = {
   boxShadow: PropTypes.string,
   hoverBoxShadow: PropTypes.string,
   borderRadius: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  cursor: PropTypes.oneOf(["default", "pointer", "text"]),
 };
 Button.defaultProps = {
   variant: "plain",

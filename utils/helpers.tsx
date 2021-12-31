@@ -34,7 +34,6 @@ function updateRef<T>(ref: UserRef<T>, value: T | null) {
   }
   (ref as Writable<typeof ref>).current = value;
 }
-
 type X<T extends number> = {
   type: T;
   value: string;

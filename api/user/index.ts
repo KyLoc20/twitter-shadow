@@ -7,7 +7,8 @@ export {
   postLogin,
   postRegister,
 };
-
+//todo Response
+//todo Model
 const getCheckUsernameForLogin = mockAPI<(username: string) => boolean>(
   (username: string) => {
     //must be existing
@@ -24,7 +25,8 @@ const getCheckUsernameForRegister = mockAPI<(username: string) => boolean>(
 );
 const postLogin = mockAPI<(username: string, password: string) => boolean>(
   (username: string, password: string) => {
-    return true;
+    const lsm = new LocalStorageManager();
+    return lsm.login(username, password);
   }
 );
 const postRegister = mockAPI<(username: string, password: string) => boolean>(
