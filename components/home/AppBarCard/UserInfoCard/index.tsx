@@ -77,7 +77,9 @@ export default function UserInfoCard(
       >
         <Avatar />
         <About>
-          <Nickname>{state.nickname}</Nickname>
+          <Nickname>
+            {state.username === "@tourist" ? "Please Log in" : state.nickname}
+          </Nickname>
           <Username>{state.username}</Username>
         </About>
         <Icon name="more" />

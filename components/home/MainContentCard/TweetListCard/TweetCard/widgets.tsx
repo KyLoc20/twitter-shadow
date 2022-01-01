@@ -19,7 +19,7 @@ function Avatar(props: React.PropsWithChildren<{ url: string }>) {
     w: 48,
     h: 48,
     borderRadius: "50%",
-    bg: props.url === "pink" ? props.url : `url(${props.url})`,
+    bg: props.url === "pink" ? props.url : `no-repeat url(${props.url})`,
     bgSize: "contain",
   });
   return (

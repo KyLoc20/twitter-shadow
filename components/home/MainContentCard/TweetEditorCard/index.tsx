@@ -2,10 +2,18 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import { defineCustomBox } from "@/components/generic/containers/Box";
 import Editor from "./Editor";
-
+import { UserStore } from "@/stores/user";
 export default function TweetEditorCard(
   props: React.PropsWithChildren<TweetEditorProps>
 ) {
+  const { state, dispatch } = React.useContext(UserStore);
+  const AvatarImage = genFlexBox({
+    w: 48,
+    h: 48,
+    borderRadius: "50%",
+    bg: state.username === "@tourist" ? "pink" : `url(${state.avatarUrl})`,
+    bgSize: "contain",
+  });
   return (
     <Component>
       <Content>
@@ -30,10 +38,4 @@ const Content = genFlexBox({
 });
 const Avatar = genFlexBox({
   mr: "12px",
-});
-const AvatarImage = genFlexBox({
-  w: 48,
-  h: 48,
-  borderRadius: "50%",
-  bg: "red",
 });

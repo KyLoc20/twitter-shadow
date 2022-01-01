@@ -16,56 +16,63 @@ import {
   CUSTOM_ICON_STYLE,
   CUSTOM_TEXTAREA_STYLE,
 } from "./widgets";
-import { TweetStore, Tweet, TweetActions, ActionTypes } from "@/stores/tweet";
-
+import {
+  UserStore,
+  UserActions,
+  ActionTypes as UserActionTypes,
+} from "@/stores/user";
+import {
+  TweetStore,
+  TweetActions,
+  ActionTypes as TweetActionTypes,
+} from "@/stores/tweet";
 type EditorProps = {};
 
 function Editor(props: React.PropsWithChildren<EditorProps>) {
-  const { state, dispatch } = React.useContext(TweetStore);
-
+  const { state: userState, dispatch: userDispatch } =
+    React.useContext(UserStore);
+  const { state: tweetState, dispatch: tweetDispatch } =
+    React.useContext(TweetStore);
   const itemsTool = ["media", "gif", "poll", "emoji", "schedule"].map(
     (iconName, index) => (
       <Icon key={index} round name={iconName} sx={CUSTOM_ICON_STYLE} />
     )
   );
-  const contentRef = React.useRef<string>("");
+  const textareaRef = React.useRef<HTMLTextAreaElement>(null);
   const handleNewTweet = (e: React.MouseEvent) => {
     //1. check tweet content
-    const content = contentRef.current;
-    if (content === "") return;
+    const elTextarea = textareaRef.current;
+    if (elTextarea == null || elTextarea.value === "") return;
+    const content = elTextarea.value;
     const user = {
-      id: 0,
-      nickname: "Me",
-      username: "@crassus",
-      avatarUrl: "pink",
+      nickname: userState.nickname,
+      username: userState.username,
+      avatarUrl: userState.avatarUrl,
     };
     //2. post to API and get unique tweet id
     API.Tweet.postCreateTweet({ content, user }).then((tid) => {
       //3.dispatch to store
       const doCreateTweet: TweetActions = {
-        type: ActionTypes.Create,
+        type: TweetActionTypes.Create,
         payload: {
           id: tid,
           content,
-          user: {
-            nickname: "Me",
-            username: "@crassus",
-            avatarUrl: "pink",
-          },
+          user,
           timestamp: "Just now",
           replies: 1,
           likes: 2,
           retweets: 3,
         },
       };
-      dispatch(doCreateTweet);
+      tweetDispatch(doCreateTweet);
+      elTextarea.value = "";
     });
   };
   return (
     <Component>
       <Textarea
         id="tweet-input"
-        ref={contentRef}
+        ref={textareaRef}
         placeholder="What's happening?"
         {...CUSTOM_TEXTAREA_STYLE}
       />

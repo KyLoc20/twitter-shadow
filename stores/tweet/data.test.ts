@@ -1,64 +1,99 @@
 import { User, Tweet, Statistics, TweetState } from "./model";
 export { getSomeTweets, getDefaultState };
-const User1: User = {
+const UserTourist: User = {
+  nickname: "Tourist",
+  username: "@tourist",
+  avatarUrl: "pink",
+};
+const TweetTourist1: Tweet = {
+  id: 1,
+  content: "Hi there👋",
+  user: UserTourist,
+  timestamp: "1 Jan, 1912",
+  replies: 1,
+  likes: 2,
+  retweets: 3,
+};
+
+const UserWintonsChurchill: User = {
+  nickname: "Wintons Churchill",
+  username: "@winstonchurchill",
+  avatarUrl: "/avatars/@winstonchurchill.jpeg",
+};
+const TweetWintonsChurchill1: Tweet = {
+  id: 2,
+  content: "I have nothing to offer but blood, toil, tears and sweat.",
+  user: UserWintonsChurchill,
+  timestamp: "13 May, 1940",
+  replies: 1,
+  likes: 2,
+  retweets: 3,
+};
+
+const UserElonMusk: User = {
   nickname: "Elon Musk",
   username: "@elonmusk",
   avatarUrl: "/avatars/@elonmusk.jpg",
 };
-const User2: User = {
-  nickname: "Jessie Frazelle",
-  username: "@jessfraz",
-  avatarUrl: "/avatars/@elonmusk.jpg",
-};
-const User3: User = {
-  nickname: "Kent Beck",
-  username: "@KentBeck",
-  avatarUrl: "/avatars/@elonmusk.jpg",
-};
-const User4: User = {
-  nickname: "virushuo",
-  username: "@virushuo",
-  avatarUrl: "/avatars/@elonmusk.jpg",
+const TweetElonMusk1: Tweet = {
+  id: 3,
+  content: "Humankind\n煮豆燃豆萁\n豆在釜中泣\n本是同根生\n相煎何太急",
+  user: UserElonMusk,
+  timestamp: "Nov 2, 2021",
+  replies: 1,
+  likes: 2,
+  retweets: 3,
 };
 
-const Tweet1: Tweet = {
-  id: 1,
-  content: "Humankind\n煮豆燃豆萁\n豆在釜中泣\n本是同根生\n相煎何太急",
-  user: User1,
-  timestamp: "Nov 2",
-  replies: 1,
-  likes: 2,
-  retweets: 3,
+const UserCisco: User = {
+  nickname: "Cisco",
+  username: "@Cisco",
+  avatarUrl: "/avatars/@Cisco.png",
 };
-const Tweet2: Tweet = {
-  id: 2,
-  content: "What’s the coolest Easter egg you’ve ever seen in a website / app?",
-  user: User2,
-  timestamp: "8h",
-  replies: 1,
-  likes: 2,
-  retweets: 3,
-};
-const Tweet3: Tweet = {
-  id: 3,
-  content:
-    "If you agree with the conclusion, why would you bother arguing with the argument?",
-  user: User3,
-  timestamp: "4h",
-  replies: 1,
-  likes: 2,
-  retweets: 3,
-};
-const Tweet4: Tweet = {
+const TweetCisco1: Tweet = {
   id: 4,
-  content: "太牛逼了，和昨天那个imsg的漏洞是一个办法。",
-  user: User4,
-  timestamp: "2h",
+  content:
+    "We believe in the power of technology and its ability to positively impact our society. Read more about how our collaborative efforts in Lebanon helped agencies and individuals after a #humanitarian crisis.",
+  user: UserCisco,
+  timestamp: "Dec 16, 21",
   replies: 1,
   likes: 2,
   retweets: 3,
 };
-const getSomeTweets = () => [Tweet1, Tweet2, Tweet3, Tweet4];
+
+const UserRssThree: User = {
+  nickname: "RSS3🎄🎁",
+  username: "@rss3_",
+  avatarUrl: "/avatars/@rss3_.jpg",
+};
+const TweetrRssThree1: Tweet = {
+  id: 5,
+  content:
+    "You better watch out\nYou better not cry\nYou better not pout\nI'm telling you why\n  RSS3 will send out $PASS form now\n\nWe're making a list\nWe're checking it twice\nWe're gonna find out who's naughty or nice\nGet your testnet RNS on revery.so once you have your $PASS",
+  user: UserRssThree,
+  timestamp: "Dec 25, 2021",
+  replies: 1,
+  likes: 2,
+  retweets: 3,
+};
+const TweetrRssThree2: Tweet = {
+  id: 6,
+  content: "墙角数枝梅\n凌寒独自开\n遥知不是雪\n为有暗香来",
+  user: UserRssThree,
+  timestamp: "Nov 3, 2021",
+  replies: 1,
+  likes: 2,
+  retweets: 3,
+};
+
+const getSomeTweets = () => [
+  TweetTourist1,
+  TweetElonMusk1,
+  TweetCisco1,
+  TweetrRssThree1,
+  TweetrRssThree2,
+  TweetWintonsChurchill1,
+];
 const getDefaultState = (): TweetState => ({
   tweets: [],
   stats: { createNum: 0, deleteNum: 0, updateNum: 0 },

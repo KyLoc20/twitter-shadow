@@ -30,45 +30,44 @@ const LOCAL_STYLE_PROPERTIES = [
 ] as const;
 const DEFAULT_ROWS = 1;
 
-const AutosizeTextarea: React.ForwardRefRenderFunction<string, TextareaProps> =
-  (props, userRef: React.Ref<string>) => {
-    const { sx = {} } = props;
-    const handleChange = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-      const el = document.getElementById("test-textarea");
-      //initially overflow-y: hidden;
-      if (el) {
-        el.style.height = "auto";
-        el.style.height = el.scrollHeight + "px";
-        //showHeight(el.style.height);
-      }
-    };
-    const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      if (e.target.value !== "") {
-        updateRef<string>(userRef, e.target.value);
-      }
-    };
-    let id = "test-textarea"; //props.id
-    React.useEffect(() => {
-      const el = document.getElementById("test-textarea");
-      //initially overflow-y: hidden;
-      //if (el) showHeight(el.scrollHeight);
-    }, []);
-    return (
-      <Component
-        {...pick(LOCAL_STYLE_PROPERTIES, props)}
-        {...sx}
-        htmlFor={props.id}
-      >
-        <textarea
-          rows={DEFAULT_ROWS}
-          id={id}
-          placeholder={props.placeholder}
-          onKeyUp={handleChange}
-          onChange={handleContentChange}
-        />
-      </Component>
-    );
+const AutosizeTextarea: React.ForwardRefRenderFunction<
+  HTMLTextAreaElement,
+  TextareaProps
+> = (props, libRef: React.Ref<HTMLTextAreaElement>) => {
+  const { sx = {} } = props;
+  const handleChange = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    const el = document.getElementById("test-textarea");
+    //initially overflow-y: hidden;
+    if (el) {
+      el.style.height = "auto";
+      el.style.height = el.scrollHeight + "px";
+      //showHeight(el.style.height);
+    }
   };
+  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {};
+  let id = "test-textarea"; //props.id
+  React.useEffect(() => {
+    const el = document.getElementById("test-textarea");
+    //initially overflow-y: hidden;
+    //if (el) showHeight(el.scrollHeight);
+  }, []);
+  return (
+    <Component
+      {...pick(LOCAL_STYLE_PROPERTIES, props)}
+      {...sx}
+      htmlFor={props.id}
+    >
+      <textarea
+        id={id}
+        ref={libRef}
+        rows={DEFAULT_ROWS}
+        placeholder={props.placeholder}
+        onKeyUp={handleChange}
+        onChange={handleContentChange}
+      />
+    </Component>
+  );
+};
 export default React.forwardRef(AutosizeTextarea);
 const BasicTextarea = styled.label`
   display: flex;
