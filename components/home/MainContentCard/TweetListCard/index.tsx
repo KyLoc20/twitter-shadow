@@ -8,9 +8,10 @@ export default function TweetListCard(
   props: React.PropsWithChildren<TweetListCardProps>
 ) {
   const { state, dispatch } = React.useContext(TweetStore);
-  const itemsTweet = state.tweets.map((item, index) => (
-    <TweetCard key={item.id} {...item}></TweetCard>
-  ));
+  const itemsTweet = state.tweets
+    .slice()
+    .sort((a, b) => b.timestamp.valueOf() - a.timestamp.valueOf())
+    .map((item, index) => <TweetCard key={item.id} {...item}></TweetCard>);
 
   return (
     <Component>

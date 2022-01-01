@@ -45,7 +45,7 @@ const _genTweet = (id: number, content: string, user: User): TTweet => ({
   id,
   content,
   user,
-  timestamp: "Just now",
+  timestamp: new Date(),
   replies: 0,
   likes: 0,
   retweets: 0,

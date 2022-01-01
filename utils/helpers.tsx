@@ -1,4 +1,4 @@
-export { pick, updateRef };
+export { pick, updateRef, customeDateFormatter };
 export type { Writable, Tolerant };
 //pick with helper
 const pick = <O extends { [key: string]: any }>(
@@ -40,3 +40,39 @@ type X<T extends number> = {
 };
 type X1 = X<1>;
 const x1: X1 = { type: 1, value: "x1" };
+
+const customeDateFormatter = (date: Date) => {
+  let now = Date.now();
+  let then = date.valueOf();
+  let dist = now - then;
+  if (dist < 0) return "Future";
+  else if (dist < 1000 * 60) {
+    //within 1 min
+    return "Just now";
+  } else if (dist < 1000 * 60 * 60) {
+    //within 1 hour
+    let min = Math.floor(dist / (1000 * 60));
+    return `${min}m`;
+  } else if (dist < 1000 * 60 * 60 * 24) {
+    //within 1 day
+    let hour = Math.floor(dist / (1000 * 60 * 60));
+    return `${hour}h`;
+  } else {
+    let [year, month, day] = date.toLocaleDateString().split("/");
+    return `${MONTH_MAP[parseInt(month)] || "Jan"} ${day}, ${year}`;
+  }
+};
+const MONTH_MAP: { [month: number]: string } = {
+  1: "Jan",
+  2: "Feb",
+  3: "Mar",
+  4: "Apr",
+  5: "May",
+  6: "Jun",
+  7: "Jul",
+  8: "Aug",
+  9: "Sep",
+  10: "Oct",
+  11: "Nov",
+  12: "Dec",
+};

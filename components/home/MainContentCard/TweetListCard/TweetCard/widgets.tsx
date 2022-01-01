@@ -5,6 +5,7 @@ import { defineCustomBox } from "@/components/generic/containers/Box";
 import { Tweet } from "@/stores/tweet";
 import { default as Icon, TIconSVG } from "@/components/generic/Icon";
 import { sxProps } from "@/system/sx";
+import { customeDateFormatter } from "@/utils/helpers";
 export type { TTweetCard };
 export { Avatar, Interaction, INTERACTIONS, UserInfo, CUSTOM_ICON_STYLE };
 const genFlexBox = defineCustomBox();
@@ -38,7 +39,7 @@ function UserInfo({
 }: React.PropsWithChildren<{
   nickname: string;
   username: string;
-  timestamp: string;
+  timestamp: Date;
   onClick?: React.MouseEventHandler;
 }>) {
   const Wrapper = genFlexBox();
@@ -47,7 +48,7 @@ function UserInfo({
       <Nickname>{nickname}</Nickname>
       <Username>{username}</Username>
       <Divider>·</Divider>
-      <Timestamp>{timestamp}</Timestamp>
+      <FormatDate date={timestamp} />
       <MoreButtonWrapper>
         <Icon
           name="more"
@@ -64,6 +65,16 @@ function UserInfo({
       </MoreButtonWrapper>
     </Wrapper>
   );
+}
+function FormatDate(props: { date: Date }) {
+  const Component = genCustomText(HTMLTag.span, TextPreset.Content_light15, {
+    lineHeight: 20,
+    textOverflow: "ellipsis",
+    overflow: "hidden",
+  });
+  let date = props.date;
+  const dateStr = customeDateFormatter(date);
+  return <Component>{dateStr}</Component>;
 }
 const Nickname = genCustomText(HTMLTag.span, TextPreset.Content_default15, {
   lineHeight: 20,
@@ -83,11 +94,7 @@ const Divider = genCustomText(HTMLTag.span, TextPreset.Content_light15, {
   textOverflow: "ellipsis",
   overflow: "hidden",
 });
-const Timestamp = genCustomText(HTMLTag.span, TextPreset.Content_light15, {
-  lineHeight: 20,
-  textOverflow: "ellipsis",
-  overflow: "hidden",
-});
+
 const MoreButtonWrapper = genFlexBox({
   position: "relative",
   minWidth: 38.75,

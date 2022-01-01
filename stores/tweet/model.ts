@@ -3,11 +3,13 @@ export type User = {
   username: string;
   avatarUrl: string;
 };
+
+//todo to modify existing type
 export type Tweet = {
   id: number;
   content: string;
   user: User;
-  timestamp: string;
+  timestamp: Date;
   replies: number;
   likes: number;
   retweets: number;

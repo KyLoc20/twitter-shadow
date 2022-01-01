@@ -58,7 +58,7 @@ function Editor(props: React.PropsWithChildren<EditorProps>) {
           id: tid,
           content,
           user,
-          timestamp: "Just now",
+          timestamp: new Date(),
           replies: 1,
           likes: 2,
           retweets: 3,

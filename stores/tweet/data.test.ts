@@ -1,5 +1,8 @@
 import { User, Tweet, Statistics, TweetState } from "./model";
 export { getSomeTweets, getDefaultState };
+//Doc: Date(year,monthIndex,day) × Date(year,month,day) √
+const genDate = (year: number, month: number, day?: number) =>
+  new Date(year, month - 1, day);
 const UserTourist: User = {
   nickname: "Tourist",
   username: "@tourist",
@@ -9,7 +12,7 @@ const TweetTourist1: Tweet = {
   id: 1,
   content: "Hi there👋",
   user: UserTourist,
-  timestamp: "1 Jan, 1912",
+  timestamp: genDate(2222, 1, 1),
   replies: 1,
   likes: 2,
   retweets: 3,
@@ -24,7 +27,7 @@ const TweetWintonsChurchill1: Tweet = {
   id: 2,
   content: "I have nothing to offer but blood, toil, tears and sweat.",
   user: UserWintonsChurchill,
-  timestamp: "13 May, 1940",
+  timestamp: genDate(1940, 5, 13),
   replies: 1,
   likes: 2,
   retweets: 3,
@@ -39,7 +42,7 @@ const TweetElonMusk1: Tweet = {
   id: 3,
   content: "Humankind\n煮豆燃豆萁\n豆在釜中泣\n本是同根生\n相煎何太急",
   user: UserElonMusk,
-  timestamp: "Nov 2, 2021",
+  timestamp: genDate(2021, 11, 2),
   replies: 1,
   likes: 2,
   retweets: 3,
@@ -55,7 +58,7 @@ const TweetCisco1: Tweet = {
   content:
     "We believe in the power of technology and its ability to positively impact our society. Read more about how our collaborative efforts in Lebanon helped agencies and individuals after a #humanitarian crisis.",
   user: UserCisco,
-  timestamp: "Dec 16, 21",
+  timestamp: genDate(2021, 12, 16),
   replies: 1,
   likes: 2,
   retweets: 3,
@@ -71,7 +74,7 @@ const TweetrRssThree1: Tweet = {
   content:
     "You better watch out\nYou better not cry\nYou better not pout\nI'm telling you why\n  RSS3 will send out $PASS form now\n\nWe're making a list\nWe're checking it twice\nWe're gonna find out who's naughty or nice\nGet your testnet RNS on revery.so once you have your $PASS",
   user: UserRssThree,
-  timestamp: "Dec 25, 2021",
+  timestamp: genDate(2021, 12, 25),
   replies: 1,
   likes: 2,
   retweets: 3,
@@ -80,7 +83,7 @@ const TweetrRssThree2: Tweet = {
   id: 6,
   content: "墙角数枝梅\n凌寒独自开\n遥知不是雪\n为有暗香来",
   user: UserRssThree,
-  timestamp: "Nov 3, 2021",
+  timestamp: genDate(2021, 11, 3),
   replies: 1,
   likes: 2,
   retweets: 3,

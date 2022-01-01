@@ -11,7 +11,7 @@ type TweetPayload = {
     id: number;
     content: string;
     user: User;
-    timestamp: string;
+    timestamp: Date;
     replies: number;
     likes: number;
     retweets: number;
@@ -23,7 +23,7 @@ type TweetPayload = {
     id: number;
     content: string;
     user: User;
-    timestamp: string;
+    timestamp: Date;
     replies: number;
     likes: number;
     retweets: number;

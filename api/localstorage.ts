@@ -12,6 +12,7 @@ import {
 type AuthMap = {
   [username: string]: string | undefined;
 };
+type UnsafeTweet = Omit<Tweet, "timestamp"> & { timestamp: string };
 export default class LocalStorageManager {
   ls: Storage;
   _tweets: TTweet[];
@@ -87,13 +88,22 @@ export default class LocalStorageManager {
     this.ls.setItem("auth", JSON.stringify(this.auth));
   }
   _loadTweets() {
+    const parseTweetsWithDate = (strTweets: string): Tweet[] => {
+      const objTweets: UnsafeTweet[] = JSON.parse(strTweets);
+      return objTweets.map((tweet: UnsafeTweet) => ({
+        ...tweet,
+        timestamp: new Date(tweet.timestamp),
+      }));
+    };
     const tweetsFromLocal = this.ls.getItem("tweets");
     let tweets: TTweet[];
     if (tweetsFromLocal == null) tweets = getSomeTweets();
     //todo checker
-    else tweets = JSON.parse(tweetsFromLocal);
+    //todo deep Date parse
+    else tweets = parseTweetsWithDate(tweetsFromLocal);
     this._tweets = tweets;
     this.isTweetsLoaded = true;
+    console.log("_loadTweets", tweets);
   }
   _loadUsers() {
     const usersFromLocal = this.ls.getItem("users");
