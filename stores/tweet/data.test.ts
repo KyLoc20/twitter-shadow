@@ -1,6 +1,6 @@
 import { User, Tweet, Statistics, TweetState } from "./model";
 export { getSomeTweets, getDefaultState };
-//Doc: Date(year,monthIndex,day) × Date(year,month,day) √
+//Doc: Date(year,month,day) × Date(year,monthIndex,day) √
 const genDate = (year: number, month: number, day?: number) =>
   new Date(year, month - 1, day);
 const UserTourist: User = {
