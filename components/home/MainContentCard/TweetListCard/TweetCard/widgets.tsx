@@ -42,9 +42,9 @@ function UserInfo({
   timestamp: Date;
   onClick?: React.MouseEventHandler;
 }>) {
-  const Wrapper = genFlexBox();
+  const Wrapper = genFlexBox({ h: 22 });
   return (
-    <Wrapper>
+    <Wrapper className="user-info">
       <Nickname>{nickname}</Nickname>
       <Username>{username}</Username>
       <Divider>·</Divider>

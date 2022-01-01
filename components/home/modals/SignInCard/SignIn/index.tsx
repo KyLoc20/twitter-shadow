@@ -16,6 +16,7 @@ import {
 } from "@/stores/tweet";
 import UsernameForm from "./UsernameForm";
 import PasswordForm from "./PasswordForm";
+import LocalSessionManager, { NEVER_EXPIRE } from "@/utils/session";
 import { User } from "@/stores/tweet";
 export default function SignIn(props: React.PropsWithChildren<TSignIn>) {
   const [givenUsername, setGivenUsername] = React.useState("");
@@ -54,6 +55,9 @@ export default function SignIn(props: React.PropsWithChildren<TSignIn>) {
                   payload: user,
                 };
                 userDispatch(doLogin);
+                //keep Login locally
+                const lsm = new LocalSessionManager();
+                lsm.update(user.username, "#auth", NEVER_EXPIRE.valueOf());
               }
               handleShutdown();
             }}

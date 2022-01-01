@@ -68,6 +68,18 @@ export default class LocalStorageManager {
   checkUsernameExisting(username: string) {
     return this.users.some((user) => user.username.trim() === username.trim());
   }
+  checkUserLoginSession(
+    username: string,
+    auth: string,
+    expired: number
+  ): APIResponse<User> {
+    let user = this.users.find((user) => user.username === username);
+    if (user != null) {
+      //todo check auth
+      //todo check expired
+      return succeedResponse<User>(user);
+    } else return failResponse<User>();
+  }
   login(username: string, password: string): APIResponse<User> {
     let authenticPassword = this.auth[username];
     if (authenticPassword == null) return failResponse<User>();
