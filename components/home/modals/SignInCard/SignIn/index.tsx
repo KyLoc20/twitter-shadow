@@ -4,13 +4,28 @@ import { genCustomBox } from "@/components/generic/containers/Box";
 import Icon from "@/components/generic/Icon";
 import { sxProps } from "@/system/sx";
 import { IconTwitter, IconCross } from "./widgets";
+import {
+  UserStore,
+  UserActions,
+  ActionTypes as UserActionTypes,
+} from "@/stores/user";
+import {
+  TweetStore,
+  TweetActions,
+  ActionTypes as TweetActionTypes,
+} from "@/stores/tweet";
 import UsernameForm from "./UsernameForm";
 import PasswordForm from "./PasswordForm";
+import { User } from "@/stores/tweet";
 export default function SignIn(props: React.PropsWithChildren<TSignIn>) {
   const [givenUsername, setGivenUsername] = React.useState("");
   const handleKeepModalOpen = (e: React.MouseEvent<HTMLElement>) =>
     e.stopPropagation();
   const handleShutdown = () => props.onClose();
+  const { state: userState, dispatch: userDispatch } =
+    React.useContext(UserStore);
+  const { state: tweetState, dispatch: tweetDispatch } =
+    React.useContext(TweetStore);
   return (
     <Component onClick={handleKeepModalOpen}>
       <Content>
@@ -32,7 +47,14 @@ export default function SignIn(props: React.PropsWithChildren<TSignIn>) {
         ) : (
           <PasswordForm
             username={givenUsername}
-            onAfterSubmit={() => {
+            onAfterSubmit={(user) => {
+              if (user) {
+                const doLogin: UserActions = {
+                  type: UserActionTypes.Login,
+                  payload: user,
+                };
+                userDispatch(doLogin);
+              }
               handleShutdown();
             }}
           />

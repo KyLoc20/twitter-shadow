@@ -1,5 +1,5 @@
 export { pick, updateRef };
-export type { Writable };
+export type { Writable, Tolerant };
 //pick with helper
 const pick = <O extends { [key: string]: any }>(
   keys: readonly string[],
@@ -18,7 +18,7 @@ const _pick = <O extends { [key: string]: any }, K extends keyof O>(
 type Writable<T> = {
   -readonly [P in keyof T]: T[P];
 };
-
+type Tolerant<T> = T | undefined;
 // basically Exclude<React.ClassAttributes<T>["ref"], string>
 type UserRef<T> =
   | ((instance: T | null) => void)

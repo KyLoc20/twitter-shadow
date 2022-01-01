@@ -10,7 +10,6 @@ import API from "@/api/index";
 export default function UsernameForm(
   props: React.PropsWithChildren<TUsernameForm>
 ) {
-  console.log("RENDER UsernameForm");
   const UsernameTextfield = genCustomBox({}, { h: 84, py: "12px" });
   const usernameTextfieldRef = React.useRef<HTMLInputElement>(null);
   const handleSubmitUsername = (e: React.MouseEvent<HTMLButtonElement>) => {

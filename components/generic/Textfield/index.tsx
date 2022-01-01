@@ -6,7 +6,6 @@ const Textfield: React.ForwardRefRenderFunction<
   HTMLInputElement,
   TextfieldProps
 > = (props, inputRef: React.Ref<HTMLInputElement>) => {
-  console.log("RENDER Textfield");
   return (
     <Component
       {...props.sx}

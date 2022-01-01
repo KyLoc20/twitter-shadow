@@ -1,3 +1,4 @@
 import * as Tweet from "./tweet";
 import * as User from "./user";
-export default { Tweet, User };
+import { APIResponse } from "./base";
+export default { Tweet, User, APIResponse };

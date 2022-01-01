@@ -46,7 +46,6 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
     });
   };
   const [isMoreMenuOpen, setMoreMenuOpen] = React.useState(false);
-  console.log("RENDER TweetCard", props.id, isMoreMenuOpen, user);
   return (
     <Component>
       <Content>
@@ -57,7 +56,6 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
             username={user.username}
             timestamp={props.timestamp}
             onClick={(e: React.MouseEvent) => {
-              console.log("onClick");
               setMoreMenuOpen(true);
             }}
           >
@@ -72,7 +70,6 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
             >
               <MoreMenu
                 onSelect={(value: string) => {
-                  console.log("onSelect", value);
                   switch (value) {
                     case "delete":
                       handleDeleteTweet(props.id);

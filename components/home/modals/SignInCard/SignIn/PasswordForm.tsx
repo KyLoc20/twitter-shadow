@@ -9,16 +9,16 @@ import {
   genText,
 } from "@/components/generic/Text";
 import { defineCustomButton, ButtonPreset } from "@/components/generic/Button";
+import { User } from "@/stores/user";
+import { Tolerant } from "@/utils/helpers";
 import API from "@/api/index";
 export default function PasswordForm(
   props: React.PropsWithChildren<TPasswordForm>
 ) {
-  console.log("RENDER PasswordForm");
   const [isSubmitAvailable, setSubmitAvailable] =
     React.useState<boolean>(false);
   const passwordTextfieldRef = React.useRef<HTMLInputElement>(null);
   const handleInputPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("handleInputPassword", e.target.value);
     if (e.target.value !== "") setSubmitAvailable(true);
     else setSubmitAvailable(false);
   };
@@ -27,10 +27,10 @@ export default function PasswordForm(
     const elPT = passwordTextfieldRef.current;
     if (elPT != null) {
       const password = elPT.value;
-      console.log("handleLogin", username, password);
-      API.User.postLogin(username, password).then((successful) => {
-        if (successful) props.onAfterSubmit();
-        else {
+      API.User.postLogin(username, password).then((res) => {
+        if (res.good) {
+          props.onAfterSubmit(res.result);
+        } else {
           alert("Wrong password!");
           elPT.value = "";
           elPT.focus();
@@ -39,6 +39,12 @@ export default function PasswordForm(
       });
     }
   };
+  React.useEffect(() => {
+    const elPT = passwordTextfieldRef.current;
+    if (elPT != null) {
+      elPT.focus();
+    }
+  }, []);
   return (
     <Component>
       <Content>
@@ -71,7 +77,7 @@ export default function PasswordForm(
 }
 type TPasswordForm = {
   username: string;
-  onAfterSubmit: () => void;
+  onAfterSubmit: (freshUser: Tolerant<User>) => void;
 };
 const Component = genCustomBox({}, { px: "32px", flexGrow: "1" });
 const Content = genCustomBox({ vertical: true }, { w: "100%" });
@@ -108,7 +114,6 @@ type TButton = {
   onClick?: Function;
 };
 function SubmitButton(props: React.PropsWithChildren<TButton>) {
-  console.log("REnDER SubmitButton");
   const isAvailable = !props.disabled;
   const handleClick = () => {
     if (isAvailable) props.onClick?.();

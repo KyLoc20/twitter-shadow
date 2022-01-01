@@ -1,7 +1,6 @@
 import { ActionTypes, TweetActions } from "./action";
 import { Tweet, Statistics, TweetState } from "./model";
 const tweetListReducer = (state: Tweet[], action: TweetActions): Tweet[] => {
-  console.log("tweetListReducer", state, action);
   switch (action.type) {
     case ActionTypes.Create:
       return [

@@ -5,10 +5,11 @@ export { mainReducer };
 const mainReducer = (state: UserState, action: UserActions): UserState =>
   userReducer(state, action);
 
-const userReducer = (state: User, action: UserActions): User => {
+const userReducer = (state: UserState, action: UserActions): UserState => {
+  //TRAP use action.payload not state to update!!!
   switch (action.type) {
     case ActionTypes.Login:
-      return { ...state };
+      return { ...action.payload };
     case ActionTypes.Logout:
       return getTouristUser();
     default:

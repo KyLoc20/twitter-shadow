@@ -4,6 +4,7 @@ import Icon from "@/components/generic/Icon";
 import { useModal } from "@/hooks/Modal";
 import Ghost from "@/components/generic/Ghost";
 import SignInModalCard from "@/components/home/modals/SignInCard";
+import { UserStore } from "@/stores/user";
 import {
   defineCustomText,
   genCustomText,
@@ -20,6 +21,7 @@ export default function UserInfoCard(
   const [showSignin, hideSignin, SigninModal] = useModal(
     "signin-modal-container"
   );
+  const { state, dispatch } = React.useContext(UserStore);
   const handleOpenSigninModal = () => {
     //todo mobile
     let scrollbarWidth =
@@ -38,7 +40,7 @@ export default function UserInfoCard(
       w: 40,
       h: 40,
       borderRadius: "50%",
-      bg: "pink",
+      bg: state.username === "@tourist" ? "pink" : `url(${state.avatarUrl})`,
       bgSize: "contain",
     }
   );
@@ -54,7 +56,7 @@ export default function UserInfoCard(
         left="calc(50% - 150px)"
       >
         <UserMenu
-          username="@CRa_SSus"
+          username={state.username}
           onSelect={(value) => {
             switch (value) {
               case "signin":
@@ -75,8 +77,8 @@ export default function UserInfoCard(
       >
         <Avatar />
         <About>
-          <Nickname>CraSSusCraSSusCraSSusCraSSusCraSSusCraSSusCraSSus</Nickname>
-          <Username>@CRa_SSus</Username>
+          <Nickname>{state.nickname}</Nickname>
+          <Username>{state.username}</Username>
         </About>
         <Icon name="more" />
       </Content>

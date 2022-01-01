@@ -2,6 +2,11 @@ import { Tweet } from "@/stores/tweet";
 import { User } from "@/stores/user";
 import { getSomeTweets } from "@/stores/tweet/data.test";
 import { getSomeUsers, getSomeAuth } from "@/stores/user/data.test";
+import {
+  APIResponse,
+  succeed as succeedResponse,
+  fail as failResponse,
+} from "./base";
 //server mocking
 //todo [username: string]: string is not safe use Map instead
 type AuthMap = {
@@ -60,14 +65,17 @@ export default class LocalStorageManager {
     return true;
   }
   checkUsernameExisting(username: string) {
-    console.log("checkUsernameExisting", username);
-    console.log(this.users);
     return this.users.some((user) => user.username.trim() === username.trim());
   }
-  login(username: string, password: string) {
+  login(username: string, password: string): APIResponse<User> {
     let authenticPassword = this.auth[username];
-    if (authenticPassword == null) return false;
-    else return authenticPassword === password;
+    if (authenticPassword == null) return failResponse<User>();
+    else if (authenticPassword !== password) return failResponse<User>();
+    else {
+      let user = this.users.find((user) => user.username === username);
+      if (user != null) return succeedResponse<User>(user);
+      else return failResponse<User>();
+    }
   }
   save() {
     this._synchronize();

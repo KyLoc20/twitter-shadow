@@ -6,6 +6,7 @@ import AsideContentCard from "@/components/home/AsideContentCard";
 import React from "react";
 import { genCustomBox } from "@/components/generic/containers/Box";
 import { UserStoreProvider } from "@/stores/user";
+import { TweetStoreProvider } from "@/stores/tweet";
 type HomePageProps = {
   children?: React.ReactNode;
 };
@@ -16,14 +17,14 @@ export default function HomePage(props: HomePageProps) {
         <title>Home / Twitter Shadow</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Content>
-        <UserStoreProvider>
+      <UserStoreProvider>
+        <Content>
           <AppBarCard></AppBarCard>
           <MainContentCard></MainContentCard>
           <AsideContentCard></AsideContentCard>
-        </UserStoreProvider>
-      </Content>
-      <SigninModal id="signin-modal-container"></SigninModal>
+        </Content>
+        <SigninModal id="signin-modal-container"></SigninModal>
+      </UserStoreProvider>
     </Container>
   );
 }

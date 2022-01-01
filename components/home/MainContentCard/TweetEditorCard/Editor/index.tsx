@@ -21,7 +21,6 @@ import { TweetStore, Tweet, TweetActions, ActionTypes } from "@/stores/tweet";
 type EditorProps = {};
 
 function Editor(props: React.PropsWithChildren<EditorProps>) {
-  console.log("RENDER Editor");
   const { state, dispatch } = React.useContext(TweetStore);
 
   const itemsTool = ["media", "gif", "poll", "emoji", "schedule"].map(

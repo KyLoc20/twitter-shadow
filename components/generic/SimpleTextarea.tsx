@@ -32,7 +32,6 @@ const DEFAULT_ROWS = 1;
 
 const AutosizeTextarea: React.ForwardRefRenderFunction<string, TextareaProps> =
   (props, userRef: React.Ref<string>) => {
-    console.log("RENDER Textarea");
     const { sx = {} } = props;
     const handleChange = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
       const el = document.getElementById("test-textarea");
@@ -46,8 +45,6 @@ const AutosizeTextarea: React.ForwardRefRenderFunction<string, TextareaProps> =
     const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       if (e.target.value !== "") {
         updateRef<string>(userRef, e.target.value);
-        console.log("handleContentChange: ");
-        console.log(userRef);
       }
     };
     let id = "test-textarea"; //props.id
