@@ -6,11 +6,14 @@ import AsideContentCard from "@/components/home/AsideContentCard";
 import React from "react";
 import { genCustomBox } from "@/components/generic/containers/Box";
 import { UserStoreProvider } from "@/stores/user";
-import { TweetStoreProvider } from "@/stores/tweet";
-type HomePageProps = {
-  children?: React.ReactNode;
-};
-export default function HomePage(props: HomePageProps) {
+import { useRouter } from "next/dist/client/router";
+export default function TimelinePage(props: TimelinePageProps) {
+  const router = useRouter();
+  console.log("RENDER TimelinePage", router.query, router.pathname);
+  React.useEffect(() => {
+    console.log("RENDER TimelinePage useEffect");
+  });
+
   return (
     <Container>
       <Head>
@@ -28,6 +31,7 @@ export default function HomePage(props: HomePageProps) {
     </Container>
   );
 }
+type TimelinePageProps = React.PropsWithChildren<{}>;
 const Container = styled("section")`
   position: relative;
   background: #fff;

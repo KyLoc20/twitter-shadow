@@ -28,17 +28,22 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Features
 
+- Timeline Page
+  - [ ] include the home page(/home) and the user page(/{username}),
+        the home page displays all the tweets, the user page displays only the tweets of the user
+  - [x] redirect the index page(/) to the home page(/home)
 - Register & Login & Logout
   - [x] unique username password without security
-  - [ ] as options in the timeline page(/)(/{username})
-  - [x] everyone starts with the tourist timeline page(/)
-  - [ ] keep the logged-in status in local session after a user successfully registers or logs in
+  - [ ] as options in the left AppBar of timeline pages(/)(/{username})
+  - [x] start with the home page(/) of a user named @tourist if a user hasn't logged in
+  - [x] keep the logged-in status in local session after a user successfully registers or logs in
   - [ ] transfer to her/his timeline page(/{username}) after a user successfully registers or logs in
-  - [ ] transfer to the tourist timeline page(/) after a user logs out
+  - [ ] transfer to the home page(/) of a user named @tourist after a user logs out
 - Tweets in the timeline page
-  - [ ] all tweets are readable but can be edited or deleted only by the posters
-  - [x] tweets are in a descending order
   - [x] each tweet owns a unique incremental integer ID
   - [x] users can post text tweets
+  - [x] tweets are in a descending order
+  - [ ] tweets can be edited only by the posters
+  - [ ] tweets can be deleted only by the posters
   - [ ] transfer to the detail page(/tweet/{tweet ID}) after clicking a tweet
 - Tweets in the detail page

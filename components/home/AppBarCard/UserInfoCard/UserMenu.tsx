@@ -13,9 +13,22 @@ export default function UserMenu(props: React.PropsWithChildren<TUserMenu>) {
       >
         <MenuText>Add an existing account</MenuText>
       </MenuItem>
-      <MenuItem>
-        <MenuText>Log out {props.username}</MenuText>
+      <MenuItem
+        onClick={() => {
+          props.onSelect("register");
+        }}
+      >
+        <MenuText>Register a new account</MenuText>
       </MenuItem>
+      {props.username !== "@tourist" && (
+        <MenuItem
+          onClick={() => {
+            props.onSelect("logout");
+          }}
+        >
+          <MenuLogoutText>Log out {props.username}</MenuLogoutText>
+        </MenuItem>
+      )}
     </Component>
   );
 }
@@ -23,12 +36,7 @@ type TUserMenu = {
   username: string;
   onSelect: (value: string) => void;
 };
-const MenuText = genCustomText(HTMLTag.span, TextPreset.Content_default15, {
-  w: "100%",
-  lineHeight: 20,
-  textOverflow: "ellipsis",
-  overflow: "hidden",
-});
+
 const Component = genCustomBox(
   {
     vertical: true,
@@ -56,5 +64,22 @@ const MenuItem = genCustomBox(
     bg: "#fff",
     hoverBg: "rgb(247, 249, 249)",
     cursor: "pointer",
+  }
+);
+const MenuText = genCustomText(HTMLTag.span, TextPreset.Content_default15, {
+  w: "100%",
+  lineHeight: 20,
+  textOverflow: "ellipsis",
+  overflow: "hidden",
+});
+const MenuLogoutText = genCustomText(
+  HTMLTag.span,
+  TextPreset.Content_default15,
+  {
+    w: "100%",
+    lineHeight: 20,
+    textOverflow: "ellipsis",
+    overflow: "hidden",
+    color: "#f4212e",
   }
 );

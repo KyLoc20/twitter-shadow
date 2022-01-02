@@ -11,7 +11,7 @@ const userReducer = (state: UserState, action: UserActions): UserState => {
     case ActionTypes.Login:
       return { ...action.payload };
     case ActionTypes.Logout:
-      return getTouristUser();
+      return { ...getTouristUser() };
     default:
       return state;
   }

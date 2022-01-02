@@ -4,7 +4,7 @@ import Icon from "@/components/generic/Icon";
 import { useModal } from "@/hooks/Modal";
 import Ghost from "@/components/generic/Ghost";
 import SignInModalCard from "@/components/home/modals/SignInCard";
-import { UserStore } from "@/stores/user";
+import { UserStore, ActionTypes, UserActions } from "@/stores/user";
 import {
   defineCustomText,
   genCustomText,
@@ -12,8 +12,9 @@ import {
   TextPreset,
 } from "@/components/generic/Text";
 import { genCustomBox } from "@/components/generic/containers/Box";
+import LocalSessionManager from "@/utils/session";
 import UserMenu from "./UserMenu";
-
+import { useRouter } from "next/dist/client/router";
 export default function UserInfoCard(
   props: React.PropsWithChildren<UserInfoCardProps>
 ) {
@@ -22,6 +23,7 @@ export default function UserInfoCard(
     "signin-modal-container"
   );
   const { state, dispatch } = React.useContext(UserStore);
+  const router = useRouter();
   const handleOpenSigninModal = () => {
     //todo mobile
     let scrollbarWidth =
@@ -30,6 +32,13 @@ export default function UserInfoCard(
     //to fill the space of the missing scrollbar
     document.body.style.paddingRight = `${scrollbarWidth}px`;
     showSignin();
+  };
+  const handleLogout = () => {
+    console.log("handleLogout", state);
+    const lsm = new LocalSessionManager();
+    lsm.flush();
+    dispatch({ type: ActionTypes.Logout, payload: {} });
+    router.push("/home");
   };
   const Avatar = genCustomBox(
     {
@@ -61,6 +70,11 @@ export default function UserInfoCard(
             switch (value) {
               case "signin":
                 handleOpenSigninModal();
+                break;
+              case "logout":
+                handleLogout();
+                break;
+              case "register":
                 break;
               default:
                 break;

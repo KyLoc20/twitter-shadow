@@ -9,9 +9,7 @@ type UserPayload = {
   [ActionTypes.Login]: {
     [key in keyof User]: User[key];
   };
-  [ActionTypes.Logout]: {
-    id: string;
-  };
+  [ActionTypes.Logout]: {};
 };
 // keyof X  -> 1 | 2 | ...
 // type V = X[keyof X] -> X[1] | X[2] | ...

@@ -31,6 +31,11 @@ export default class LocalSessionManager {
     this._session = { username, auth, expire };
     this._save();
   }
+  flush() {
+    this._session = DEFAULT_SESSION;
+    localStorage.removeItem("_session");
+    this.isLoaded = false;
+  }
   _save() {
     localStorage.setItem("_session", JSON.stringify(this._session));
   }
@@ -61,17 +66,15 @@ class Session {
   }
   check() {
     //Session.check() -> Send a request, Make sure the session to be authentic and not expired
-    console.log("check start");
+    console.log("CHECK Session", this._username);
     return new Promise<User>((resolve, reject: (msg: string) => void) => {
       if (this.isExpired) reject("Session Expired!");
       else {
-        console.log("check before post");
         API.User.postCheckLoginSession(
           this._username,
           this._auth,
           this._expire
         ).then((res) => {
-          console.log("check post returned");
           if (res.good && res.result != null) resolve(res.result);
           else reject("Session Invalid!");
         });

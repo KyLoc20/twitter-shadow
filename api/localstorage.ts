@@ -115,7 +115,6 @@ export default class LocalStorageManager {
     else tweets = parseTweetsWithDate(tweetsFromLocal);
     this._tweets = tweets;
     this.isTweetsLoaded = true;
-    console.log("_loadTweets", tweets);
   }
   _loadUsers() {
     const usersFromLocal = this.ls.getItem("users");

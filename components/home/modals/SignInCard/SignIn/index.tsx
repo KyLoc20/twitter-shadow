@@ -17,7 +17,7 @@ import {
 import UsernameForm from "./UsernameForm";
 import PasswordForm from "./PasswordForm";
 import LocalSessionManager, { NEVER_EXPIRE } from "@/utils/session";
-import { User } from "@/stores/tweet";
+import { useRouter } from "next/dist/client/router";
 export default function SignIn(props: React.PropsWithChildren<TSignIn>) {
   const [givenUsername, setGivenUsername] = React.useState("");
   const handleKeepModalOpen = (e: React.MouseEvent<HTMLElement>) =>
@@ -27,6 +27,7 @@ export default function SignIn(props: React.PropsWithChildren<TSignIn>) {
     React.useContext(UserStore);
   const { state: tweetState, dispatch: tweetDispatch } =
     React.useContext(TweetStore);
+  const router = useRouter();
   return (
     <Component onClick={handleKeepModalOpen}>
       <Content>
@@ -50,14 +51,25 @@ export default function SignIn(props: React.PropsWithChildren<TSignIn>) {
             username={givenUsername}
             onAfterSubmit={(user) => {
               if (user) {
+                //Experiment: do not userDispatch
+                //to test whether only router.push could cause UserStoreProvider useEffect
                 const doLogin: UserActions = {
                   type: UserActionTypes.Login,
                   payload: user,
                 };
                 userDispatch(doLogin);
+
                 //keep Login locally
                 const lsm = new LocalSessionManager();
                 lsm.update(user.username, "#auth", NEVER_EXPIRE.valueOf());
+                //transfer to the logged-in user's timeline page(/{username})
+
+                router.replace("/[user]", `/${user.username}`);
+                //WHY without userDispatch, router.push cause APP to useEffect but UserStoreProvider doesn't useEffect
+                //seems that UserStore won't change(so UserStoreProvider not useEffect?) unless reload the page
+
+                //router.reload();
+                //it works
               }
               handleShutdown();
             }}

@@ -19,15 +19,16 @@ const UserStore = React.createContext<{
 const UserStoreProvider: React.FC = ({ children }) => {
   //todo fetch initialState from API
   const [state, dispatch] = React.useReducer(mainReducer, getDefaultState());
+  console.log("RENDER UserStoreProvider", state);
+  //WHY React component rendered twice and useEffect not triggered
   useEffect(() => {
+    console.log("RENDER UserStoreProvider useEffect", state);
     //sessioned UserState
     const lsm = new LocalSessionManager();
     const session = lsm.session();
-    console.log("before check", session);
     session
       .check()
       .then((user) => {
-        console.log("check passed", user);
         const doLogin: UserActions = {
           type: ActionTypes.Login,
           payload: {
@@ -36,9 +37,7 @@ const UserStoreProvider: React.FC = ({ children }) => {
         };
         dispatch(doLogin);
       })
-      .catch((msg) => {
-        console.log("check failed", msg);
-      });
+      .catch((failedMsg) => {});
   }, []);
   return (
     <UserStore.Provider value={{ state, dispatch }}>
