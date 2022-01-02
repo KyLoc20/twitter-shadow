@@ -11,7 +11,7 @@ export default function TweetEditorCard(
     w: 48,
     h: 48,
     borderRadius: "50%",
-    bg: state.username === "@tourist" ? "pink" : `url(${state.avatarUrl})`,
+    bg: `url(${state.avatarUrl})`,
     bgSize: "contain",
   });
   return (

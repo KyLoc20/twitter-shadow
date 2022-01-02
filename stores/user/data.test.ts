@@ -3,7 +3,7 @@ export { getTouristUser, getSomeUsers, getDefaultState, getSomeAuth };
 const UserTourist: User = {
   nickname: "Please Log in",
   username: "@tourist",
-  avatarUrl: "pink",
+  avatarUrl: "/avatars/tourist1.jpg",
   auth: {},
   stats: {},
 };

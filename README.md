@@ -38,7 +38,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
   - [x] start with the home page(/) of a user named @tourist if a user hasn't logged in
   - [x] keep the logged-in status in local session after a user successfully registers or logs in
   - [ ] transfer to her/his timeline page(/{username}) after a user successfully registers or logs in
-  - [ ] transfer to the home page(/) of a user named @tourist after a user logs out
+  - [x] transfer to the home page(/) of a user named @tourist after a user logs out
 - Tweets in the timeline page
   - [x] each tweet owns a unique incremental integer ID
   - [x] users can post text tweets

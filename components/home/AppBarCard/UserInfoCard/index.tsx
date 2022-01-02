@@ -3,7 +3,8 @@ import styled from "@emotion/styled";
 import Icon from "@/components/generic/Icon";
 import { useModal } from "@/hooks/Modal";
 import Ghost from "@/components/generic/Ghost";
-import SignInModalCard from "@/components/home/modals/SignInCard";
+import SignIn from "@/components/home/modals/SignInCard";
+import Register from "@/components/home/modals/RegisterCard";
 import { UserStore, ActionTypes, UserActions } from "@/stores/user";
 import {
   defineCustomText,
@@ -19,8 +20,11 @@ export default function UserInfoCard(
   props: React.PropsWithChildren<UserInfoCardProps>
 ) {
   const [isMenuOpen, setMenuOpen] = React.useState(false);
-  const [showSignin, hideSignin, SigninModal] = useModal(
+  const [showSignIn, hideSignIn, SignInModal] = useModal(
     "signin-modal-container"
+  );
+  const [showRegister, hideRegister, RegisterModal] = useModal(
+    "register-modal-container"
   );
   const { state, dispatch } = React.useContext(UserStore);
   const router = useRouter();
@@ -31,8 +35,18 @@ export default function UserInfoCard(
     document.body.style.overflow = "hidden";
     //to fill the space of the missing scrollbar
     document.body.style.paddingRight = `${scrollbarWidth}px`;
-    showSignin();
+    showSignIn();
   };
+  const handleOpenRegisterModal = () => {
+    //todo mobile
+    let scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.overflow = "hidden";
+    //to fill the space of the missing scrollbar
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    showRegister();
+  };
+
   const handleLogout = () => {
     console.log("handleLogout", state);
     const lsm = new LocalSessionManager();
@@ -49,7 +63,7 @@ export default function UserInfoCard(
       w: 40,
       h: 40,
       borderRadius: "50%",
-      bg: state.username === "@tourist" ? "pink" : `url(${state.avatarUrl})`,
+      bg: `url(${state.avatarUrl})`,
       bgSize: "contain",
     }
   );
@@ -75,6 +89,7 @@ export default function UserInfoCard(
                 handleLogout();
                 break;
               case "register":
+                handleOpenRegisterModal();
                 break;
               default:
                 break;
@@ -98,15 +113,24 @@ export default function UserInfoCard(
         </About>
         <Icon name="more" />
       </Content>
-      <SigninModal>
-        <SignInModalCard
+      <SignInModal>
+        <SignIn
           onClose={() => {
             document.body.style.overflow = "auto";
             document.body.style.paddingRight = "0";
-            hideSignin();
+            hideSignIn();
           }}
         />
-      </SigninModal>
+      </SignInModal>
+      <RegisterModal>
+        <Register
+          onClose={() => {
+            document.body.style.overflow = "auto";
+            document.body.style.paddingRight = "0";
+            hideRegister();
+          }}
+        />
+      </RegisterModal>
     </Component>
   );
 }

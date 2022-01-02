@@ -27,6 +27,7 @@ export default function TimelinePage(props: TimelinePageProps) {
           <AsideContentCard></AsideContentCard>
         </Content>
         <SigninModal id="signin-modal-container"></SigninModal>
+        <RegisterModal id="register-modal-container"></RegisterModal>
       </UserStoreProvider>
     </Container>
   );

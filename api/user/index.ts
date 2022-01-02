@@ -37,8 +37,9 @@ const postLogin = mockAPI<
   const lsm = new LocalStorageManager();
   return lsm.login(username, password);
 });
-const postRegister = mockAPI<(username: string, password: string) => boolean>(
-  (username: string, password: string) => {
-    return true;
-  }
-);
+const postRegister = mockAPI<
+  (username: string, password: string) => APIResponse<User>
+>((username: string, password: string) => {
+  const lsm = new LocalStorageManager();
+  return lsm.register(username, password);
+});

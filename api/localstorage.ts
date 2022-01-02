@@ -90,6 +90,19 @@ export default class LocalStorageManager {
       else return failResponse<User>();
     }
   }
+  register(username: string, password: string): APIResponse<User> {
+    let newUser: User = {
+      username,
+      nickname: username,
+      avatarUrl: "/avatars/newuser1.jpg",
+      auth: {},
+      stats: {},
+    };
+    this.users.push(newUser);
+    this.auth[username] = password;
+    this.save();
+    return succeedResponse<User>(newUser);
+  }
   save() {
     this._synchronize();
     //saving tweets

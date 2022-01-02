@@ -6,7 +6,7 @@ const genDate = (year: number, month: number, day?: number) =>
 const UserTourist: User = {
   nickname: "Tourist",
   username: "@tourist",
-  avatarUrl: "pink",
+  avatarUrl: "/avatars/tourist1.jpg",
 };
 const TweetTourist1: Tweet = {
   id: 1,
