@@ -28,15 +28,17 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Features
 
-- Register&Login&Logout
-  - [ ]as options in the timeline page
-  - [ ]unique username password without security
-  - [ ]transfer to his timeline page with the path (/{username}) after a user successfully registers or logs in
-  - [ ]transfer to the home page with the path (/) after a user logs out
+- Register & Login & Logout
+  - [x] unique username password without security
+  - [ ] as options in the timeline page(/)(/{username})
+  - [x] everyone starts with the tourist timeline page(/)
+  - [ ] keep the logged-in status in local session after a user successfully registers or logs in
+  - [ ] transfer to her/his timeline page(/{username}) after a user successfully registers or logs in
+  - [ ] transfer to the tourist timeline page(/) after a user logs out
 - Tweets in the timeline page
-  - [ ]all tweets are readable but can be edited or deleted only by the posters
+  - [ ] all tweets are readable but can be edited or deleted only by the posters
   - [x] tweets are in a descending order
   - [x] each tweet owns a unique incremental integer ID
   - [x] users can post text tweets
-  - [ ]transfer to the detail page with the path (/tweet/{tweet ID}) after clicking a tweet
+  - [ ] transfer to the detail page(/tweet/{tweet ID}) after clicking a tweet
 - Tweets in the detail page

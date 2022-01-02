@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 import { createUnstyleComponent, sxProps, parseLengthValue } from "@/system/sx";
-import { pick, updateRef } from "@/utils/helpers";
+import { pick, updateRef } from "@/utils/helper";
 const showHeight = (height: number | string) => {
   console.log("Height of Textarea: ", height);
 };

@@ -5,7 +5,7 @@ import { defineCustomBox } from "@/components/generic/containers/Box";
 import { Tweet } from "@/stores/tweet";
 import { default as Icon, TIconSVG } from "@/components/generic/Icon";
 import { sxProps } from "@/system/sx";
-import { customeDateFormatter } from "@/utils/helpers";
+import { customeDateFormatter } from "@/utils/helper";
 export type { TTweetCard };
 export { Avatar, Interaction, INTERACTIONS, UserInfo, CUSTOM_ICON_STYLE };
 const genFlexBox = defineCustomBox();

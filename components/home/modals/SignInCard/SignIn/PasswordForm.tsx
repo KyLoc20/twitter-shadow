@@ -10,7 +10,7 @@ import {
 } from "@/components/generic/Text";
 import { defineCustomButton, ButtonPreset } from "@/components/generic/Button";
 import { User } from "@/stores/user";
-import { Tolerant } from "@/utils/helpers";
+import { Tolerant } from "@/utils/helper";
 import API from "@/api/index";
 export default function PasswordForm(
   props: React.PropsWithChildren<TPasswordForm>
