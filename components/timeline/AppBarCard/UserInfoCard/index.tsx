@@ -3,8 +3,8 @@ import styled from "@emotion/styled";
 import Icon from "@/components/generic/Icon";
 import { useModal } from "@/hooks/Modal";
 import Ghost from "@/components/generic/Ghost";
-import SignIn from "@/components/home/modals/SignInCard";
-import Register from "@/components/home/modals/RegisterCard";
+import SignIn from "@/components/modals/SignInCard";
+import Register from "@/components/modals/RegisterCard";
 import { UserStore, ActionTypes, UserActions } from "@/stores/user";
 import {
   defineCustomText,

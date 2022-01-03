@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import Head from "next/head";
-import AppBarCard from "@/components/home/AppBarCard";
-import MainContentCard from "@/components/home/MainContentCard";
-import AsideContentCard from "@/components/home/AsideContentCard";
+import AppBarCard from "@/components/timeline/AppBarCard";
+import MainContentCard from "@/components/timeline/MainContentCard";
+import AsideContentCard from "@/components/timeline/AsideContentCard";
 import React from "react";
 import { genCustomBox } from "@/components/generic/containers/Box";
 import { UserStoreProvider } from "@/stores/user";
