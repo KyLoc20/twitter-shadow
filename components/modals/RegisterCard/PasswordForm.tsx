@@ -46,7 +46,7 @@ export default function PasswordForm(
       const password = elPT.value;
       API.User.postRegister(username, password).then((res) => {
         if (res.good) {
-          props.onAfterSubmit(res.result);
+          props.onAfterSubmit(res.result as User);
         } else {
           //todo
           alert("Register failed!");
