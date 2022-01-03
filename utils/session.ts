@@ -66,7 +66,6 @@ class Session {
   }
   check() {
     //Session.check() -> Send a request, Make sure the session to be authentic and not expired
-    console.log("CHECK Session", this._username);
     return new Promise<User>((resolve, reject: (msg: string) => void) => {
       if (this.isExpired) reject("Session Expired!");
       else {

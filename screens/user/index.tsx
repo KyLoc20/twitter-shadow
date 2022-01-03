@@ -6,26 +6,24 @@ import AsideContentCard from "@/components/timeline/AsideContentCard";
 import React from "react";
 import { genCustomBox } from "@/components/generic/containers/Box";
 import { UserStoreProvider } from "@/stores/user";
-import { useRouter } from "next/dist/client/router";
+import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 export default function UserTimelinePage(props: UserTimelinePageProps) {
   const { query, asPath } = useRouter();
-  const username = getUsername(query, asPath, "@tourist");
-  console.log("RENDER TimelinePage", query, asPath, username);
-
-  React.useEffect(() => {
-    console.log("RENDER TimelinePage useEffect");
-  });
+  //TODO what is the best practice to get query
+  const ownername = React.useMemo(() => {
+    return getUsername(query, asPath, "@tourist");
+  }, [query, asPath]);
   return (
     <Container>
       <Head>
-        <title>{username} / Twitter Shadow</title>
+        <title>{ownername} / Twitter Shadow</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <UserStoreProvider>
         <Content>
           <AppBarCard />
-          <UserMainContentCard />
+          <UserMainContentCard username={ownername} />
           <AsideContentCard />
         </Content>
         <SigninModal id="signin-modal-container" />
@@ -57,7 +55,8 @@ const getUsername = (
   path: string,
   defaultName: string
 ) => {
+  console.log("RENDER TimelinePage getUsername", query, path);
   if (query.user != null && !Array.isArray(query.user))
     return query.user ?? defaultName;
-  else path.split("/").shift() ?? defaultName;
+  else return path.split("/").length > 0 ? path.split("/")[0] : defaultName;
 };

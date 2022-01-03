@@ -7,7 +7,6 @@ import { genCustomBox } from "@/components/generic/containers/Box";
 export default function TweetListCard(
   props: React.PropsWithChildren<TTweetListCard>
 ) {
-  console.log("RENDER TweetListCard");
   const { state, dispatch } = React.useContext(TweetStore);
   const isForUser = props.username != null;
   const itemsAllTweet = React.useMemo(() => {
@@ -15,7 +14,6 @@ export default function TweetListCard(
       .slice()
       .sort((a, b) => b.timestamp.valueOf() - a.timestamp.valueOf())
       .map((item, index) => <TweetCard key={item.id} {...item}></TweetCard>);
-    console.log("RENDER All Tweet", tweets);
     return tweets;
   }, [state.tweets]);
   const itemsUserTweet = React.useMemo(() => {
@@ -24,7 +22,6 @@ export default function TweetListCard(
       .filter((item) => item.user.username === props.username)
       .sort((a, b) => b.timestamp.valueOf() - a.timestamp.valueOf())
       .map((item, index) => <TweetCard key={item.id} {...item}></TweetCard>);
-    console.log("RENDER User Tweet", tweets);
     return tweets;
   }, [state.tweets, props.username]);
 

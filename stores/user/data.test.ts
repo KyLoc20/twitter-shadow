@@ -1,7 +1,7 @@
 import { User, UserState } from "./model";
 export { getTouristUser, getSomeUsers, getDefaultState, getSomeAuth };
 const UserTourist: User = {
-  nickname: "Please Log in",
+  nickname: "Tourist",
   username: "@tourist",
   avatarUrl: "/avatars/tourist1.jpg",
   auth: {},
@@ -45,6 +45,7 @@ const AUTH: {
 };
 const getTouristUser = () => UserTourist;
 const getSomeUsers = () => [
+  UserTourist,
   UserElonMusk,
   UserCisco,
   UserRssThree,

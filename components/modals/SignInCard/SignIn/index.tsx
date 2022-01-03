@@ -17,7 +17,7 @@ import {
 import UsernameForm from "./UsernameForm";
 import PasswordForm from "./PasswordForm";
 import LocalSessionManager, { NEVER_EXPIRE } from "@/utils/session";
-import { useRouter } from "next/dist/client/router";
+import { useRouter } from "next/router";
 export default function SignIn(props: React.PropsWithChildren<TSignIn>) {
   const [givenUsername, setGivenUsername] = React.useState("");
   const handleKeepModalOpen = (e: React.MouseEvent<HTMLElement>) =>
@@ -65,7 +65,7 @@ export default function SignIn(props: React.PropsWithChildren<TSignIn>) {
                 //transfer to the logged-in user's timeline page(/{username})
 
                 router.replace("/[user]", `/${user.username}`);
-                //WHY without userDispatch, router.push cause APP to useEffect but UserStoreProvider doesn't useEffect
+                //WHY without userDispatch, router.replace router.push cause APP to useEffect but UserStoreProvider doesn't useEffect
                 //seems that UserStore won't change(so UserStoreProvider not useEffect?) unless reload the page
 
                 //router.reload();

@@ -1,13 +1,10 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { genCustomText, HTMLTag, TextPreset } from "@/components/generic/Text";
 import { defineCustomBox } from "@/components/generic/containers/Box";
 import { Tweet } from "@/stores/tweet";
-import { default as Icon, TIconSVG } from "@/components/generic/Icon";
 import { sxProps } from "@/system/sx";
-import { customeDateFormatter } from "@/utils/helper";
 export type { TTweetCard };
-export { Avatar, Interaction, INTERACTIONS, UserInfo, CUSTOM_ICON_STYLE };
+export { Avatar, Interaction, INTERACTIONS, CUSTOM_ICON_STYLE };
 const genFlexBox = defineCustomBox();
 type TTweetCard = {
   share?: number;
@@ -29,79 +26,6 @@ function Avatar(props: React.PropsWithChildren<{ url: string }>) {
     </Wrapper>
   );
 }
-
-function UserInfo({
-  nickname,
-  username,
-  timestamp,
-  onClick,
-  children,
-}: React.PropsWithChildren<{
-  nickname: string;
-  username: string;
-  timestamp: Date;
-  onClick?: React.MouseEventHandler;
-}>) {
-  const Wrapper = genFlexBox({ h: 22 });
-  return (
-    <Wrapper className="user-info">
-      <Nickname>{nickname}</Nickname>
-      <Username>{username}</Username>
-      <Divider>·</Divider>
-      <FormatDate date={timestamp} />
-      <MoreButtonWrapper>
-        <Icon
-          name="more"
-          round
-          sx={{
-            ...CUSTOM_ICON_STYLE,
-            color: COLOR_DEFAULT,
-            hoverBg: COLOR_BLUE_LIGHT,
-            hoverColor: COLOR_BLUE,
-          }}
-          onClick={onClick}
-        />
-        {children}
-      </MoreButtonWrapper>
-    </Wrapper>
-  );
-}
-function FormatDate(props: { date: Date }) {
-  const Component = genCustomText(HTMLTag.span, TextPreset.Content_light15, {
-    lineHeight: 20,
-    textOverflow: "ellipsis",
-    overflow: "hidden",
-  });
-  let date = props.date;
-  const dateStr = customeDateFormatter(date);
-  return <Component>{dateStr}</Component>;
-}
-const Nickname = genCustomText(HTMLTag.span, TextPreset.Content_default15, {
-  lineHeight: 20,
-  fontWeight: 700,
-  textOverflow: "ellipsis",
-  overflow: "hidden",
-});
-const Username = genCustomText(HTMLTag.span, TextPreset.Content_light15, {
-  ml: "4px",
-  lineHeight: 20,
-  textOverflow: "ellipsis",
-  overflow: "hidden",
-});
-const Divider = genCustomText(HTMLTag.span, TextPreset.Content_light15, {
-  p: "0 4px",
-  lineHeight: 20,
-  textOverflow: "ellipsis",
-  overflow: "hidden",
-});
-
-const MoreButtonWrapper = genFlexBox({
-  position: "relative",
-  minWidth: 38.75,
-  flexGrow: "1",
-  AI: "center",
-  JC: "flex-end",
-});
 const CUSTOM_ICON_STYLE: sxProps = {
   w: 35,
   h: 35,

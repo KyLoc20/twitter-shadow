@@ -6,9 +6,9 @@ import TweetEditorCard from "./TweetEditorCard";
 import TweetListCard from "./TweetListCard";
 import { TweetStoreProvider } from "@/stores/tweet";
 import { UserStore, User } from "@/stores/user";
-export default function HomeMainContentCard(
-  props: React.PropsWithChildren<TMainContentCard>
-) {
+import API from "@/api/index";
+export { HomeMainContentCard, UserMainContentCard };
+function HomeMainContentCard(props: React.PropsWithChildren<{}>) {
   return (
     <Component>
       <Content>
@@ -21,23 +21,43 @@ export default function HomeMainContentCard(
     </Component>
   );
 }
-export function UserMainContentCard(
-  props: React.PropsWithChildren<TMainContentCard>
+
+//TODO you can even kick off fetching here as early as possible
+function UserMainContentCard(
+  props: React.PropsWithChildren<TUserMainContentCard>
 ) {
-  const { state: userState, dispatch: userDispatch } =
-    React.useContext(UserStore);
-  return (
-    <Component>
-      <Content>
-        <TopBannerCard nickname={userState.nickname}></TopBannerCard>
-        <TweetStoreProvider>
-          <TweetListCard username={userState.username}></TweetListCard>
-        </TweetStoreProvider>
-      </Content>
-    </Component>
-  );
+  const [owner, setOwner] = React.useState<User | null>(null);
+  React.useEffect(() => {
+    API.User.getUser(props.username).then((res) => {
+      if (res.good) setOwner(res.result as User);
+    });
+  }, [props.username]);
+  if (owner == null)
+    return (
+      <Component>
+        <Content>
+          <TopBannerCard nickname={"Loading..."}></TopBannerCard>
+          <TweetStoreProvider>
+            <TweetListCard username={props.username}></TweetListCard>
+          </TweetStoreProvider>
+        </Content>
+      </Component>
+    );
+  else
+    return (
+      <Component>
+        <Content>
+          <TopBannerCard nickname={owner.nickname}></TopBannerCard>
+          <TweetStoreProvider>
+            <TweetListCard username={props.username}></TweetListCard>
+          </TweetStoreProvider>
+        </Content>
+      </Component>
+    );
 }
-type TMainContentCard = {};
+type TUserMainContentCard = {
+  username: string;
+};
 const Component = styled.main`
   width: 100%;
   margin-left: 275px;

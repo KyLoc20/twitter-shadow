@@ -17,7 +17,7 @@ import {
 import UsernameForm from "./UsernameForm";
 import PasswordForm from "./PasswordForm";
 import LocalSessionManager, { NEVER_EXPIRE } from "@/utils/session";
-import { useRouter } from "next/dist/client/router";
+import { useRouter } from "next/router";
 export default function RegisterModalCard(
   props: React.PropsWithChildren<TRegisterModal>
 ) {

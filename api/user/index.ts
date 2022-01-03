@@ -4,6 +4,7 @@ import LocalStorageManager from "../localstorage";
 export {
   getCheckUsernameForLogin,
   getCheckUsernameForRegister,
+  getUser,
   postLogin,
   postRegister,
   postCheckLoginSession,
@@ -22,6 +23,12 @@ const getCheckUsernameForRegister = mockAPI<(username: string) => boolean>(
     //must not be existing
     const lsm = new LocalStorageManager();
     return !lsm.checkUsernameExisting(username);
+  }
+);
+const getUser = mockAPI<(username: string) => APIResponse<User>>(
+  (username: string) => {
+    const lsm = new LocalStorageManager();
+    return lsm.getUser(username);
   }
 );
 const postCheckLoginSession = mockAPI<

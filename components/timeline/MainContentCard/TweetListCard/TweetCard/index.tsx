@@ -12,9 +12,9 @@ import {
   Avatar,
   Interaction,
   INTERACTIONS,
-  UserInfo,
   CUSTOM_ICON_STYLE,
 } from "./widgets";
+import UserInfo from "./UserInfo";
 import MoreMenu from "./MoreMenu";
 import API from "@/api/index";
 import { TweetStore, TweetActions, ActionTypes } from "@/stores/tweet";
@@ -55,7 +55,7 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
             nickname={user.nickname}
             username={user.username}
             timestamp={props.timestamp}
-            onClick={(e: React.MouseEvent) => {
+            onClickMoreButton={() => {
               setMoreMenuOpen(true);
             }}
           >

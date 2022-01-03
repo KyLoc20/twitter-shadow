@@ -20,7 +20,7 @@ class APIResponse<T> {
     this.statusCode = code;
   }
   get isSuccessful() {
-    return this.statusCode === 200;
+    return this.statusCode === 200 && this._content != null;
   }
   //different getter names provided
   get good() {
@@ -30,8 +30,8 @@ class APIResponse<T> {
     return this.isSuccessful;
   }
   get result() {
-    if (this.isSuccessful) return this._content;
-    else return undefined;
+    if (this.isSuccessful) return this._content as T;
+    else return null;
   }
 }
 const succeed = <T>(content: T) => new APIResponse<T>(200, content);

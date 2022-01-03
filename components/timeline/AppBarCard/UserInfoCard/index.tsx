@@ -15,7 +15,7 @@ import {
 import { genCustomBox } from "@/components/generic/containers/Box";
 import LocalSessionManager from "@/utils/session";
 import UserMenu from "./UserMenu";
-import { useRouter } from "next/dist/client/router";
+import { useRouter } from "next/router";
 export default function UserInfoCard(
   props: React.PropsWithChildren<UserInfoCardProps>
 ) {
@@ -48,7 +48,6 @@ export default function UserInfoCard(
   };
 
   const handleLogout = () => {
-    console.log("handleLogout", state);
     const lsm = new LocalSessionManager();
     lsm.flush();
     dispatch({ type: ActionTypes.Logout, payload: {} });

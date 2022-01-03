@@ -3,16 +3,20 @@ import styled from "@emotion/styled";
 import { defineCustomBox } from "@/components/generic/containers/Box";
 import { GoBackButton, TopTweetsButton } from "./widgets";
 import { genCustomText, HTMLTag, TextPreset } from "@/components/generic/Text";
-
+import { useRouter } from "next/router";
 export default function TopBannerCard(
   props: React.PropsWithChildren<TTopBanner>
 ) {
   const isForUser = props.nickname != null;
   const isForHome = props.nickname == null;
+  const router = useRouter();
+  const handleGoBack = () => {
+    router.back();
+  };
   return (
     <Component>
       <Content>
-        {isForUser && <GoBackButton />}
+        {isForUser && <GoBackButton onClick={handleGoBack} />}
         <HeaderText>{isForUser ? props.nickname : "Home"}</HeaderText>
         {isForHome && <TopTweetsButton />}
       </Content>

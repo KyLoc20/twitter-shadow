@@ -59,6 +59,12 @@ export default class LocalStorageManager {
       return true;
     } else return false;
   }
+  getUser(username: string) {
+    let user = this.users.find((user) => user.username === username);
+    if (user != null) {
+      return succeedResponse<User>(user);
+    } else return failResponse<User>();
+  }
   updateTweet(tweet: TTweet) {
     let index = this._searchTweet(tweet.id);
     if (index >= 0) this.tweets.splice(index, 1, tweet);

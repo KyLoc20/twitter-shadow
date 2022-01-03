@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
 import Head from "next/head";
 import AppBarCard from "@/components/timeline/AppBarCard";
-import MainContentCard from "@/components/timeline/MainContentCard";
+import { HomeMainContentCard } from "@/components/timeline/MainContentCard";
 import AsideContentCard from "@/components/timeline/AsideContentCard";
 import React from "react";
 import { genCustomBox } from "@/components/generic/containers/Box";
 import { UserStoreProvider } from "@/stores/user";
-import { useRouter } from "next/dist/client/router";
+import { useRouter } from "next/router";
 export default function HomeTimelinePage(props: HomeTimelinePageProps) {
   const router = useRouter();
   console.log("RENDER TimelinePage", router.query, router.pathname);
@@ -23,7 +23,7 @@ export default function HomeTimelinePage(props: HomeTimelinePageProps) {
       <UserStoreProvider>
         <Content>
           <AppBarCard />
-          <MainContentCard />
+          <HomeMainContentCard />
           <AsideContentCard />
         </Content>
         <SigninModal id="signin-modal-container" />

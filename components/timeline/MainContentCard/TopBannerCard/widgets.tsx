@@ -19,7 +19,10 @@ function TopTweetsButton() {
     </Wrapper>
   );
 }
-function GoBackButton() {
+type TGoBackButton = {
+  onClick: React.MouseEventHandler<HTMLElement>;
+};
+function GoBackButton(props: TGoBackButton) {
   const Wrapper = genFlexBox({
     minWidth: 56,
     AI: "center",
@@ -27,7 +30,12 @@ function GoBackButton() {
 
   return (
     <Wrapper>
-      <Icon svg={IconGoBack} sx={ICON_STYLE} round></Icon>
+      <Icon
+        svg={IconGoBack}
+        sx={ICON_STYLE}
+        round
+        onClick={props.onClick}
+      ></Icon>
     </Wrapper>
   );
 }
