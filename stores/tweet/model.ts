@@ -1,4 +1,4 @@
-export type User = {
+export type Poster = {
   nickname: string;
   username: string;
   avatarUrl: string;
@@ -8,7 +8,7 @@ export type User = {
 export type Tweet = {
   id: number;
   content: string;
-  user: User;
+  user: Poster;
   timestamp: Date;
   replies: number;
   likes: number;

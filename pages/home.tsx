@@ -1,2 +1,2 @@
-import TimelinePage from "@/screens/timeline";
-export default TimelinePage;
+import HomeTimelinePage from "@/screens/home";
+export default HomeTimelinePage;

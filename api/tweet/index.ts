@@ -1,4 +1,4 @@
-import { Tweet, User } from "@/stores/tweet/model";
+import { Tweet, Poster } from "@/stores/tweet/model";
 import LocalStorageManager from "../localstorage";
 import { mockAPI } from "../base";
 export { getTweetList, postCreateTweet, deleteTweet, postUpdateTweet };
@@ -41,7 +41,7 @@ const postUpdateTweet = mockAPI<(tweet: TUpdateTweet) => number>(
     return id;
   }
 );
-const _genTweet = (id: number, content: string, user: User): TTweet => ({
+const _genTweet = (id: number, content: string, user: Poster): TTweet => ({
   id,
   content,
   user,

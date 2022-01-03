@@ -1,9 +1,9 @@
-import { User, Tweet, Statistics, TweetState } from "./model";
+import { Poster, Tweet, Statistics, TweetState } from "./model";
 export { getSomeTweets, getDefaultState };
 //Doc: Date(year,month,day) × Date(year,monthIndex,day) √
 const genDate = (year: number, month: number, day?: number) =>
   new Date(year, month - 1, day);
-const UserTourist: User = {
+const UserTourist: Poster = {
   nickname: "Tourist",
   username: "@tourist",
   avatarUrl: "/avatars/tourist1.jpg",
@@ -18,7 +18,7 @@ const TweetTourist1: Tweet = {
   retweets: 3,
 };
 
-const UserWintonsChurchill: User = {
+const UserWintonsChurchill: Poster = {
   nickname: "Wintons Churchill",
   username: "@winstonchurchill",
   avatarUrl: "/avatars/@winstonchurchill.jpeg",
@@ -33,7 +33,7 @@ const TweetWintonsChurchill1: Tweet = {
   retweets: 3,
 };
 
-const UserElonMusk: User = {
+const UserElonMusk: Poster = {
   nickname: "Elon Musk",
   username: "@elonmusk",
   avatarUrl: "/avatars/@elonmusk.jpg",
@@ -48,7 +48,7 @@ const TweetElonMusk1: Tweet = {
   retweets: 3,
 };
 
-const UserCisco: User = {
+const UserCisco: Poster = {
   nickname: "Cisco",
   username: "@Cisco",
   avatarUrl: "/avatars/@Cisco.png",
@@ -64,7 +64,7 @@ const TweetCisco1: Tweet = {
   retweets: 3,
 };
 
-const UserRssThree: User = {
+const UserRssThree: Poster = {
   nickname: "RSS3🎄🎁",
   username: "@rss3_",
   avatarUrl: "/avatars/@rss3_.jpg",

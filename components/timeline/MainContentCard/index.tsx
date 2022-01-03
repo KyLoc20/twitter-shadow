@@ -5,7 +5,8 @@ import TopBannerCard from "./TopBannerCard";
 import TweetEditorCard from "./TweetEditorCard";
 import TweetListCard from "./TweetListCard";
 import { TweetStoreProvider } from "@/stores/tweet";
-export default function MainContentCard(
+import { UserStore, User } from "@/stores/user";
+export default function HomeMainContentCard(
   props: React.PropsWithChildren<TMainContentCard>
 ) {
   return (
@@ -15,6 +16,22 @@ export default function MainContentCard(
         <TweetStoreProvider>
           <TweetEditorCard></TweetEditorCard>
           <TweetListCard></TweetListCard>
+        </TweetStoreProvider>
+      </Content>
+    </Component>
+  );
+}
+export function UserMainContentCard(
+  props: React.PropsWithChildren<TMainContentCard>
+) {
+  const { state: userState, dispatch: userDispatch } =
+    React.useContext(UserStore);
+  return (
+    <Component>
+      <Content>
+        <TopBannerCard nickname={userState.nickname}></TopBannerCard>
+        <TweetStoreProvider>
+          <TweetListCard username={userState.username}></TweetListCard>
         </TweetStoreProvider>
       </Content>
     </Component>

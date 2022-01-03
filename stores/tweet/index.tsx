@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { TweetState, Tweet, User, Statistics } from "./model";
+import { TweetState, Tweet, Poster, Statistics } from "./model";
 import { TweetActions, ActionTypes } from "./action";
 import { mainReducer } from "./reducer";
 import { getDefaultState } from "./data.test";
 import API from "@/api/index";
 export { TweetStore, TweetStoreProvider, ActionTypes };
-export type { Tweet, User, Statistics, TweetActions };
+export type { Tweet, Poster, Statistics, TweetActions };
 
 const TweetStore = React.createContext<{
   state: TweetState;

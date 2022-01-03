@@ -1,3 +1,3 @@
-import TimelinePage from "@/screens/timeline";
-export default TimelinePage;
-//this page will be redirect to /home
+import HomeTimelinePage from "@/screens/home";
+export default HomeTimelinePage;
+//this page / will be redirect to /home

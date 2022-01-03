@@ -1,38 +1,40 @@
 import styled from "@emotion/styled";
 import Head from "next/head";
 import AppBarCard from "@/components/timeline/AppBarCard";
-import MainContentCard from "@/components/timeline/MainContentCard";
+import { UserMainContentCard } from "@/components/timeline/MainContentCard";
 import AsideContentCard from "@/components/timeline/AsideContentCard";
 import React from "react";
 import { genCustomBox } from "@/components/generic/containers/Box";
 import { UserStoreProvider } from "@/stores/user";
 import { useRouter } from "next/dist/client/router";
-export default function TimelinePage(props: TimelinePageProps) {
-  const router = useRouter();
-  console.log("RENDER TimelinePage", router.query, router.pathname);
+import { ParsedUrlQuery } from "querystring";
+export default function UserTimelinePage(props: UserTimelinePageProps) {
+  const { query, asPath } = useRouter();
+  const username = getUsername(query, asPath, "@tourist");
+  console.log("RENDER TimelinePage", query, asPath, username);
+
   React.useEffect(() => {
     console.log("RENDER TimelinePage useEffect");
   });
-
   return (
     <Container>
       <Head>
-        <title>Home / Twitter Shadow</title>
+        <title>{username} / Twitter Shadow</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <UserStoreProvider>
         <Content>
-          <AppBarCard></AppBarCard>
-          <MainContentCard></MainContentCard>
-          <AsideContentCard></AsideContentCard>
+          <AppBarCard />
+          <UserMainContentCard />
+          <AsideContentCard />
         </Content>
-        <SigninModal id="signin-modal-container"></SigninModal>
-        <RegisterModal id="register-modal-container"></RegisterModal>
+        <SigninModal id="signin-modal-container" />
+        <RegisterModal id="register-modal-container" />
       </UserStoreProvider>
     </Container>
   );
 }
-type TimelinePageProps = React.PropsWithChildren<{}>;
+type UserTimelinePageProps = React.PropsWithChildren<{}>;
 const Container = styled("section")`
   position: relative;
   background: #fff;
@@ -48,3 +50,14 @@ const Content = genCustomBox(
 );
 const SigninModal = styled.div``;
 const RegisterModal = styled.div``;
+const removePrefix = (str: string) =>
+  str.startsWith("@") ? str.slice(1) : str;
+const getUsername = (
+  query: ParsedUrlQuery,
+  path: string,
+  defaultName: string
+) => {
+  if (query.user != null && !Array.isArray(query.user))
+    return query.user ?? defaultName;
+  else path.split("/").shift() ?? defaultName;
+};

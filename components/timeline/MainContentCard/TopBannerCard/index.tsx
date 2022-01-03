@@ -1,22 +1,27 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 import { defineCustomBox } from "@/components/generic/containers/Box";
-import { TopTweetsButton } from "./widgets";
+import { GoBackButton, TopTweetsButton } from "./widgets";
 import { genCustomText, HTMLTag, TextPreset } from "@/components/generic/Text";
 
 export default function TopBannerCard(
-  props: React.PropsWithChildren<TopBannerProps>
+  props: React.PropsWithChildren<TTopBanner>
 ) {
+  const isForUser = props.nickname != null;
+  const isForHome = props.nickname == null;
   return (
     <Component>
       <Content>
-        <HeaderText>Home</HeaderText>
-        <TopTweetsButton />
+        {isForUser && <GoBackButton />}
+        <HeaderText>{isForUser ? props.nickname : "Home"}</HeaderText>
+        {isForHome && <TopTweetsButton />}
       </Content>
     </Component>
   );
 }
-type TopBannerProps = {};
+type TTopBanner = {
+  nickname?: string;
+};
 const Component = styled.section`
   position: sticky;
   top: 0;
@@ -35,7 +40,7 @@ const Content = genFlexBox({
   h: "100%",
 });
 const HeaderText = genCustomText(HTMLTag.span, TextPreset.Title_default20, {
-  w: "100%",
+  flex: "1",
   lineHeight: 24,
   textOverflow: "ellipsis",
   overflow: "hidden",

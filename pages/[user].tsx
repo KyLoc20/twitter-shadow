@@ -1,2 +1,2 @@
-import TimelinePage from "@/screens/timeline";
+import TimelinePage from "@/screens/user";
 export default TimelinePage;
