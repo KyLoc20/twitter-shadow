@@ -99,7 +99,7 @@ export default class LocalStorageManager {
   register(username: string, password: string): APIResponse<User> {
     let newUser: User = {
       username,
-      nickname: username,
+      nickname: upperFirst(removePrefix(username)), //auto generated
       avatarUrl: "/avatars/newuser1.jpg",
       auth: {},
       stats: {},
@@ -173,3 +173,7 @@ export default class LocalStorageManager {
 const INIT_TID = 10;
 type TTweet = Tweet;
 type TUser = User;
+const removePrefix = (str: string) =>
+  str.startsWith("@") ? str.slice(1) : str;
+const upperFirst = (str: string) =>
+  str.length > 1 ? str[0].toUpperCase() + str.slice(1) : str[0].toUpperCase();
