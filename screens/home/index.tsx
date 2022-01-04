@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import Head from "next/head";
-import AppBarCard from "@/components/timeline/AppBarCard";
-import { HomeMainContentCard } from "@/components/timeline/MainContentCard";
-import AsideContentCard from "@/components/timeline/AsideContentCard";
+import { default as LeftAppBar } from "@/components/timeline/AppBarCard";
+import { HomeMainContentCard as HomeMainContent } from "@/components/timeline/MainContentCard";
+import { default as RightAsideContent } from "@/components/timeline/AsideContentCard";
 import React from "react";
 import { genCustomBox } from "@/components/generic/containers/Box";
 import { UserStoreProvider } from "@/stores/user";
@@ -22,9 +22,9 @@ export default function HomeTimelinePage(props: HomeTimelinePageProps) {
       </Head>
       <UserStoreProvider>
         <Content>
-          <AppBarCard />
-          <HomeMainContentCard />
-          <AsideContentCard />
+          <LeftAppBar />
+          <HomeMainContent />
+          <RightAsideContent />
         </Content>
         <SigninModal id="signin-modal-container" />
         <RegisterModal id="register-modal-container" />

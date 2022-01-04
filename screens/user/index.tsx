@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import Head from "next/head";
-import AppBarCard from "@/components/timeline/AppBarCard";
-import { UserMainContentCard } from "@/components/timeline/MainContentCard";
-import AsideContentCard from "@/components/timeline/AsideContentCard";
+import { default as LeftAppBar } from "@/components/timeline/AppBarCard";
+import { UserMainContentCard as UserMainContent } from "@/components/timeline/MainContentCard";
+import { default as RightAsideContent } from "@/components/timeline/AsideContentCard";
 import React from "react";
 import { genCustomBox } from "@/components/generic/containers/Box";
 import { UserStoreProvider } from "@/stores/user";
@@ -10,10 +10,13 @@ import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 export default function UserTimelinePage(props: UserTimelinePageProps) {
   const { query, asPath } = useRouter();
+  //Is this unsafe?
+  const ownername = getUsername(query, asPath, "@tourist");
+
   //TODO what is the best practice to get query
-  const ownername = React.useMemo(() => {
-    return getUsername(query, asPath, "@tourist");
-  }, [query, asPath]);
+  // const ownername = React.useMemo(() => {
+  //   return getUsername(query, asPath, "@tourist");
+  // }, [query, asPath]);
   return (
     <Container>
       <Head>
@@ -22,9 +25,9 @@ export default function UserTimelinePage(props: UserTimelinePageProps) {
       </Head>
       <UserStoreProvider>
         <Content>
-          <AppBarCard />
-          <UserMainContentCard username={ownername} />
-          <AsideContentCard />
+          <LeftAppBar />
+          <UserMainContent username={ownername} />
+          <RightAsideContent />
         </Content>
         <SigninModal id="signin-modal-container" />
         <RegisterModal id="register-modal-container" />
