@@ -10,13 +10,14 @@ import {
 } from "@/components/generic/Text";
 import { sxProps } from "@/system/sx";
 import Icon from "@/components/generic/Icon";
+import { underConstruction } from "@/utils/helper";
 export default function UserDetailInfoCard() {
   return (
     <Component>
       <Content>
         <UserInfoHeader>
           <UserAvatar avatarUrl="/avatars/tourist1.jpg" />
-          <InteractionButtonGroup />
+          <InteractionButtonGroup onSelect={() => underConstruction()} />
         </UserInfoHeader>
         <Nickname>Tourist</Nickname>
         <Username>@tourist</Username>
@@ -64,23 +65,44 @@ function UserAvatar(props: TUserAvatar) {
 type TUserAvatar = {
   avatarUrl: string;
 };
-function InteractionButtonGroup() {
+function InteractionButtonGroup(props: TInteractionButtonGroup) {
   const Wrapper = genCustomBox({}, {});
   return (
     <Wrapper>
-      <MoreButton>
+      <MoreButton
+        onClick={() => {
+          props.onSelect("more");
+        }}
+      >
         <Icon svg={IconMore} />
       </MoreButton>
-      <MessageButton>
+      <MessageButton
+        onClick={() => {
+          props.onSelect("message");
+        }}
+      >
         <Icon svg={IconMessage} />
       </MessageButton>
-      <NotifyButton>
+      <NotifyButton
+        onClick={() => {
+          props.onSelect("notify");
+        }}
+      >
         <Icon svg={IconNotify} />
       </NotifyButton>
-      <FollowButton>Follow</FollowButton>
+      <FollowButton
+        onClick={() => {
+          props.onSelect("follow");
+        }}
+      >
+        Follow
+      </FollowButton>
     </Wrapper>
   );
 }
+type TInteractionButtonGroup = {
+  onSelect: (value: string) => void;
+};
 const INTERACTION_BUTTON_STYLE: sxProps = {
   mr: "8px",
   mb: "12px",

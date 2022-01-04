@@ -5,12 +5,24 @@ import { genCustomText, HTMLTag, TextPreset } from "@/components/generic/Text";
 import { defineCustomButton, ButtonPreset } from "@/components/generic/Button";
 import Icon from "@/components/generic/Icon";
 import { NAVIGATION_ITEMS, Logo } from "./widgets";
-
+import { useRouter } from "next/router";
+import { underConstruction } from "@/utils/helper";
 export default function NavigationMenuCard(
   props: React.PropsWithChildren<NavigationMenuCardProps>
 ) {
+  const router = useRouter();
+  const handleGotoHomeTimelinePage = () => {
+    router.push("/home");
+  };
   const itemsNavigationMenu = NAVIGATION_ITEMS.map((item) => (
-    <Navigation key={item.name}>
+    <Navigation
+      key={item.name}
+      onClick={
+        item.name === "Home"
+          ? handleGotoHomeTimelinePage
+          : () => underConstruction()
+      }
+    >
       <Icon svg={item.icon} />
       <NavigationText>{item.name}</NavigationText>
     </Navigation>
@@ -19,7 +31,7 @@ export default function NavigationMenuCard(
     <Component>
       <Logo></Logo>
       {itemsNavigationMenu}
-      <TweetButton>Tweet</TweetButton>
+      <TweetButton onClick={() => underConstruction()}>Tweet</TweetButton>
     </Component>
   );
 }

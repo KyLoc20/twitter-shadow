@@ -18,7 +18,7 @@ import UserInfo from "./UserInfo";
 import MoreMenu from "./MoreMenu";
 import API from "@/api/index";
 import { TweetStore, TweetActions, ActionTypes } from "@/stores/tweet";
-
+import { underConstruction } from "@/utils/helper";
 export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
   const { state, dispatch } = React.useContext(TweetStore);
   const user = props.user;
@@ -28,6 +28,7 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
       name={item.name}
       hoverColor={item.hoverColor}
       hoverBg={item.hoverBg}
+      onClick={() => underConstruction()}
     >
       <Icon round name={item.name} sx={CUSTOM_ICON_STYLE} />
       <InteractionInnerText>{props[item.name]}</InteractionInnerText>

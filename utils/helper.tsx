@@ -1,4 +1,4 @@
-export { pick, updateRef, customeDateFormatter };
+export { pick, updateRef, customeDateFormatter, underConstruction };
 export type { Writable, Tolerant };
 //pick with helper
 const pick = <O extends { [key: string]: any }>(
@@ -76,3 +76,4 @@ const MONTH_MAP: { [month: number]: string } = {
   11: "Nov",
   12: "Dec",
 };
+const underConstruction = () => alert("🚧 THIS IS UNDER CONSTRUCTION!");
