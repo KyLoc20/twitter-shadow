@@ -1,4 +1,4 @@
-import { sxProps, parseLengthValue, parseSxToCSSProperties } from "./sx";
+import { sxProps, parseSxToCSSProperties } from "./sx";
 import { merge } from "./utils";
 import { TBasicAttributes, TDOMAttributes } from "./attributes";
 export type { BoxProps };
@@ -17,10 +17,10 @@ const genInlineCSSStyles = (props: BoxProps): React.CSSProperties =>
 const genHTMLAttributes = (
   props: BoxProps
 ): TBasicAttributes & TDOMAttributes<HTMLElement> => ({
-  className: props.className,
-  //omit [style: props.style] due to genInlineCSSStyles
   id: props.id,
-
+  className: props.className,
+  title: props.title,
+  //omit [style: props.style] due to genInlineCSSStyles
   //DOM EventHandler
   onMouseEnter: props.onMouseEnter,
   onMouseLeave: props.onMouseLeave,

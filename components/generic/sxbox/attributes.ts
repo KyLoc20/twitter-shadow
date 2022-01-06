@@ -87,4 +87,5 @@ type TBasicAttributes = {
   className?: string;
   id?: string;
   style?: React.CSSProperties;
+  title?: string;
 };

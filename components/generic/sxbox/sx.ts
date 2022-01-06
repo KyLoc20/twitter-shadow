@@ -1,198 +1,165 @@
 import React from "react";
-import { transform, merge, ManyToOneStrategies } from "./utils";
+import { transform, ManyToOneStrategies } from "./utils";
+import { sxProps, TCSSProperties, TLengthValue } from "./types";
 export type { sxProps };
 export { parseLengthValue, parseSxToCSSProperties };
 
 const parseSxToCSSProperties = (sx: sxProps) => {
-  return transform<sxProps, TCSSProperties>(sx, CSS_PROPERTIES, RULES);
+  return transform<sxProps, TCSSProperties>(
+    sx,
+    CSS_PROPERTIES,
+    CSSPROPERTIES_PARSE_RULES
+  );
 };
-type sxProps = {
-  color?: string;
-  w?: TLengthValue;
-  h?: TLengthValue;
-  bg?: string; //background
-  m?: string; //margin
-  mt?: string; //margin-top
-  mr?: string; //margin-right
-  mb?: string; //margin-bottom
-  ml?: string; //margin-left
-  mx?: string; //margin-left&margin-right
-  my?: string; //margin-top&margin-bottom
-};
-type TCSSProperties = {
-  color?: string;
-  width?: string;
-  height?: string;
-  background?: string;
-  margin?: string;
-  marginTop?: string;
-  marginRight?: string;
-  marginBottom?: string;
-  marginLeft?: string;
-};
+//TODO tuple array
 const CSS_PROPERTIES: Array<keyof TCSSProperties> = [
-  "color",
+  "display",
+  "overflow",
+  "overflowX",
+  "overflowY",
+  "flex",
+  "flexBasis",
+  "flexDirection",
+  "flexGrow",
+  "flexShrink",
+  "flexWrap",
+  "justifyContent",
+  "alignContent",
+  "alignItems",
+  "background",
+  "backgroundSize",
+  "border",
+  "borderTop",
+  "borderRight",
+  "borderBottom",
+  "borderLeft",
+  "borderRadius",
+  "outline",
+  "opacity",
+  "visibility",
+  "boxShadow",
+  "cursor",
+  "userSelect",
+  "position",
+  "top",
+  "right",
+  "bottom",
+  "left",
+  "zIndex",
+  "transform",
+  "boxSizing",
   "width",
   "height",
-  "background",
+  "maxHeight",
+  "maxWidth",
+  "minHeight",
+  "minWidth",
   "margin",
   "marginTop",
   "marginRight",
   "marginBottom",
   "marginLeft",
+  "padding",
+  "paddingTop",
+  "paddingRight",
+  "paddingBottom",
+  "paddingLeft",
+  "color",
+  "caretColor",
+  "fontFamily",
+  "fontSize",
+  "fontWeight",
+  "letterSpacing",
+  "lineHeight",
+  "direction",
+  "textAlign",
+  "lineBreak",
+  "textOverflow",
+  "whiteSpace",
+  "wordBreak",
+  "wordSpacing",
+  "wordWrap",
+  "textDecoration",
+  "textTransform",
+  "transition",
 ];
-const RULES: ManyToOneStrategies<sxProps, TCSSProperties> = {
-  color: { fn: (props) => props.color },
-  width: { fn: (props) => parseLengthValue(props.w) },
-  height: { fn: (props) => parseLengthValue(props.h) },
-  background: { fn: (props) => props.bg },
-  margin: { fn: (props) => props.m },
-  marginTop: { fn: (props) => props.mt || props.my },
-  marginRight: { fn: (props) => props.mr || props.mx },
-  marginBottom: { fn: (props) => props.mb || props.my },
-  marginLeft: { fn: (props) => props.ml || props.mx },
-};
+const CSSPROPERTIES_PARSE_RULES: ManyToOneStrategies<sxProps, TCSSProperties> =
+  {
+    display: { fn: (props) => props.display },
+    overflow: { fn: (props) => props.overflow },
+    overflowX: { fn: (props) => props.overflowX },
+    overflowY: { fn: (props) => props.overflowY },
+    flex: { fn: (props) => props.flex },
+    flexBasis: { fn: (props) => props.flexBasis },
+    flexDirection: { fn: (props) => props.flexDirection },
+    flexGrow: { fn: (props) => props.flexGrow },
+    flexShrink: { fn: (props) => props.flexShrink },
+    flexWrap: { fn: (props) => props.flexWrap },
+    justifyContent: { fn: (props) => props.justifyContent || props.JC },
+    alignContent: { fn: (props) => props.alignContent },
+    alignItems: { fn: (props) => props.alignItems || props.AI },
+    background: { fn: (props) => props.bg },
+    backgroundSize: { fn: (props) => props.bgSize },
+    border: { fn: (props) => props.border },
+    borderTop: { fn: (props) => props.borderTop },
+    borderRight: { fn: (props) => props.borderRight },
+    borderBottom: { fn: (props) => props.borderBottom },
+    borderLeft: { fn: (props) => props.borderLeft },
+    borderRadius: { fn: (props) => parseLengthValue(props.borderRadius) },
+    outline: { fn: (props) => props.outline },
+    opacity: { fn: (props) => props.opacity },
+    visibility: { fn: (props) => props.visibility },
+    boxShadow: { fn: (props) => props.boxShadow },
+    cursor: { fn: (props) => props.cursor },
+    userSelect: { fn: (props) => props.userSelect },
 
-type sxProps1 = SpacingProps &
-  PaperProps &
-  SizingProps &
-  PositionProps &
-  TextProps &
-  DisplayProps &
-  FlexProps;
-type DisplayProps = {
-  display?: TDisplayValue;
-  overflow?: TOverflowValue;
-  visibility?: TVisibilityValue;
-};
-type FlexProps = {
-  flexDirection?: "row" | "column"; //flex-direction
-  flexWrap?: "wrap" | "nowrap"; //flex-wrap
-  JC?: TJustifyContentValue; //justify-content shortcut
-  justifyContent?: TJustifyContentValue; //justify-content
-  AI?: TAlignItemsValue; //align-items shortcut
-  alignItems?: TAlignItemsValue; //align-items
-  alignContent?: TAlignContentValue; //align-content
+    position: { fn: (props) => props.position },
+    top: { fn: (props) => parseLengthValue(props.top) },
+    right: { fn: (props) => parseLengthValue(props.right) },
+    bottom: { fn: (props) => parseLengthValue(props.bottom) },
+    left: { fn: (props) => parseLengthValue(props.left) },
+    zIndex: { fn: (props) => props.zIndex },
+    transform: { fn: (props) => props.transform },
 
-  flexGrow?: string; //flex-grow
-  flexShrink?: string; //flex-shrink
-  flexBasis?: string;
-  flex?: string; //flex
-};
-type PositionProps = {
-  position?: TPositionValue;
-  zIndex?: number; //z-index
-  top?: TLengthValue;
-  right?: TLengthValue;
-  bottom?: TLengthValue;
-  left?: TLengthValue;
-};
-type SizingProps = {
-  boxSizing?: TBoxSizingValue;
-  w?: TLengthValue;
-  h?: TLengthValue;
-  minWidth?: TLengthValue; //min-width
-  maxWidth?: TLengthValue; //max-width
-  minHeight?: TLengthValue; //min-height
-  maxHeight?: TLengthValue; //max-height
-};
-type SpacingProps = {
-  m?: string; //margin
-  mt?: string; //margin-top
-  mr?: string; //margin-right
-  mb?: string; //margin-bottom
-  ml?: string; //margin-left
-  mx?: string; //margin-left&margin-right
-  my?: string; //margin-top&margin-bottom
-  p?: string; //padding
-  pt?: string; //padding-top
-  pr?: string; //padding-right
-  pb?: string; //padding-bottom
-  pl?: string; //padding-left
-  px?: string; //padding-left&padding-right
-  py?: string; //padding-top&padding-bottom
-};
-type PaperProps = {
-  bg?: string; //background
-  bgSize?: string; //background-size
-  hoverBg?: string; //:hover background
-  border?: string; //border
-  borderTop?: string; //border-top
-  borderRight?: string; //border-right
-  borderBottom?: string; //border-bottom
-  borderLeft?: string; //border-left
-  borderRadius?: number | string; //border-radius
-  boxShadow?: string; //box-shadow
-  cursor?: TCursorValue;
-  userSelect?: TUserSelectValue;
-  transition?: string;
-};
-type TextProps = {
-  textAlign?: TTextAlignValue; //text-align
-  lineHeight?: TLengthValue; //line-height
-  fontSize?: TLengthValue; //font-size
-  fontWeight?: number; //font-weight
-  letterSpacing?: TLengthValue; //letter-spacing
-  textOverflow?: TTextOverflowValue; //text-overflow
-  textDecoration?: string; //text-decoration
-  whiteSpace?: TWhiteSpaceValue; //white-space
-  color?: string;
-  hoverColor?: string; //:hover color
-};
-type GridProps = {};
+    boxSizing: { fn: (props) => props.boxSizing },
+    width: { fn: (props) => parseLengthValue(props.w) },
+    height: { fn: (props) => parseLengthValue(props.h) },
+    maxHeight: { fn: (props) => parseLengthValue(props.maxHeight) },
+    maxWidth: { fn: (props) => parseLengthValue(props.maxWidth) },
+    minHeight: { fn: (props) => parseLengthValue(props.minHeight) },
+    minWidth: { fn: (props) => parseLengthValue(props.minWidth) },
 
-type TGlobalValue = "inherit" | "initial" | "revert" | "unset";
-type TJustifyContentValue =
-  | "flex-start"
-  | "center"
-  | "flex-end"
-  | "space-between"
-  | "space-evenly"
-  | "space-around";
-type TAlignItemsValue = "stretch" | "flex-start" | "center" | "flex-end";
-type TAlignContentValue =
-  | "stretch"
-  | "flex-start"
-  | "center"
-  | "flex-end"
-  | "space-between"
-  | "space-evenly"
-  | "space-around";
-type TDisplayValue =
-  | "block"
-  | "inline"
-  | "inline-block"
-  | "flex"
-  | "grid"
-  | "none"
-  | TGlobalValue;
-type TOverflowValue = "hidden" | "visible" | "auto" | "scroll" | TGlobalValue;
-type TVisibilityValue = "hidden" | "visible" | TGlobalValue;
-type TPositionValue =
-  | "relative"
-  | "absolute"
-  | "fixed"
-  | "sticky"
-  | TGlobalValue;
-type TBoxSizingValue = "border-box" | "content-box" | TGlobalValue;
-type TCursorValue = "default" | "pointer" | "text";
-type TUserSelectValue = "auto" | "none" | "text" | "all" | "contain";
-type TTextAlignValue =
-  | "left"
-  | "right"
-  | "center"
-  | "start"
-  | "end"
-  | "justify";
-type TTextOverflowValue = "ellipsis" | "clip";
-type TWhiteSpaceValue = "nowrap" | "normal" | "pre" | "pre-wrap" | "pre-line";
+    margin: { fn: (props) => props.m },
+    marginTop: { fn: (props) => props.mt || props.my },
+    marginRight: { fn: (props) => props.mr || props.mx },
+    marginBottom: { fn: (props) => props.mb || props.my },
+    marginLeft: { fn: (props) => props.ml || props.mx },
+    padding: { fn: (props) => props.p },
+    paddingTop: { fn: (props) => props.pt || props.py },
+    paddingRight: { fn: (props) => props.pr || props.px },
+    paddingBottom: { fn: (props) => props.pb || props.py },
+    paddingLeft: { fn: (props) => props.pl || props.px },
 
-//A LengthValue could be:
-//1. number between [0,1] -> percentage as string TODO
-//2. string with various units "1px" "200px" "75%" "3em" "20vw" "1.5" "inherit"-> direct style
-//3. number 100 200 -> parse number with "px"
-type TLengthValue = number | string;
+    color: { fn: (props) => props.color },
+    caretColor: { fn: (props) => props.caretColor },
+    fontFamily: { fn: (props) => props.fontFamily },
+    fontSize: { fn: (props) => parseLengthValue(props.fontSize) },
+    fontWeight: { fn: (props) => props.fontWeight },
+    letterSpacing: { fn: (props) => parseLengthValue(props.letterSpacing) },
+    lineHeight: { fn: (props) => parseLengthValue(props.lineHeight) },
+    direction: { fn: (props) => props.direction },
+    textAlign: { fn: (props) => props.textAlign },
+    lineBreak: { fn: (props) => props.lineBreak },
+    textOverflow: { fn: (props) => props.textOverflow },
+    whiteSpace: { fn: (props) => props.whiteSpace },
+    wordBreak: { fn: (props) => props.wordBreak },
+    wordSpacing: { fn: (props) => props.wordSpacing },
+    wordWrap: { fn: (props) => props.wordWrap },
+    textDecoration: { fn: (props) => props.textDecoration },
+    textTransform: { fn: (props) => props.textTransform },
 
+    transition: { fn: (props) => props.transition },
+  };
 const parseNumberWithPx = (v: number | undefined) =>
   v != null ? `${v}px` : undefined;
 const parseLengthValue = (
