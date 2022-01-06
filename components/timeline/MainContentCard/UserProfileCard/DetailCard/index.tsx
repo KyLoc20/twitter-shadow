@@ -11,6 +11,7 @@ import {
 import { sxProps } from "@/system/sx";
 import Icon from "@/components/generic/Icon";
 import { underConstruction } from "@/utils/helper";
+import { genBox } from "@/components/generic/sxbox";
 export default function UserDetailInfoCard() {
   return (
     <Component>

@@ -1,4 +1,5 @@
-import { sxProps, parseLengthValue } from "./sx";
+import { sxProps, parseLengthValue, parseSxToCSSProperties } from "./sx";
+import { merge } from "./utils";
 import { TBasicAttributes, TDOMAttributes } from "./attributes";
 export type { BoxProps };
 export { genInlineCSSStyles, genHTMLAttributes, Box };
@@ -7,19 +8,11 @@ type BoxProps = { sx?: sxProps } & sxProps &
   TBasicAttributes &
   TDOMAttributes<HTMLElement>;
 
-//priorities: props.sx > props
+//priorities: props(direct style) > props.sx
 const genInlineCSSStyles = (props: BoxProps): React.CSSProperties =>
   props.sx != null
-    ? {
-        background: props.sx.bg ?? props.bg,
-        width: parseLengthValue(props.sx.w ?? props.w),
-        height: parseLengthValue(props.sx.h ?? props.h),
-      }
-    : {
-        background: props.bg,
-        width: parseLengthValue(props.w),
-        height: parseLengthValue(props.h),
-      };
+    ? merge(parseSxToCSSProperties(props.sx), parseSxToCSSProperties(props))
+    : parseSxToCSSProperties(props);
 
 const genHTMLAttributes = (
   props: BoxProps
