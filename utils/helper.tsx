@@ -1,4 +1,10 @@
-export { pick, updateRef, customeDateFormatter, underConstruction };
+export {
+  pick,
+  updateRef,
+  customeDateFormatter,
+  customNumberFormatter,
+  underConstruction,
+};
 export type { Writable, Tolerant };
 //pick with helper
 const pick = <O extends { [key: string]: any }>(
@@ -40,6 +46,33 @@ type X<T extends number> = {
 };
 type X1 = X<1>;
 const x1: X1 = { type: 1, value: "x1" };
+//Number.toFixed(digits) float -> string
+const customNumberFormatter = (value: number, digits: number = 1) => {
+  //return a str decorated with a suffix whose value <= value
+  const v = Math.abs(value);
+  let str = value > 0 ? "" : "-";
+  let helper =
+    digits >= 1 && Number.isInteger(digits) ? Math.pow(10, digits) : 10;
+  if (v > 1000 * 1000 * 1000) {
+    str +=
+      v % (1000 * 1000 * 1000) === 0
+        ? `${v / (1000 * 1000 * 1000)}B`
+        : `${Math.floor((v / (1000 * 1000 * 1000)) * helper) / helper}B`;
+  } else if (v > 1000 * 1000) {
+    str +=
+      v % (1000 * 1000) === 0
+        ? `${v / (1000 * 1000)}M`
+        : `${Math.floor((v / (1000 * 1000)) * helper) / helper}M`;
+  } else if (v > 1000) {
+    str +=
+      v % 1000 === 0
+        ? `${v / 1000}K`
+        : `${Math.floor((v / 1000) * helper) / helper}K`;
+  } else {
+    str += `${v}`;
+  }
+  return str;
+};
 
 const customeDateFormatter = (date: Date) => {
   let now = Date.now();
