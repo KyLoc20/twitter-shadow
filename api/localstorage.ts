@@ -101,8 +101,18 @@ export default class LocalStorageManager {
       username,
       nickname: upperFirst(removePrefix(username)), //auto generated
       avatarUrl: "/avatars/newuser1.jpg",
+      coverUrl: "/covers/newuser.jpg",
       auth: {},
-      stats: {},
+      stats: {
+        location: "Earth",
+        link: "github.com/KyLoc20", //https://github.com/KyLoc20
+        whenJoined: "Just now",
+        biography: `Welcome to Twitter Shadow, ${upperFirst(
+          removePrefix(username)
+        )}`,
+        followings: 123456,
+        followers: 654321,
+      },
     };
     this.users.push(newUser);
     this.auth[username] = password;

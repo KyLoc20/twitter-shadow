@@ -11,28 +11,39 @@ import {
 import { sxProps } from "@/system/sx";
 import Icon, { TIconSVG } from "@/components/generic/Icon";
 import { underConstruction, customNumberFormatter } from "@/utils/helper";
-import { genBox } from "@/components/generic/sxbox";
-export default function UserDetailInfoCard() {
+import { User } from "@/stores/user";
+export default function UserDetailInfoCard(
+  props: PropsWithChildren<TUserDetailInfo>
+) {
+  const { username, nickname, avatarUrl } = props.user;
+  const { followers, followings, location, link, whenJoined, biography } =
+    props.user.stats;
   return (
     <Component>
       <Content>
         <UserInfoHeader>
-          <UserAvatar avatarUrl="/avatars/tourist1.jpg" />
+          <UserAvatar avatarUrl={avatarUrl} />
           <InteractionButtonGroup onSelect={() => underConstruction()} />
         </UserInfoHeader>
-        <Nickname>Tourist</Nickname>
-        <Username>@tourist</Username>
-        <Biography>
-          Author. Web Standards Godfather. Designer @Automattic . Founder &
+        <Nickname>{nickname}</Nickname>
+        <Username>{username}</Username>
+        {biography && (
+          <Biography>
+            {biography}
+            {/* Author. Web Standards Godfather. Designer @Automattic . Founder &
           Publisher @AListApart . Co-Founder/Host @AnEventApart . Publisher
-          @ABookApart . Ava’s dad. He/him.
-        </Biography>
-        <OtherInfo />
-        <Social></Social>
+          @ABookApart . Ava’s dad. He/him. */}
+          </Biography>
+        )}
+        <OtherInfo location={location} link={link} whenJoined={whenJoined} />
+        <Social followings={followings} followers={followers}></Social>
       </Content>
     </Component>
   );
 }
+type TUserDetailInfo = {
+  user: User;
+};
 type TUserInfoHeader = {};
 
 const Component = genCustomBox({}, { mb: "16px", flexBasis: "auto" });
@@ -164,25 +175,32 @@ const Biography = genText(HTMLTag.div, {
   letterSpacing: "normal",
   mb: "12px",
 });
-function OtherInfo() {
+function OtherInfo(props: TOtherInfo) {
+  const { location, link, whenJoined } = props;
+
   const Wrapper = genCustomBox({}, { mb: "12px", h: 20, AI: "center" });
   return (
     <Wrapper>
-      <OtherGadget icon={IconLocation} text={"California"} isLink={false} />
-      <OtherGadget icon={IconLink} text={"flowingdata.com"} isLink={true} />
-      <OtherGadget
-        icon={IconCalendar}
-        text={"Joined March 2008"}
-        isLink={false}
-      />
+      {location && (
+        <OtherGadget icon={IconLocation} text={`${location}`} isLink={false} />
+      )}
+      {link && <OtherGadget icon={IconLink} text={`${link}`} isLink={true} />}
+      {whenJoined && (
+        <OtherGadget
+          icon={IconCalendar}
+          text={`Joined ${whenJoined}`}
+          isLink={false}
+        />
+      )}
     </Wrapper>
   );
 }
-type TOtherGadget = {
-  icon: TIconSVG;
-  text: string;
-  isLink: boolean;
+type TOtherInfo = {
+  location?: string;
+  link?: string;
+  whenJoined?: string;
 };
+
 function OtherGadget(props: TOtherGadget) {
   const Component = genCustomBox(
     {},
@@ -203,25 +221,34 @@ function OtherGadget(props: TOtherGadget) {
     { hoverUnderlined: props.isLink ? true : false }
   );
   return (
-    <Component>
+    <Component
+      onClick={() => {
+        if (props.isLink) window.open(`https://${props.text}`);
+      }}
+    >
       <Icon svg={props.icon} sx={{ mr: "4px" }} />
       <Text>{props.text}</Text>
     </Component>
   );
 }
-function Social() {
+type TOtherGadget = {
+  icon: TIconSVG;
+  text: string;
+  isLink: boolean;
+};
+function Social(props: TSocial) {
   const Wrapper = genCustomBox({}, { h: 20, AI: "center" });
   return (
     <Wrapper>
       <SocialGadget
-        value={359}
+        value={props.followings}
         metaText={"Following"}
         onSelect={() => {
           underConstruction();
         }}
       />
       <SocialGadget
-        value={84776}
+        value={props.followers}
         metaText={"Followers"}
         onSelect={() => {
           underConstruction();
@@ -230,6 +257,10 @@ function Social() {
     </Wrapper>
   );
 }
+type TSocial = {
+  followings: number;
+  followers: number;
+};
 type TSocialGadget = {
   value: number;
   metaText: string;
@@ -253,7 +284,7 @@ function SocialGadget(props: TSocialGadget) {
     fontWeight: 700,
     lineHeight: 18,
     letterSpacing: "normal",
-    mr: "2px",
+    mr: "4px",
   });
   const MetaText = genText(HTMLTag.span, {
     color: "rgb(83, 100, 113)",

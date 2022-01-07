@@ -39,7 +39,7 @@ function UserMainContentCard(
       <Component>
         <Content>
           <TopBannerCard nickname={"Loading..."}></TopBannerCard>
-          <UserProfileCard />
+          {/* <UserProfileCard /> */}
           <TweetTabCard />
           <TweetStoreProvider>
             <TweetListCard username={props.username}></TweetListCard>
@@ -52,7 +52,7 @@ function UserMainContentCard(
       <Component>
         <Content>
           <TopBannerCard nickname={owner.nickname}></TopBannerCard>
-          <UserProfileCard />
+          <UserProfileCard user={owner} />
           <TweetTabCard />
           <TweetStoreProvider>
             <TweetListCard username={props.username}></TweetListCard>

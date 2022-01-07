@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { User, UserState } from "./model";
+import { User, UserState, Statistics } from "./model";
 import { UserActions, ActionTypes } from "./action";
 import { mainReducer } from "./reducer";
 import { getDefaultState } from "./data.test";
 import LocalSessionManager from "@/utils/session";
 //todo UserStoreProvider should be separated due to importing LocalSessionManager
 export { UserStore, UserStoreProvider, ActionTypes };
-export type { User, UserActions };
+export type { User, UserActions, Statistics };
 
 const UserStore = React.createContext<{
   state: UserState;

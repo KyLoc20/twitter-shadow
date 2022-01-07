@@ -75,6 +75,9 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
                     case "delete":
                       handleDeleteTweet(props.id);
                       break;
+                    case "pin":
+                      underConstruction();
+                      break;
                     default:
                       break;
                   }

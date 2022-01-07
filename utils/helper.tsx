@@ -7,6 +7,7 @@ export {
 };
 export type { Writable, Tolerant };
 //pick with helper
+//TODO its output doesn't work when props of the target component is "Required" not "Partial"
 const pick = <O extends { [key: string]: any }>(
   keys: readonly string[],
   obj: O
@@ -50,7 +51,7 @@ const x1: X1 = { type: 1, value: "x1" };
 const customNumberFormatter = (value: number, digits: number = 1) => {
   //return a str decorated with a suffix whose value <= value
   const v = Math.abs(value);
-  let str = value > 0 ? "" : "-";
+  let str = value >= 0 ? "" : "-";
   let helper =
     digits >= 1 && Number.isInteger(digits) ? Math.pow(10, digits) : 10;
   if (v > 1000 * 1000 * 1000) {
