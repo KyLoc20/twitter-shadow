@@ -1,58 +1,51 @@
-import * as React from "react";
+import React from "react";
 import styled from "@emotion/styled";
 import { genCustomText, HTMLTag, TextPreset } from "@/components/generic/Text";
 import { genBox, genCustomBox } from "@/components/generic/containers/Box";
 import { default as Icon, TIconSVG } from "@/components/generic/Icon";
-import { IconDelete, IconPin } from "./icons";
-type TMenuItem = {
-  name: string;
-  description: string;
-  icon: TIconSVG;
-};
-const MORE_MENU_ITEMS: TMenuItem[] = [
-  {
-    name: "delete",
-    description: "Delete",
-    icon: IconDelete,
-  },
-  {
-    name: "pin",
-    description: "Pin to your profile",
-    icon: IconPin,
-  },
-];
+import { IconDelete, IconPin, IconUpdate } from "./icons";
 export default function MoreMenu(
   props: React.PropsWithChildren<{
+    username: string; //the logged-in user
+    ownername: string; //the owner of the tweet's
     onSelect: (value: string) => void;
   }>
 ) {
+  const { username, ownername } = props;
   //todo [Stack] first and last El's border-radius
-  const itemsMenu = MORE_MENU_ITEMS.map((item) => (
-    <MenuItem
-      key={item.name}
-      onClick={() => {
-        props.onSelect(item.name);
-      }}
-    >
-      <Icon
-        svg={item.icon}
-        sx={{
-          mr: "12px",
-          w: 18.75,
-          h: 18.75,
-          color: item.name === "delete" ? "#f4212e" : undefined,
-        }}
-      />
-      {item.name === "delete" ? (
-        <MenuWarningText>{item.description}</MenuWarningText>
-      ) : (
-        <MenuText>{item.description}</MenuText>
-      )}
-    </MenuItem>
-  ));
   return (
     <Component>
-      <Content>{itemsMenu}</Content>
+      <Content>
+        {username === ownername && (
+          <MenuItem
+            name={"delete"}
+            description={"Delete"}
+            icon={IconDelete}
+            warning
+            onClick={() => {
+              props.onSelect("delete");
+            }}
+          />
+        )}
+        {username === ownername && (
+          <MenuItem
+            name={"update"}
+            description={"Modify this tweet"}
+            icon={IconUpdate}
+            onClick={() => {
+              props.onSelect("update");
+            }}
+          />
+        )}
+        <MenuItem
+          name={"pin"}
+          description={"Pin to your profile"}
+          icon={IconPin}
+          onClick={() => {
+            props.onSelect("pin");
+          }}
+        />
+      </Content>
     </Component>
   );
 }
@@ -73,19 +66,56 @@ const Content = genCustomBox(
     transition: "all 0.2s ease",
   }
 );
-const MenuItem = genCustomBox(
-  {
-    borderbox: true,
-  },
-  {
-    w: "100%",
-    h: 52,
-    p: "16px",
-    hoverBg: "rgb(247, 249, 249)",
-    cursor: "pointer",
-    color: "rgb(83, 100, 113)",
-  }
-);
+function MenuItem(props: React.PropsWithChildren<TMenuItem>) {
+  const Component = genCustomBox(
+    {
+      borderbox: true,
+    },
+    {
+      w: "100%",
+      p: "16px",
+      hoverBg: "rgb(247, 249, 249)",
+      cursor: "pointer",
+      color: "rgb(83, 100, 113)",
+    }
+  );
+  return (
+    <Component
+      onClick={(e) => {
+        props.onClick(e);
+      }}
+    >
+      <Icon
+        svg={props.icon}
+        sx={props.warning ? MENUITEM_ICON_WARNING_STYLE : MENUITEM_ICON_STYLE}
+      />
+      {props.warning ? (
+        <MenuWarningText>{props.description}</MenuWarningText>
+      ) : (
+        <MenuText>{props.description}</MenuText>
+      )}
+    </Component>
+  );
+}
+type TMenuItem = {
+  name: string;
+  description: string;
+  icon: TIconSVG;
+  warning?: boolean;
+  onClick: React.MouseEventHandler<HTMLElement>;
+};
+const MENUITEM_ICON_STYLE = {
+  mr: "12px",
+  w: 18.75,
+  h: 18.75,
+};
+const MENUITEM_ICON_WARNING_STYLE = {
+  mr: "12px",
+  w: 18.75,
+  h: 18.75,
+  color: "#f4212e",
+};
+
 const MenuText = genCustomText(HTMLTag.span, TextPreset.Content_default15, {
   w: "100%",
   lineHeight: 20,

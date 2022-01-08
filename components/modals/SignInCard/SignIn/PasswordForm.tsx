@@ -12,6 +12,7 @@ import { defineCustomButton, ButtonPreset } from "@/components/generic/Button";
 import { User } from "@/stores/user";
 import { Tolerant } from "@/utils/helper";
 import API from "@/api/index";
+import { underConstruction } from "@/utils/helper";
 export default function PasswordForm(
   props: React.PropsWithChildren<TPasswordForm>
 ) {
@@ -65,7 +66,13 @@ export default function PasswordForm(
             secretly
             onChange={handleInputPassword}
           />
-          <ForgotPasswordButton>Forget password?</ForgotPasswordButton>
+          <ForgotPasswordButton
+            onClick={() => {
+              underConstruction();
+            }}
+          >
+            Forget password?
+          </ForgotPasswordButton>
         </Password>
         <Spacing />
         <SubmitButton disabled={!isSubmitAvailable} onClick={handleLogin}>

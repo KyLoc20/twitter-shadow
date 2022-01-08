@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import styled from "@emotion/styled";
 
 type BaseProps = {
@@ -16,8 +16,8 @@ export function useClickable(
   color?: string,
   hoverColor?: string
 ) {
-  const renderClick = (props: BaseProps) => {
-    const [isHovering, setIsHovering] = React.useState(false);
+  const RenderClick = (props: BaseProps) => {
+    const [isHovering, setIsHovering] = React.useState<boolean>(false);
     const handleEnter = (e: React.MouseEvent) => {
       setIsHovering(true);
     };
@@ -40,5 +40,5 @@ export function useClickable(
       </Wrapper>
     );
   };
-  return [renderClick];
+  return [RenderClick];
 }

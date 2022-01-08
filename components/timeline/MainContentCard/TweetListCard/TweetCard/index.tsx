@@ -18,10 +18,14 @@ import UserInfo from "./UserInfo";
 import MoreMenu from "./MoreMenu";
 import API from "@/api/index";
 import { TweetStore, TweetActions, ActionTypes } from "@/stores/tweet";
+import { UserStore } from "@/stores/user";
 import { underConstruction } from "@/utils/helper";
 export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
-  const { state, dispatch } = React.useContext(TweetStore);
-  const user = props.user;
+  const { state: userState, dispatch: userDispatch } =
+    React.useContext(UserStore);
+  const { state: tweetState, dispatch: tweetDispatch } =
+    React.useContext(TweetStore);
+  const poster = props.user;
   const itemsInteraction = INTERACTIONS.map((item, index) => (
     <Interaction
       key={index}
@@ -43,18 +47,18 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
           id: tid,
         },
       };
-      dispatch(doDeleteTweet);
+      tweetDispatch(doDeleteTweet);
     });
   };
   const [isMoreMenuOpen, setMoreMenuOpen] = React.useState(false);
   return (
     <Component>
       <Content>
-        <Avatar url={user.avatarUrl} />
+        <Avatar url={poster.avatarUrl} />
         <MainWrapper>
           <UserInfo
-            nickname={user.nickname}
-            username={user.username}
+            nickname={poster.nickname}
+            username={poster.username}
             timestamp={props.timestamp}
             onClickMoreButton={() => {
               setMoreMenuOpen(true);
@@ -70,10 +74,15 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
               top="0"
             >
               <MoreMenu
+                username={userState.username}
+                ownername={poster.username}
                 onSelect={(value: string) => {
                   switch (value) {
                     case "delete":
                       handleDeleteTweet(props.id);
+                      break;
+                    case "update":
+                      underConstruction();
                       break;
                     case "pin":
                       underConstruction();

@@ -6,6 +6,7 @@ import { genCustomBox } from "@/components/generic/containers/Box";
 import { genCustomText, HTMLTag, TextPreset } from "@/components/generic/Text";
 import { defineCustomButton, ButtonPreset } from "@/components/generic/Button";
 import { Divider, IconGoogle, IconApple } from "./widgets";
+import { underConstruction } from "@/utils/helper";
 import API from "@/api/index";
 export default function UsernameForm(
   props: React.PropsWithChildren<TUsernameForm>
@@ -31,11 +32,19 @@ export default function UsernameForm(
     <Component>
       <Content>
         <Prompt>Sign in to Twitter</Prompt>
-        <SignInWithGoogleButton>
+        <SignInWithGoogleButton
+          onClick={() => {
+            underConstruction();
+          }}
+        >
           <Icon svg={IconGoogle} sx={{ mr: "4px" }} />
           Sign in with Google
         </SignInWithGoogleButton>
-        <SignInWithAppleButton>
+        <SignInWithAppleButton
+          onClick={() => {
+            underConstruction();
+          }}
+        >
           <Icon svg={IconApple} sx={{ mr: "4px" }} /> Sign in with Apple
         </SignInWithAppleButton>
         <Divider />
@@ -47,7 +56,13 @@ export default function UsernameForm(
           />
         </UsernameTextfield>
         <SubmitButton onClick={handleSubmitUsername}>Next</SubmitButton>
-        <ForgetPasswordButton>Forget password?</ForgetPasswordButton>
+        <ForgetPasswordButton
+          onClick={() => {
+            underConstruction();
+          }}
+        >
+          Forget password?
+        </ForgetPasswordButton>
       </Content>
     </Component>
   );
