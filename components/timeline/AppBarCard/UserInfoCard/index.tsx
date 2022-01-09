@@ -70,7 +70,7 @@ export default function UserInfoCard(
     <Component>
       <Ghost
         active={isMenuOpen}
-        onReadyClose={() => {
+        onOverlayTouched={() => {
           setMenuOpen(false);
         }}
         width="300px"

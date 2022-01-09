@@ -30,7 +30,6 @@ const Component = styled.section`
   min-height: 145px;
   padding: 0 16px;
   box-sizing: border-box;
-  border-bottom: 1px solid rgb(239, 243, 244);
 `;
 const genFlexBox = defineCustomBox();
 const Content = genFlexBox({

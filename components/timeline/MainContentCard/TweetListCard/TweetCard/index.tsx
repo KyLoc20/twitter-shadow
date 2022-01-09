@@ -20,6 +20,8 @@ import API from "@/api/index";
 import { TweetStore, TweetActions, ActionTypes } from "@/stores/tweet";
 import { UserStore } from "@/stores/user";
 import { underConstruction } from "@/utils/helper";
+import { useModal } from "@/hooks/Modal";
+import EditTweetCard from "@/components/modals/EditTweetCard";
 export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
   const { state: userState, dispatch: userDispatch } =
     React.useContext(UserStore);
@@ -40,7 +42,7 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
   ));
   const handleDeleteTweet = (tid: number) => {
     API.Tweet.deleteTweet(tid).then((tid) => {
-      setMoreMenuOpen(false);
+      // setMoreMenuOpen(false);
       const doDeleteTweet: TweetActions = {
         type: ActionTypes.Delete,
         payload: {
@@ -51,6 +53,22 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
     });
   };
   const [isMoreMenuOpen, setMoreMenuOpen] = React.useState(false);
+
+  const [showEditTweet, hideEditTweet, EditTweetModal] = useModal(
+    "edit-tweet-modal-container"
+  );
+  const handleOpenEditTweetModal = () => {
+    let scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.overflow = "hidden";
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    showEditTweet();
+  };
+  const handleCloseEditTweetModal = () => {
+    document.body.style.overflow = "auto";
+    document.body.style.paddingRight = "0";
+    hideEditTweet();
+  };
   return (
     <Component>
       <Content>
@@ -66,7 +84,7 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
           >
             <Ghost
               active={isMoreMenuOpen}
-              onReadyClose={() => {
+              onOverlayTouched={() => {
                 setMoreMenuOpen(false);
               }}
               width="300px"
@@ -82,7 +100,7 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
                       handleDeleteTweet(props.id);
                       break;
                     case "update":
-                      underConstruction();
+                      handleOpenEditTweetModal();
                       break;
                     case "pin":
                       underConstruction();
@@ -90,6 +108,7 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
                     default:
                       break;
                   }
+                  setMoreMenuOpen(false);
                 }}
               />
             </Ghost>
@@ -99,6 +118,9 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
           <InteractionWrapper>{itemsInteraction}</InteractionWrapper>
         </MainWrapper>
       </Content>
+      <EditTweetModal>
+        <EditTweetCard onClose={handleCloseEditTweetModal} />
+      </EditTweetModal>
     </Component>
   );
 }

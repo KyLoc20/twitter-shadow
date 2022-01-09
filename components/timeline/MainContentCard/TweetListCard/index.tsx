@@ -37,6 +37,7 @@ type TTweetListCard = {
 const Component = styled.section`
   margin-top: 4px;
   box-sizing: border-box;
+  border-top: 1px solid rgb(239, 243, 244);
 `;
 const Content = genCustomBox({
   vertical: true,

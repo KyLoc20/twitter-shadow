@@ -4,6 +4,7 @@ import { genCustomText, HTMLTag, TextPreset } from "@/components/generic/Text";
 import { genBox, genCustomBox } from "@/components/generic/containers/Box";
 import { default as Icon, TIconSVG } from "@/components/generic/Icon";
 import { IconDelete, IconPin, IconUpdate } from "./icons";
+
 export default function MoreMenu(
   props: React.PropsWithChildren<{
     username: string; //the logged-in user

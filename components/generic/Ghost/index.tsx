@@ -7,7 +7,7 @@ import {
 } from "@/components/generic/containers/Box";
 type GhostProps = {
   active: boolean;
-  onReadyClose: React.MouseEventHandler<HTMLDivElement>;
+  onOverlayTouched: React.MouseEventHandler<HTMLDivElement>;
   overlayColor?: string;
 } & TContainer;
 type TContainer = {
@@ -32,7 +32,7 @@ export default function Ghost(props: React.PropsWithChildren<GhostProps>) {
           className="ghost-overlay"
           color={props.overlayColor}
           onMouseDown={(e: React.MouseEvent<HTMLDivElement>) => {
-            props.onReadyClose(e);
+            props.onOverlayTouched(e);
           }}
         />
       )}

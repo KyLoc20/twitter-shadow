@@ -31,6 +31,7 @@ export default function UserTimelinePage(props: UserTimelinePageProps) {
         </Content>
         <SigninModal id="signin-modal-container" />
         <RegisterModal id="register-modal-container" />
+        <EditTweetModal id="edit-tweet-modal-container" />
       </UserStoreProvider>
     </Container>
   );
@@ -51,6 +52,7 @@ const Content = genCustomBox(
 );
 const SigninModal = styled.div``;
 const RegisterModal = styled.div``;
+const EditTweetModal = styled.div``;
 const removePrefix = (str: string) =>
   str.startsWith("@") ? str.slice(1) : str;
 const getUsername = (
