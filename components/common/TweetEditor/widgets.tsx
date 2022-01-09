@@ -4,13 +4,12 @@ import {
   genCustomBox,
   defineCustomBox,
 } from "@/components/generic/containers/Box";
-import { TextareaProps } from "@/components/generic/SimpleTextarea";
 import { genCustomText, HTMLTag, TextPreset } from "@/components/generic/Text";
 import { underConstruction } from "@/utils/helper";
 import { defineCustomButton, ButtonPreset } from "@/components/generic/Button";
 import Icon from "@/components/generic/Icon";
 import { sxProps } from "@/system/sx";
-export { Avatar, CUSTOM_TEXTAREA_STYLE, Tools, WhoCanReply };
+export { Avatar, Tools, WhoCanReply };
 
 function Avatar({ url }: TAvatar) {
   const Component = genFlexBox({
@@ -76,16 +75,6 @@ function WhoCanReply() {
 }
 const genFlexBox = defineCustomBox();
 const genButton24 = defineCustomButton(ButtonPreset.Navigation_primary24);
-const CUSTOM_TEXTAREA_STYLE: Omit<TextareaProps, "id"> = {
-  sx: {
-    p: "12px 0",
-  },
-  inputFontSize: "20px",
-  inputColor: "#0f1419",
-  inputLineHeight: "30px",
-  placeholderFontsize: "20px",
-  placeholderColor: "#536471",
-};
 const CUSTOM_ICON_STYLE: sxProps = {
   w: 36,
   h: 36,

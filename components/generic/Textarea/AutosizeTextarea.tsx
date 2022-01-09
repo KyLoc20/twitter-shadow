@@ -1,11 +1,70 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 import { createUnstyleComponent, sxProps, parseLengthValue } from "@/system/sx";
-import { pick, updateRef } from "@/utils/helper";
-export type TextareaProps = {
+import { pick } from "@/utils/helper";
+export type { TextareaProps };
+const AutosizeTextarea: React.ForwardRefRenderFunction<
+  HTMLTextAreaElement,
+  TextareaProps
+> = (props, libRef: React.Ref<HTMLTextAreaElement>) => {
+  React.useEffect(() => {
+    //THE FIRST TIME
+    const el = document.getElementById(props.id);
+    if (el != null) {
+      if (el.scrollHeight > MAX_HEIGHT) {
+        el.style.overflowY = "auto";
+        el.style.height = `${MAX_HEIGHT}px`;
+      } else {
+        el.style.overflowY = "hidden";
+        el.style.height = `${el.scrollHeight}px`;
+      }
+    }
+  }, []);
+
+  const { sx = {} } = props;
+  const handleChange = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    //EVERY TIME
+    const el = document.getElementById(props.id);
+    if (el) {
+      el.style.height = "auto"; //deleting rows doesn't cause to shrink if not
+      //TODO maxRows
+      if (el.scrollHeight > MAX_HEIGHT) {
+        el.style.overflowY = "auto";
+        el.style.height = `${MAX_HEIGHT}px`;
+      } else {
+        el.style.overflowY = "hidden";
+        el.style.height = `${el.scrollHeight}px`;
+      }
+    }
+  };
+  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {};
+  return (
+    <Component
+      {...pick(LOCAL_STYLE_PROPERTIES, props)}
+      {...sx}
+      htmlFor={props.id}
+    >
+      <textarea
+        id={props.id}
+        ref={libRef}
+        defaultValue={props.defaultValue}
+        rows={props.rows ?? DEFAULT_ROWS}
+        placeholder={props.placeholder}
+        onKeyUp={handleChange}
+        onChange={handleContentChange}
+      />
+    </Component>
+  );
+};
+export default React.forwardRef(AutosizeTextarea);
+const DEFAULT_ROWS = 1;
+const MAX_HEIGHT = 12 * 30; //12 rows
+type TextareaProps = {
   id: string;
+  defaultValue?: string;
   placeholder?: string;
   sx?: sxProps;
+  rows?: number;
 } & TextareaStyleProps;
 type TextareaStyleProps = {
   inputHeight?: string;
@@ -25,47 +84,6 @@ const LOCAL_STYLE_PROPERTIES = [
   "placeholderFontsize",
   "placeholderColor",
 ] as const;
-const DEFAULT_ROWS = 1;
-
-const AutosizeTextarea: React.ForwardRefRenderFunction<
-  HTMLTextAreaElement,
-  TextareaProps
-> = (props, libRef: React.Ref<HTMLTextAreaElement>) => {
-  const { sx = {} } = props;
-  const handleChange = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    const el = document.getElementById("test-textarea");
-    //initially overflow-y: hidden;
-    if (el) {
-      el.style.height = "auto";
-      el.style.height = el.scrollHeight + "px";
-      //showHeight(el.style.height);
-    }
-  };
-  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {};
-  let id = "test-textarea"; //props.id
-  React.useEffect(() => {
-    const el = document.getElementById("test-textarea");
-    //initially overflow-y: hidden;
-    //if (el) showHeight(el.scrollHeight);
-  }, []);
-  return (
-    <Component
-      {...pick(LOCAL_STYLE_PROPERTIES, props)}
-      {...sx}
-      htmlFor={props.id}
-    >
-      <textarea
-        id={id}
-        ref={libRef}
-        rows={DEFAULT_ROWS}
-        placeholder={props.placeholder}
-        onKeyUp={handleChange}
-        onChange={handleContentChange}
-      />
-    </Component>
-  );
-};
-export default React.forwardRef(AutosizeTextarea);
 const BasicTextarea = styled.label`
   display: flex;
   box-sizing: border-box;

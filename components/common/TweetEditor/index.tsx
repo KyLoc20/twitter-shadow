@@ -3,8 +3,8 @@ import styled from "@emotion/styled";
 import { defineCustomBox } from "@/components/generic/containers/Box";
 import { defineCustomButton, ButtonPreset } from "@/components/generic/Button";
 import { User } from "@/stores/user";
-import { Avatar, CUSTOM_TEXTAREA_STYLE, WhoCanReply, Tools } from "./widgets";
-import Textarea from "./AutosizeTextarea";
+import { Avatar, WhoCanReply, Tools } from "./widgets";
+import Textarea, { TextareaProps } from "@/components/generic/Textarea";
 export default forwardRef<HTMLTextAreaElement, TTweetEditor>(TweetEditor);
 function TweetEditor(
   props: PropsWithChildren<TTweetEditor>,
@@ -21,7 +21,7 @@ function TweetEditor(
             ref={ref}
             defaultValue={props.textareaDefaultValue}
             placeholder={props.textareaPlaceholder} // placeholder="What's happening?"
-            rows={3}
+            rows={props.textareaDefaultRows}
             {...CUSTOM_TEXTAREA_STYLE}
           />
           <WhoCanReply />
@@ -47,6 +47,7 @@ type TTweetEditor = {
   submitButtonMetaText: string;
   textareaId: string;
   textareaPlaceholder: string;
+  textareaDefaultRows?: number;
   textareaDefaultValue?: string;
 };
 const Component = styled.div`
@@ -69,3 +70,13 @@ const ControlPanel = genFlexBox({
 const SubmitButton = genButton36({
   wrapper: { w: 76, mt: "12px", ml: "12px" },
 });
+const CUSTOM_TEXTAREA_STYLE: Omit<TextareaProps, "id"> = {
+  sx: {
+    p: "12px 0",
+  },
+  inputFontSize: "20px",
+  inputColor: "#0f1419",
+  inputLineHeight: "30px",
+  placeholderFontsize: "20px",
+  placeholderColor: "#536471",
+};

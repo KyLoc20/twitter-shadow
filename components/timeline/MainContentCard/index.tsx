@@ -39,7 +39,6 @@ function UserMainContentCard(
       <Component>
         <Content>
           <TopBannerCard nickname={"Loading..."}></TopBannerCard>
-          {/* <UserProfileCard /> */}
           <TweetTabCard />
           <TweetStoreProvider>
             <TweetListCard username={props.username}></TweetListCard>
@@ -77,7 +76,7 @@ const Content = genCustomBox(
     vertical: true,
   },
   {
-    minHeight: "200vh",
+    minHeight: "100vh",
     position: "relative",
   }
 );

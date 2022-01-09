@@ -6,11 +6,7 @@ import { IconCross } from "./widgets";
 import Icon from "@/components/generic/Icon";
 import { sxProps } from "@/system/sx";
 import TweetEditor from "@/components/common/TweetEditor";
-import {
-  UserStore,
-  UserActions,
-  ActionTypes as UserActionTypes,
-} from "@/stores/user";
+import { UserStore } from "@/stores/user";
 import {
   TweetStore,
   TweetActions,
@@ -43,13 +39,13 @@ export default function ModalTweetEditorCard(
           user={userState}
           submitButtonMetaText="Done"
           textareaId="edit-tweet-textarea"
-          textareaDefaultValue={props.writtenContent} //`123\n456\n789\n`
+          textareaDefaultRows={3}
+          textareaDefaultValue={props.writtenContent}
           textareaPlaceholder="What's happening?"
           onSubmit={() => {
             const elTextarea = textareaRef.current;
             if (elTextarea == null || elTextarea.value === "") return;
             const content = elTextarea.value;
-            console.log("TweetEditor onSubmit", content);
             switch (props.variant) {
               case "Create":
                 const user: Poster = {

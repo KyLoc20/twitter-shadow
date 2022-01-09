@@ -1,40 +1,61 @@
-import * as React from "react";
+import { PropsWithChildren, useContext, useRef } from "react";
 import styled from "@emotion/styled";
-import { defineCustomBox } from "@/components/generic/containers/Box";
-import Editor from "./Editor";
+import TweetEditor from "@/components/common/TweetEditor";
 import { UserStore } from "@/stores/user";
+import {
+  TweetStore,
+  TweetActions,
+  ActionTypes as TweetActionTypes,
+  Poster,
+} from "@/stores/tweet";
+import API from "@/api/index";
 export default function TweetEditorCard(
-  props: React.PropsWithChildren<TweetEditorProps>
+  props: PropsWithChildren<TTweetEditor>
 ) {
-  const { state, dispatch } = React.useContext(UserStore);
-  const AvatarImage = genFlexBox({
-    w: 48,
-    h: 48,
-    borderRadius: "50%",
-    bg: `url(${state.avatarUrl})`,
-    bgSize: "contain",
-  });
+  const { state: userState, dispatch: userDispatch } = useContext(UserStore);
+  const { state: tweetState, dispatch: tweetDispatch } = useContext(TweetStore);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const handleCreateTweet = () => {
+    const elTextarea = textareaRef.current;
+    if (elTextarea == null || elTextarea.value === "") return;
+    const content = elTextarea.value;
+    const user: Poster = {
+      nickname: userState.nickname,
+      username: userState.username,
+      avatarUrl: userState.avatarUrl,
+    };
+    API.Tweet.postCreateTweet({ content, user }).then((tid) => {
+      const doCreateTweet: TweetActions = {
+        type: TweetActionTypes.Create,
+        payload: _genTweetInstance(tid, content, user),
+      };
+      tweetDispatch(doCreateTweet);
+      elTextarea.value = "";
+    });
+  };
   return (
-    <Component>
-      <Content>
-        <Avatar>
-          <AvatarImage />
-        </Avatar>
-        <Editor />
-      </Content>
-    </Component>
+    <TweetEditor
+      ref={textareaRef}
+      user={userState}
+      submitButtonMetaText="Tweet"
+      textareaId="main-tweet-editor-textarea"
+      textareaPlaceholder="What's happening?"
+      onSubmit={handleCreateTweet}
+    />
   );
 }
-type TweetEditorProps = {};
-const Component = styled.section`
-  min-height: 145px;
-  padding: 0 16px;
-  box-sizing: border-box;
-`;
-const genFlexBox = defineCustomBox();
-const Content = genFlexBox({
-  p: "8px 0",
-});
-const Avatar = genFlexBox({
-  mr: "12px",
+type TTweetEditor = {};
+const _genTweetInstance = (
+  tid: number,
+  content: string,
+  user: Poster,
+  timestamp: Date = new Date()
+) => ({
+  id: tid,
+  content,
+  user,
+  timestamp,
+  replies: 1,
+  likes: 2,
+  retweets: 3,
 });
