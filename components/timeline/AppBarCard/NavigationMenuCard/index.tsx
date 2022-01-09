@@ -1,40 +1,96 @@
-import * as React from "react";
+import { PropsWithChildren, useContext } from "react";
 import styled from "@emotion/styled";
 import { genCustomBox } from "@/components/generic/containers/Box";
-import { genCustomText, HTMLTag, TextPreset } from "@/components/generic/Text";
 import { defineCustomButton, ButtonPreset } from "@/components/generic/Button";
-import Icon from "@/components/generic/Icon";
-import { NAVIGATION_ITEMS, Logo } from "./widgets";
+import { Navigation, Logo } from "./widgets";
 import { useRouter } from "next/router";
 import { underConstruction } from "@/utils/helper";
+import {
+  IconHome,
+  IconExplore,
+  IconNotifications,
+  IconMessages,
+  IconBookmarks,
+  IconLists,
+  IconProfile,
+  IconMore,
+} from "./icons";
+import { UserStore } from "@/stores/user";
 export default function NavigationMenuCard(
-  props: React.PropsWithChildren<NavigationMenuCardProps>
+  props: PropsWithChildren<TNavigationMenuCard>
 ) {
   const router = useRouter();
+  const { state, dispatch } = useContext(UserStore);
   const handleGotoHomeTimelinePage = () => {
     router.push("/home");
   };
-  const itemsNavigationMenu = NAVIGATION_ITEMS.map((item) => (
-    <Navigation
-      key={item.name}
-      onClick={
-        item.name === "Home"
-          ? handleGotoHomeTimelinePage
-          : () => underConstruction()
-      }
-    >
-      <Icon svg={item.icon} />
-      <NavigationText>{item.name}</NavigationText>
-    </Navigation>
-  ));
+  const handleGotoUserTimelinePage = () => {
+    router.push(`/${state.username}`);
+  };
   return (
     <Component>
       <Logo></Logo>
-      {itemsNavigationMenu}
+      <Navigation
+        name={"Home"}
+        icon={IconHome}
+        onSelect={() => {
+          handleGotoHomeTimelinePage();
+        }}
+      />
+      <Navigation
+        name={"Explore"}
+        icon={IconExplore}
+        onSelect={() => {
+          underConstruction();
+        }}
+      />
+      <Navigation
+        name={"Notifications"}
+        icon={IconNotifications}
+        onSelect={() => {
+          underConstruction();
+        }}
+      />
+      <Navigation
+        name={"Messages"}
+        icon={IconMessages}
+        onSelect={() => {
+          underConstruction();
+        }}
+      />
+      <Navigation
+        name={"Bookmarks"}
+        icon={IconBookmarks}
+        onSelect={() => {
+          underConstruction();
+        }}
+      />
+      <Navigation
+        name={"Lists"}
+        icon={IconLists}
+        onSelect={() => {
+          underConstruction();
+        }}
+      />
+      <Navigation
+        name={"Profile"}
+        icon={IconProfile}
+        onSelect={() => {
+          handleGotoUserTimelinePage();
+        }}
+      />
+      <Navigation
+        name={"More"}
+        icon={IconMore}
+        onSelect={() => {
+          underConstruction();
+        }}
+      />
       <TweetButton onClick={() => underConstruction()}>Tweet</TweetButton>
     </Component>
   );
 }
+type TNavigationMenuCard = {};
 const Component = genCustomBox(
   {
     vertical: true,
@@ -46,19 +102,7 @@ const Component = genCustomBox(
     AI: "flex-start",
   }
 );
-type NavigationMenuCardProps = {};
 const genButton50Primary = defineCustomButton(
   ButtonPreset.Navigation_primary50
 );
-const genButton50 = defineCustomButton(ButtonPreset.Navigation_default50);
 const TweetButton = genButton50Primary({ wrapper: { my: "12px" } });
-const Navigation = genButton50();
-const NavigationText = genCustomText(
-  HTMLTag.span,
-  TextPreset.Navigation_default20,
-  {
-    lineHeight: 24,
-    ml: "20px",
-    mr: "16px",
-  }
-);
