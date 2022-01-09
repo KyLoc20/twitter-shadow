@@ -15,10 +15,8 @@ function HomeMainContentCard(props: React.PropsWithChildren<{}>) {
     <Component>
       <Content>
         <TopBannerCard></TopBannerCard>
-        <TweetStoreProvider>
-          <TweetEditorCard></TweetEditorCard>
-          <TweetListCard></TweetListCard>
-        </TweetStoreProvider>
+        <TweetEditorCard></TweetEditorCard>
+        <TweetListCard></TweetListCard>
       </Content>
     </Component>
   );
@@ -40,9 +38,7 @@ function UserMainContentCard(
         <Content>
           <TopBannerCard nickname={"Loading..."}></TopBannerCard>
           <TweetTabCard />
-          <TweetStoreProvider>
-            <TweetListCard username={props.username}></TweetListCard>
-          </TweetStoreProvider>
+          <TweetListCard username={props.username}></TweetListCard>
         </Content>
       </Component>
     );
@@ -53,9 +49,7 @@ function UserMainContentCard(
           <TopBannerCard nickname={owner.nickname}></TopBannerCard>
           <UserProfileCard user={owner} />
           <TweetTabCard />
-          <TweetStoreProvider>
-            <TweetListCard username={props.username}></TweetListCard>
-          </TweetStoreProvider>
+          <TweetListCard username={props.username}></TweetListCard>
         </Content>
       </Component>
     );

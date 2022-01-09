@@ -14,6 +14,7 @@ export { Avatar, Tools, WhoCanReply };
 function Avatar({ url }: TAvatar) {
   const Component = genFlexBox({
     mr: "12px",
+    pt: "4px",
     w: 48,
     h: 48,
     borderRadius: "50%",

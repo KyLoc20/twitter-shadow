@@ -55,8 +55,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - AppBar
 
   - [x] appears in leftside of the home page(/home) and the user page(/{username})
-  - [ ] users can post a tweet quickly by clicking the _Tweet_ Button
+  - [x] users can post a tweet quickly by clicking the _Tweet_ Button
   - [x] users can go to the home page(/) by clicking the _Home_ Navigation Button
-  - [ ] users can go to her/his timeline page(/{username}) by clicking the _Profile_ Navigation Button
+  - [x] users can go to her/his timeline page(/{username}) by clicking the _Profile_ Navigation Button
 
 - Tweets in the detail page

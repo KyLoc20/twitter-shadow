@@ -60,9 +60,10 @@ const genButton36 = defineCustomButton(ButtonPreset.Navigation_primary36);
 const genVerticalBox = defineCustomBox({ vertical: true });
 const Content = genFlexBox({
   py: "8px",
+  AI: "flex-start",
 });
 const Editor = genVerticalBox({
-  w: "100%",
+  flexGrow: "1",
 });
 const ControlPanel = genFlexBox({
   JC: "space-between",

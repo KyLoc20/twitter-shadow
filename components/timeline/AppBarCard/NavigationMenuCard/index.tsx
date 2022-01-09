@@ -16,11 +16,28 @@ import {
   IconMore,
 } from "./icons";
 import { UserStore } from "@/stores/user";
+import { useModal } from "@/hooks/Modal";
+import EditTweetCard from "@/components/modals/EditTweetCard";
 export default function NavigationMenuCard(
   props: PropsWithChildren<TNavigationMenuCard>
 ) {
   const router = useRouter();
   const { state, dispatch } = useContext(UserStore);
+  const [showEditTweet, hideEditTweet, EditTweetModal] = useModal(
+    "edit-tweet-modal-container"
+  );
+  const handleOpenEditTweetModal = () => {
+    let scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.overflow = "hidden";
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    showEditTweet();
+  };
+  const handleCloseEditTweetModal = () => {
+    document.body.style.overflow = "auto";
+    document.body.style.paddingRight = "0";
+    hideEditTweet();
+  };
   const handleGotoHomeTimelinePage = () => {
     router.push("/home");
   };
@@ -86,7 +103,12 @@ export default function NavigationMenuCard(
           underConstruction();
         }}
       />
-      <TweetButton onClick={() => underConstruction()}>Tweet</TweetButton>
+      <TweetButton onClick={() => handleOpenEditTweetModal()}>
+        Tweet
+      </TweetButton>
+      <EditTweetModal>
+        <EditTweetCard onClose={handleCloseEditTweetModal} variant="Create" />
+      </EditTweetModal>
     </Component>
   );
 }
@@ -105,4 +127,12 @@ const Component = genCustomBox(
 const genButton50Primary = defineCustomButton(
   ButtonPreset.Navigation_primary50
 );
-const TweetButton = genButton50Primary({ wrapper: { my: "12px" } });
+const TweetButton = genButton50Primary({
+  wrapper: { my: "12px" },
+  inner: {
+    letterSpacing: "normal",
+    fontSize: 17,
+    lineHeight: 20,
+    fontWeight: 700,
+  },
+});

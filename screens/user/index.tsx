@@ -6,6 +6,7 @@ import { default as RightAsideContent } from "@/components/timeline/AsideContent
 import React from "react";
 import { genCustomBox } from "@/components/generic/containers/Box";
 import { UserStoreProvider } from "@/stores/user";
+import { TweetStoreProvider } from "@/stores/tweet";
 import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 export default function UserTimelinePage(props: UserTimelinePageProps) {
@@ -24,14 +25,16 @@ export default function UserTimelinePage(props: UserTimelinePageProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <UserStoreProvider>
-        <Content>
-          <LeftAppBar />
-          <UserMainContent username={ownername} />
-          <RightAsideContent />
-        </Content>
-        <SigninModal id="signin-modal-container" />
-        <RegisterModal id="register-modal-container" />
-        <EditTweetModal id="edit-tweet-modal-container" />
+        <TweetStoreProvider>
+          <Content>
+            <LeftAppBar />
+            <UserMainContent username={ownername} />
+            <RightAsideContent />
+          </Content>
+          <SigninModal id="signin-modal-container" />
+          <RegisterModal id="register-modal-container" />
+          <EditTweetModal id="edit-tweet-modal-container" />
+        </TweetStoreProvider>
       </UserStoreProvider>
     </Container>
   );
