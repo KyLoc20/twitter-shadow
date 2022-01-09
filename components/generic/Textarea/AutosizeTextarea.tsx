@@ -19,7 +19,7 @@ const AutosizeTextarea: React.ForwardRefRenderFunction<
         el.style.height = `${el.scrollHeight}px`;
       }
     }
-  }, []);
+  }, [props.id]);
 
   const { sx = {} } = props;
   const handleChange = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
