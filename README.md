@@ -30,7 +30,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 - Timeline Page
 
-  - [x] include the home page(/home) and the user page(/{username}),
+  - [x] includes the home page(/home) and the user page(/{username}),
         the home page displays all the tweets, the user page displays only the tweets of the user
   - [x] redirect the index page(/) to the home page(/home)
 

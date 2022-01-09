@@ -4,7 +4,7 @@ const UserTourist: User = {
   nickname: "Tourist",
   username: "@tourist",
   avatarUrl: "/avatars/tourist1.jpg",
-  coverUrl: "/covers/@elonmusk.jfif",
+  coverUrl: "/covers/tourist.jfif",
   auth: {},
   stats: {
     location: "Earth",
