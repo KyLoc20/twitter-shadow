@@ -4,7 +4,7 @@ import { defineCustomBox } from "@/components/generic/containers/Box";
 import { defineCustomButton, ButtonPreset } from "@/components/generic/Button";
 import { User } from "@/stores/user";
 import { Avatar, CUSTOM_TEXTAREA_STYLE, WhoCanReply, Tools } from "./widgets";
-import Textarea from "./SimpleTextarea";
+import Textarea from "./AutosizeTextarea";
 export default forwardRef<HTMLTextAreaElement, TTweetEditor>(TweetEditor);
 function TweetEditor(
   props: PropsWithChildren<TTweetEditor>,
@@ -19,7 +19,9 @@ function TweetEditor(
           <Textarea
             id={props.textareaId} // id="tweet-input"
             ref={ref}
+            defaultValue={props.textareaDefaultValue}
             placeholder={props.textareaPlaceholder} // placeholder="What's happening?"
+            rows={3}
             {...CUSTOM_TEXTAREA_STYLE}
           />
           <WhoCanReply />
@@ -45,6 +47,7 @@ type TTweetEditor = {
   submitButtonMetaText: string;
   textareaId: string;
   textareaPlaceholder: string;
+  textareaDefaultValue?: string;
 };
 const Component = styled.div`
   min-height: 145px;

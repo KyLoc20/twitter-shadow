@@ -40,6 +40,7 @@ export default function ModalTweetEditorCard(
           user={userState}
           submitButtonMetaText="Done"
           textareaId="edit-tweet-textarea"
+          textareaDefaultValue={`123\n456\n789\n`}
           textareaPlaceholder="What's happening?"
           onSubmit={() => {
             const elTextarea = textareaRef.current;
