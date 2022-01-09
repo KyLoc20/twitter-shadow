@@ -48,7 +48,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
   - [x] each tweet owns a unique incremental integer ID
   - [x] users can post text tweets
   - [x] tweets are in a descending order
-  - [ ] tweets can be edited only by the posters
+  - [x] tweets can be edited only by the posters
   - [x] tweets can be deleted only by the posters
   - [ ] transfer to the detail page(/tweet/{tweet ID}) after clicking a tweet
 

@@ -16,7 +16,12 @@ export default function EditTweetCard(
   };
   return (
     <Container onClick={handleOverlayTouchedShutdown}>
-      <EditorCard onClose={handleShutdown} />
+      <EditorCard
+        variant={props.variant}
+        writtenContent={props.writtenContent}
+        writtenTweetId={props.writtenTweetId}
+        onClose={handleShutdown}
+      />
     </Container>
   );
 }
@@ -35,4 +40,7 @@ const Container = styled.div`
 
 type TEditTweetCard = {
   onClose: Function;
+  variant: "Create" | "Update";
+  writtenContent?: string; //for Update
+  writtenTweetId?: number; //for Update
 };

@@ -67,9 +67,13 @@ export default class LocalStorageManager {
   }
   updateTweet(tweet: TTweet) {
     let index = this._searchTweet(tweet.id);
-    if (index >= 0) this.tweets.splice(index, 1, tweet);
-    else this.tweets.push(tweet);
-    return true;
+    let updatedTweet: TTweet = tweet;
+    if (index >= 0) {
+      //update the content only
+      updatedTweet = { ...this.tweets[index], content: tweet.content };
+      this.tweets.splice(index, 1, updatedTweet);
+    } else this.tweets.push(tweet);
+    return updatedTweet;
   }
   checkUsernameExisting(username: string) {
     return this.users.some((user) => user.username.trim() === username.trim());

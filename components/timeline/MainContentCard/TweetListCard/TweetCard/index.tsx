@@ -119,7 +119,12 @@ export default function TweetCard(props: React.PropsWithChildren<TTweetCard>) {
         </MainWrapper>
       </Content>
       <EditTweetModal>
-        <EditTweetCard onClose={handleCloseEditTweetModal} />
+        <EditTweetCard
+          onClose={handleCloseEditTweetModal}
+          variant="Update"
+          writtenContent={props.content}
+          writtenTweetId={props.id}
+        />
       </EditTweetModal>
     </Component>
   );

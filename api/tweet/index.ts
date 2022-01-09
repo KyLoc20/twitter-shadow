@@ -32,13 +32,13 @@ const deleteTweet = mockAPI<(tid: number) => number>((tid: number) => {
   lsm.save();
   return tid;
 });
-const postUpdateTweet = mockAPI<(tweet: TUpdateTweet) => number>(
+const postUpdateTweet = mockAPI<(tweet: TUpdateTweet) => TTweet>(
   (tweet: TUpdateTweet) => {
     const lsm = new LocalStorageManager();
     let { id, content, user } = tweet;
-    lsm.updateTweet(_genTweet(id, content, user));
+    let updatedTweet = lsm.updateTweet(_genTweet(id, content, user));
     lsm.save();
-    return id;
+    return updatedTweet;
   }
 );
 const _genTweet = (id: number, content: string, user: Poster): TTweet => ({
