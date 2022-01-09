@@ -37,7 +37,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Register & Login & Logout
 
   - [x] unique username password without security
-  - [x] as options in the left AppBar of timeline pages(/)(/{username})
+  - [x] as options in the left-side AppBar of timeline pages(/)(/{username})
   - [x] start with the home page(/) of a user named @tourist if a user hasn't logged in
   - [x] keep the logged-in status in local session after a user successfully registers or logs in
   - [x] transfer to her/his timeline page(/{username}) after a user successfully registers or logs in
@@ -51,5 +51,12 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
   - [x] tweets can be edited only by the posters
   - [x] tweets can be deleted only by the posters
   - [ ] transfer to the detail page(/tweet/{tweet ID}) after clicking a tweet
+
+- AppBar
+
+  - [x] appears in leftside of the home page(/home) and the user page(/{username})
+  - [ ] users can post a tweet quickly by clicking the _Tweet_ Button
+  - [x] users can go to the home page(/) by clicking the _Home_ Navigation Button
+  - [ ] users can go to her/his timeline page(/{username}) by clicking the _Profile_ Navigation Button
 
 - Tweets in the detail page
