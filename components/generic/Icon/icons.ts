@@ -1,4 +1,4 @@
-import { SVGProps } from "../SVG";
+import { SVGProps } from "@/components/generic/SVG";
 const all = (): { [name: string]: SVGProps } => ({
   //todo default IconProps wanted
   unknown: IconMore,

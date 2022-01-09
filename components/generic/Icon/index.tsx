@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { default as SVG, SVGProps } from "../SVG";
+import { default as SVG, SVGProps } from "@/components/generic/SVG";
 import { getIconFromLocal } from "./icons";
 import * as React from "react";
 import { createUnstyleComponent, sxProps, parseLengthValue } from "@/system/sx";

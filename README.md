@@ -60,3 +60,65 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
   - [x] users can go to her/his timeline page(/{username}) by clicking the _Profile_ Navigation Button
 
 - Tweets in the detail page
+
+## How I Made it
+
+This little project is basically out of these principles:
+
+- _Readable Code Comes 1st_
+- _Reusable Code Comes 2nd_
+- _A UI Library Helps to Reduce the Mental Burden and the Possibility of Making Mistakes_
+
+Now let's look through the practices of above principles.
+
+### Component, Component, Component
+
+Component = Props => UI
+
+Here are 3 types of Components in the project.
+
+| Type              | Role                   | Dependencies                   |
+| ----------------- | ---------------------- | ------------------------------ |
+| Generic Component | Atom utility           | none / other Generic Component |
+| Common Component  | Reusable business      | Generic Component              |
+| Page Component    | Usual business, Chores | Generic & Common Component     |
+
+#### Generic Component
+
+As the most atomic Components, Generic Components serve as the reinforcement from UI lib ([Thoughts about building my own UI lib](TODO)).
+
+You can find them in [@/components/generic](TODO) and [@/ui]().
+
+#### Common Component
+
+As the reusable business Components, Common Component are _dumb_ waiting to receive props.
+
+They have nothing to do with State or Store in spite of containing a fair amount of reusable business logic.
+
+---
+
+**NOTE**
+
+Why some dumb Components are not called Common Components
+
+Some dumb Components are so simple to be written that they serve as _Widgwets_ around their parent Components Like [Avatar]().
+
+Some Components are too specific in business to be reused across the Pages like [PasswordForm]().
+
+---
+
+You can use Common Components safely and update State or Store in their parent Components.
+
+You can find them in [@/components/common](TODO).
+
+#### Page Component
+
+As the logic elements of Pages, Page Components are _"people"_ of the Page _"nation"_.
+
+They are everywhere and serve as all kinds of jobs.
+
+You can find them in [@/components/common](TODO).
+
+---
+
+### Component Babysitter
