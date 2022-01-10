@@ -1,6 +1,9 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { defineCustomBox } from "@/components/generic/containers/Box";
+import Box, {
+  defineCustomBox,
+  genCustomBox,
+} from "@/components/generic/containers/Box";
 import { Tweet } from "@/stores/tweet";
 import { sxProps } from "@/system/sx";
 export type { TTweetCard };
@@ -9,6 +12,97 @@ const genFlexBox = defineCustomBox();
 type TTweetCard = {
   share?: number;
 } & Tweet;
+function SimpleAvatar(props: { url: string }) {
+  return (
+    <div
+      style={{
+        marginRight: "12px",
+        width: "48px",
+        height: "48px",
+        borderRadius: "50%",
+        background: `no-repeat url(${props.url})`,
+        backgroundSize: "contain",
+      }}
+    ></div>
+  );
+}
+type TSweetAvatar = {
+  url: string;
+  m?: string; //margin
+  w?: number; //width
+  h?: number; //height
+};
+function SweetAvatar(props: TSweetAvatar) {
+  return (
+    <div
+      style={{
+        margin: props.m,
+        width: props.w ? `${props.w}px` : "48px",
+        height: props.h ? `${props.h}px` : "48px",
+        borderRadius: "50%",
+        background: `no-repeat url(${props.url})`,
+        backgroundSize: "contain",
+      }}
+    ></div>
+  );
+}
+//require a larger width and height
+const LargerAvatarCase = () => (
+  <SweetAvatar url="xxx" m="0 12px 0 0" w={64} h={64}></SweetAvatar>
+);
+
+const LargerAvatarUsingBoxCase = () => (
+  <Box
+    m="0 12px 0 0"
+    w={64}
+    h={64}
+    borderRadius={"50%"}
+    bg="no-repeat url(xxx)"
+    bgSize="contain"
+  ></Box>
+);
+
+const AvatarUsingCustomBoxCase = () => {
+  const Wrapper = genCustomBox({ vertical: true }, {});
+  const MyAvatar = genCustomBox(
+    { noFlex: true },
+    {
+      w: 48,
+      h: 48,
+      p: "2px", //padding
+      borderRadius: "50%",
+      bg: `no-repeat url(xxx)`,
+      bgSize: "contain",
+    }
+  );
+  return (
+    <Wrapper>
+      <MyAvatar />
+      <MyAvatar />
+      <MyAvatar />
+    </Wrapper>
+  );
+};
+
+const AvatarUsingDefinedBoxCase = () => {
+  const genBlockBox = defineCustomBox({ noFlex: true });
+  const Wrapper = genBlockBox();
+  const MyAvatar = genBlockBox({
+    w: 48,
+    h: 48,
+    p: "2px", //padding
+    borderRadius: "50%",
+    bg: `no-repeat url(xxx)`,
+    bgSize: "contain",
+  });
+  return (
+    <Wrapper>
+      <MyAvatar />
+      <MyAvatar />
+      <MyAvatar />
+    </Wrapper>
+  );
+};
 
 function Avatar(props: React.PropsWithChildren<{ url: string }>) {
   const Wrapper = genFlexBox({ mr: "12px" });
