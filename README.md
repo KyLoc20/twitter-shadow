@@ -139,13 +139,13 @@ They have nothing to do with State or Store in spite of containing a fair amount
 > **_NOTE:_**  
 > Why some dumb Components are not called Common Components?
 >
-> Some dumb Components are so simple to be written that they serve as _Widgwets_ around their parent Components Like [Avatar]().
+> Some dumb Components are so simple to be written that they serve as _Widgwets_ around their parent Components Like [Avatar](https://github.com/KyLoc20/twitter-shadow/blob/master/components/common/TweetEditor/widgets.tsx).
 >
-> Some Components are too specific in business to be reused across the Pages like [PasswordForm]().
+> Some Components are too specific in business to be reused across the Pages like [PasswordForm](https://github.com/KyLoc20/twitter-shadow/blob/master/components/modals/SignInCard/SignIn/PasswordForm.tsx).
 
 You can use Common Components safely and update State or Store in their parent Components.
 
-You can find them in [@/components/common](TODO).
+You can find them in [@/components/common](https://github.com/KyLoc20/twitter-shadow/tree/master/components/common).
 
 Take the Component [TweetEditor](https://github.com/KyLoc20/twitter-shadow/blob/master/components/common/TweetEditor/index.tsx) for example.
 
@@ -203,7 +203,7 @@ TweetEditor when updating tweets:
 
 What does [TweetEditor](https://github.com/KyLoc20/twitter-shadow/blob/master/components/common/TweetEditor/index.tsx) do?
 
-- It is a large compound Component which combines Page Components including [Avatar](https://github.com/KyLoc20/twitter-shadow/blob/master/components/common/TweetEditor/widgets.tsx) [Tools](https://github.com/KyLoc20/twitter-shadow/blob/master/components/common/TweetEditor/widgets.tsx) and Generic Components including [AutosizeTextarea](https://github.com/KyLoc20/twitter-shadow/blob/master/components/generic/Textarea/AutosizeTextarea.tsx) and [Button](https://github.com/KyLoc20/twitter-shadow/blob/master/components/generic/Button/index.tsx).
+- It is a large compound Component which combines Page Components including [Avatar](https://github.com/KyLoc20/twitter-shadow/blob/master/components/common/TweetEditor/widgets.tsx) and [Tools](https://github.com/KyLoc20/twitter-shadow/blob/master/components/common/TweetEditor/widgets.tsx) and Generic Components including [AutosizeTextarea](https://github.com/KyLoc20/twitter-shadow/blob/master/components/generic/Textarea/AutosizeTextarea.tsx) and [Button](https://github.com/KyLoc20/twitter-shadow/blob/master/components/generic/Button/index.tsx).
 - It is reusable across the Big Page Components [TweetEditorCard](https://github.com/KyLoc20/twitter-shadow/blob/master/components/timeline/MainContentCard/TweetEditorCard/index.tsx) from [timeline](https://github.com/KyLoc20/twitter-shadow/tree/master/components/timeline) which allows to write tweets in Timeline Page and [EditorCard](https://github.com/KyLoc20/twitter-shadow/blob/master/components/modals/EditTweetCard/EditorCard/index.tsx) from [modals](https://github.com/KyLoc20/twitter-shadow/tree/master/components/modals/EditTweetCard) which allows to post tweets quickly from the left-side AppBar or edit tweets' content in each Tweet.
 - It is dumb therefore you always mess with Store and API in its parent Components.
 
@@ -391,7 +391,7 @@ const AvatarUsingDefinedBoxCase = () => {
 };
 ```
 
-By default `genCustomBox` provides you with a `display: flex`,you have to specify for each if you don't want.
+By default `genCustomBox` provides you with a `display: flex`, you have to specify for each if you don't want.
 
 Now by using `defineCustomBox` you can customize your `genCustomBox` and using `genCustomBox` to customize your `Box`.
 
