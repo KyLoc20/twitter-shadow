@@ -103,6 +103,25 @@ const AvatarUsingDefinedBoxCase = () => {
     </Wrapper>
   );
 };
+type TExampleButton = {
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  //or simpler
+  onClickSimple: React.MouseEventHandler<HTMLElement>;
+};
+function ExampleButton(props: TExampleButton) {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    props.onClick(e);
+  };
+  const handleClickSimpler = (e: React.MouseEvent<HTMLElement>) => {
+    props.onClickSimple(e);
+  };
+  return (
+    <>
+      <button onClick={handleClick}></button>
+      <button onClick={handleClickSimpler}></button>
+    </>
+  );
+}
 
 function Avatar(props: React.PropsWithChildren<{ url: string }>) {
   const Wrapper = genFlexBox({ mr: "12px" });
